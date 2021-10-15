@@ -36,10 +36,6 @@ public class Locataire extends Utilisateur {
 		this.dossier = dossier;
 		this.chambre = chambre;
 	}
-	
-	
-
-
 
 	public boolean isRecherche() {
 		return recherche;
