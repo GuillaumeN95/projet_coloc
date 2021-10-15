@@ -27,9 +27,9 @@ public class Locataire extends Utilisateur {
 	
 	public Locataire() {}
 
-	public Locataire(String nom, String prenom, Civilite civ, String email, String tel, boolean recherche,
+	public Locataire(String nom, String prenom, Civilite civ, String email, String tel, String password, boolean recherche,
 			String description, Situation situation, Dossier dossier, Chambre chambre) {
-		super(nom, prenom, civ, email, tel);
+		super(nom, prenom, civ, email, tel, password);
 		this.recherche = recherche;
 		this.description = description;
 		this.situation = situation;

@@ -1,5 +1,6 @@
 package model.utilisateur;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,110 +20,85 @@ public abstract class Utilisateur {
 	protected String nom;
 	protected String prenom;
 	protected Civilite civ;
+	@Column(unique = true)
 	protected String email;
 	protected String tel;
-	
-	
+	@Column(unique = true)
+	protected String password;
 	
 	public Utilisateur() {
 		super();
 	}
 
-
-
-	public Utilisateur(String nom, String prenom, Civilite civ, String email, String tel) {
+	public Utilisateur(String nom, String prenom, Civilite civ, String email, String tel, String password) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.civ = civ;
 		this.email = email;
 		this.tel = tel;
+		this.password = password;
 	}
-
-
 
 	public int getId() {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	public String getNom() {
 		return nom;
 	}
 
-
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-
 
 	public String getPrenom() {
 		return prenom;
 	}
 
-
-
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
-
 
 	public Civilite getCiv() {
 		return civ;
 	}
 
-
-
 	public void setCiv(Civilite civ) {
 		this.civ = civ;
 	}
-
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 
 	public String getTel() {
 		return tel;
 	}
 
-
-
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
+	public String getPassword() {
+		return password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", civ=" + civ + ", email=" + email
 				+ ", tel=" + tel + "]";
 	}
-
-
-
-	
-	
-	
-	
 
 }

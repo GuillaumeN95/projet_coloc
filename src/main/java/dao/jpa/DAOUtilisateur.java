@@ -49,4 +49,23 @@ public class DAOUtilisateur implements IDAOUtilisateur {
 		em.close();
 	}
 	
+	public Utilisateur findByEmail(String email) {
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query query = em.createQuery("from Utilisateur u where u.email = :email", Utilisateur.class);
+		query.setParameter("email", email);
+		Utilisateur utilisateur = (Utilisateur) query.getSingleResult();
+		em.close();
+		return utilisateur;
+	}
+
+	@Override
+	public Utilisateur connect(String email, String password) {
+		// TODO Auto-generated method stub
+		Utilisateur utilisateur = findByEmail(email);
+		if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)) {
+			return utilisateur;
+		}
+		return null;
+	}
+	
 }
