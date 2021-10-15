@@ -24,7 +24,7 @@ public class Notation {
 	@OneToOne
 	private Locataire locataire;
 	
-	private Integer note;
+	private Double note;
 	
 	@Column(columnDefinition = "VARCHAR(75)")
 	private String commentaire;
@@ -36,7 +36,7 @@ public class Notation {
 
 
 
-	public Notation(Logement logement, Locataire locataire, Integer note, String commentaire) {
+	public Notation(Logement logement, Locataire locataire, Double note, String commentaire) {
 		this.logement = logement;
 		this.locataire = locataire;
 		this.note = note;
@@ -79,13 +79,13 @@ public class Notation {
 
 
 
-	public Integer getNote() {
+	public Double getNote() {
 		return note;
 	}
 
 
 
-	public void setNote(Integer note) {
+	public void setNote(Double note) {
 		this.note = note;
 	}
 
