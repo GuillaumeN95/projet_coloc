@@ -2,5 +2,5 @@ package model.logement;
 
 public enum TypeLogement {
 	
-	Appartement,Maison,Studio,Loft,Résidence;
+	Appartement,Maison,Studio,Loft,Residence;
 }
