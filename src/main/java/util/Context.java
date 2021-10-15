@@ -24,7 +24,7 @@ public class Context {
 	private IDAORegle daoRegle = new DAORegle();
 	private IDAONotation daoNotation = new DAONotation();
 	private IDAOUtilisateur daoUtilisateur = new DAOUtilisateur();
-	private Utilisateur utisateurConnecte = null;
+	private Utilisateur utilisateurConnecte = null;
 	
 	//SINGLETON
 	private static Context _instance;
@@ -115,12 +115,12 @@ public class Context {
 		return sc.nextDouble();
 	}
 
-	public Utilisateur getUtisateurConnecte() {
-		return utisateurConnecte;
+	public Utilisateur getUtilisateurConnecte() {
+		return utilisateurConnecte;
 	}
 
-	public void setUtisateurConnecte(Utilisateur utisateurConnecte) {
-		this.utisateurConnecte = utisateurConnecte;
+	public void setUtilisateurConnecte(Utilisateur utilisateurConnecte) {
+		this.utilisateurConnecte = utilisateurConnecte;
 	}
 	
 }
