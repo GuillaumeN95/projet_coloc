@@ -30,6 +30,8 @@ public class Proprio extends Utilisateur {
 	public void setLogements(List<Logement> logements) {
 		this.logements = logements;
 	}
+	
+	
 
 	@Override
 	public String toString() {
