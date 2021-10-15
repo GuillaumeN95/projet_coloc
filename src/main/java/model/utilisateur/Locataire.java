@@ -60,6 +60,56 @@ public class Locataire extends Utilisateur {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
+
+	public Situation getSituation() {
+		return situation;
+	}
+
+
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
+	}
+
+
+
+	public Dossier getDossier() {
+		return dossier;
+	}
+
+
+
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
+	}
+
+
+
+	public Logement getLogement() {
+		return logement;
+	}
+
+
+
+	public void setLogement(Logement logement) {
+		this.logement = logement;
+	}
+
+
+
+	public Chambre getChambre() {
+		return chambre;
+	}
+
+
+
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
+	}
+
+
 
 	@Override
 	public String toString() {

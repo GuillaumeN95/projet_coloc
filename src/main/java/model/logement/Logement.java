@@ -27,14 +27,27 @@ public class Logement {
 	public Logement() {
 		super();
 	}
+	
 
 
+	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			Localisation localisation) {
+		super();
+		this.description = description;
+		this.surface = surface;
+		this.nChambree = nChambree;
+		this.nChambreOccup = nChambreOccup;
+		this.nSdb = nSdb;
+		this.loyer = loyer;
+		this.localisation = localisation;
+	}
 
 
 
 	public Logement(int id, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
 			int note, LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement,
-			List<Chambre> chambres) {
+			List<Chambre> chambres, List<Commodite> commodites, List<Regle> regles) {
+		super();
 		this.id = id;
 		this.description = description;
 		this.surface = surface;
@@ -48,7 +61,13 @@ public class Logement {
 		this.localisation = localisation;
 		this.typeLogement = typeLogement;
 		this.chambres = chambres;
+		this.commodites = commodites;
+		this.regles = regles;
 	}
+
+
+
+
 
 
 
@@ -211,7 +230,32 @@ public class Logement {
 		this.chambres = chambres;
 	}
 
+	
 
+
+
+
+	public List<Commodite> getCommodites() {
+		return commodites;
+	}
+
+
+
+	public void setCommodites(List<Commodite> commodites) {
+		this.commodites = commodites;
+	}
+
+
+
+	public List<Regle> getRegles() {
+		return regles;
+	}
+
+
+
+	public void setRegles(List<Regle> regles) {
+		this.regles = regles;
+	}
 
 
 
