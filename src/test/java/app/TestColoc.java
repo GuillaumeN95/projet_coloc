@@ -1,5 +1,6 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.*;
@@ -55,7 +56,7 @@ public class TestColoc {
 		System.out.println("2 - Ajouter un logement");
 		System.out.println("3 - Voir/Modifier un logement");
 		System.out.println("4 - Voir les dossiers de candidature");
-		System.out.println("5 - Modifier les disponibilit�s d'un logement");
+		System.out.println("5 - Modifier les disponibilites d'un logement");
 		System.out.println("6 - Lire mes messages");
 		System.out.println("7 - Ecrire un message");
 		System.out.println("8 - Se deconnecter");
@@ -175,7 +176,39 @@ public class TestColoc {
 		retourMenu();
 	}
 	
+	/*
+	 * Methodes appartement
+	 */
 	
+	public static void rendreDispo() {
+		List<Logement> logementsDuProprio = Context.getInstance().getDaoLogement().findAllByIdProprio(Context.getInstance().getUtilisateurConnecte().getId());
+		System.out.println("Voici la liste de vos logements : ");
+		for(Logement l : logementsDuProprio) {
+			System.out.println("Logement numero " + l.getId() + " situé " + l.getLocalisation().getNum() + " " + l.getLocalisation().getVoie() + " " + l.getLocalisation().getVille());
+		}
+		int choix = Context.getInstance().saisieInt("Dans quel logement souhaitez vous liberer une chambre : ");
+		Logement logementALiberer = Context.getInstance().getDaoLogement().findById(choix);
+		List<Chambre> chambresDuLogement = Context.getInstance().getDaoChambre().findAllByIdLogement(logementALiberer.getId());
+		System.out.println("Voici les chambres du logement : ");
+		List<Locataire> locatairesDesChambres = new ArrayList();
+		for(Chambre c : chambresDuLogement) {
+			Locataire loc = Context.getInstance().getDaoLocataire().findByIdChambre(c.getId());
+			locatairesDesChambres.add(loc);
+			if(loc == null) {
+				System.out.println("Chambre numero " + c.getId() + "inoccupee");
+			} else {
+				System.out.println("Chambre numero " + c.getId() + " occupee par " + loc.getNom() + " " + loc.getPrenom());
+			}
+		choix = Context.getInstance().saisieInt("Quelle chambre souhaitez vous liberer : ");
+		Chambre chambreALiberer = Context.getInstance().getDaoChambre().findById(choix);
+		Locataire locataireChambreALiberer = Context.getInstance().getDaoLocataire().findByIdChambre(choix);
+		locataireChambreALiberer.setChambre(null);
+		chambreALiberer.setLocataire(null);
+		Context.getInstance().getDaoChambre().save(chambreALiberer);
+		Context.getInstance().getDaoLocataire().save(locataireChambreALiberer);
+		retourMenu();
+		}
+	}
 	
 	/*
 	 *  Main
