@@ -1,9 +1,29 @@
 package model.logement;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+
+
+@Entity
+
 public class Regle {
+	
+	@Id
+	@GeneratedValue(strategy =  GenerationType.IDENTITY )
 	private int id;
 	private String libelle;
 	
+	@ManyToMany(mappedBy = "regles")
+	private List<Logement> logements;
+	
+	@ManyToMany(mappedBy = "regles")
+	private List<Chambre> chambres;
 	
 	public Regle() {
 		super();

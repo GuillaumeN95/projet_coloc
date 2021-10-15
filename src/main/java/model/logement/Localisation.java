@@ -1,16 +1,26 @@
 package model.logement;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+
 public class Localisation {
+	
+	@Id
+	@GeneratedValue(strategy =  GenerationType.IDENTITY )
 	private int id; 
 	private String departement;
 	private String ville;
 	private String codePostal;
 	private String voie;
 	private int num;
+	
 
 	
 	public Localisation() {
-		super();
 	}
 
 	public Localisation(String departement, String ville, String codePostal, String voie, int num) {
