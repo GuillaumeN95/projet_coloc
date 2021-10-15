@@ -50,6 +50,14 @@ public class Chambre {
 	public Chambre() {
 	}
 
+
+	public Chambre(Logement logement, int surface, Double loyer, Double caution) {
+		this.logement = logement;
+		this.surface = surface;
+		this.loyer = loyer;
+		this.caution = caution;
+	}
+	
 	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
 			LocalDate dateDispo, List<Commodite> commodites) {
 		this.logement = logement;

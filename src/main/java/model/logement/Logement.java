@@ -76,6 +76,12 @@ public class Logement {
 		super();
 	}
 	
+	public Logement(String description, int surface, int nChambree,Localisation localisation){
+		this.description = description;
+		this.surface = surface;
+		this.nChambree = nChambree;
+		this.localisation = localisation;
+	}
 
 
 	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
