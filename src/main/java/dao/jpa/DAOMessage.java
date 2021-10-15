@@ -23,9 +23,9 @@ public class DAOMessage implements IDAOMessage {
 	public List<Message> findAll() {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		Query requete = em.createQuery("from Message m ",Message.class);
-		List<Message> Messages = requete.getResultList();
+		List<Message> messages = requete.getResultList();
 		em.close();
-		return Messages;
+		return messages;
 	}
 
 
@@ -47,6 +47,26 @@ public class DAOMessage implements IDAOMessage {
 		em.remove(o);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	@Override
+	public List<Message> findAllByIdDestinataire(int idDestinataire) {
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query requete = em.createQuery("from Message m WHERE m.destinataire = :destinataire",Message.class);
+		requete.setParameter("destinataire", Context.getInstance().getDaoUtilisateur().findById(idDestinataire));
+		List<Message> messages = requete.getResultList();
+		em.close();
+		return messages;
+	}
+
+	@Override
+	public List<Message> findAllByIdEmetteur(int idEmetteur) {
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query requete = em.createQuery("from Message m WHERE m.emetteur = :emetteur",Message.class);
+		requete.setParameter("emetteur", Context.getInstance().getDaoUtilisateur().findById(idEmetteur));
+		List<Message> messages = requete.getResultList();
+		em.close();
+		return messages;
 	}
 	
 }
