@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.*;
+import model.logement.Logement;
 import model.utilisateur.*;
 import util.Context;
 
