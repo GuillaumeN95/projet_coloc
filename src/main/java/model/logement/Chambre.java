@@ -51,11 +51,15 @@ public class Chambre {
 	}
 
 
-	public Chambre(Logement logement, int surface, Double loyer, Double caution) {
+	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
+			LocalDate dateDispo) {
 		this.logement = logement;
 		this.surface = surface;
 		this.loyer = loyer;
+		this.charges = charges;
 		this.caution = caution;
+		this.dureeMini = dureeMini;
+		this.dateDispo = dateDispo;
 	}
 	
 	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
