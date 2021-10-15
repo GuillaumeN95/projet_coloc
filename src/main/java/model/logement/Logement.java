@@ -58,7 +58,7 @@ public class Logement {
 		joinColumns = @JoinColumn(name="idLogement"),
 		inverseJoinColumns = @JoinColumn(name="idCommodites")
 	)
-	private List<Commodite> commodites;
+	private  List<Commodite> commodites;
 	
 	@ManyToMany
 	@JoinTable
@@ -76,16 +76,9 @@ public class Logement {
 		super();
 	}
 	
-	public Logement(String description, int surface, int nChambree,Localisation localisation){
-		this.description = description;
-		this.surface = surface;
-		this.nChambree = nChambree;
-		this.localisation = localisation;
-	}
-
 
 	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
-			Localisation localisation) {
+			Localisation localisation,TypeLogement typeLogement) {
 		super();
 		this.description = description;
 		this.surface = surface;
@@ -94,7 +87,23 @@ public class Logement {
 		this.nSdb = nSdb;
 		this.loyer = loyer;
 		this.localisation = localisation;
+		this.typeLogement = typeLogement;
 	}
+	
+	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites) {
+		super();
+		this.description = description;
+		this.surface = surface;
+		this.nChambree = nChambree;
+		this.nChambreOccup = nChambreOccup;
+		this.nSdb = nSdb;
+		this.loyer = loyer;
+		this.localisation = localisation;
+		this.typeLogement = typeLogement;
+		this.commodites = commodites;
+	}
+
 
 
 

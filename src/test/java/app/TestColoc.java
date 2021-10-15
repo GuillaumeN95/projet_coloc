@@ -1,5 +1,6 @@
 package app;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.persistence.Column;
 
 import model.*;
 import model.logement.Chambre;
+import model.logement.Commodite;
 import model.logement.Localisation;
 import model.logement.Logement;
 import model.logement.Notation;
@@ -348,6 +350,7 @@ public class TestColoc {
 		
 		
 		
+		
 		/* INFOS Logement */
 		
 		
@@ -367,11 +370,6 @@ public class TestColoc {
 			catch(Exception e) {System.out.println("Erreur : entrer uniquement nombres");}
 		}
 		while(!fin);
-		
-		
-		String testMeuble = Context.getInstance().saisieString("Le logement est-il meuble (o/n)");
-		boolean meuble;
-		if(testMeuble.equals("o")) {meuble=true;}else {meuble=false;}
 		
 		int nbChambre = Context.getInstance().saisieInt("Entrer le nombre de chambre : ");
 		int nbChambreOccup = Context.getInstance().saisieInt("Entrer le nombre de chambre occupee : ");
@@ -436,7 +434,7 @@ public class TestColoc {
 		
 		
 		
-		Logement newLogement = new Logement(description,surface,nbChambre,newLocalisation);
+		Logement newLogement = new Logement(description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites);
 		newLogement = Context.getInstance().getDaoLogement().save(newLogement);
 		
 		
@@ -457,11 +455,13 @@ public class TestColoc {
 			for(int i=1;i<=nbChambre;i++)
 			{
 				System.out.println("Chambre n� " + i);
+				String dateDispoChambre = Context.getInstance().saisieString("Date de disponbilite (aaaa-mm-jj) (Entrer pour passer) :");
 				int surfaceChambre = Context.getInstance().saisieInt("Surface : ");
 				Double loyerChambre = Context.getInstance().saisieDouble("Loyer : ");
+				Double chargeChambre = Context.getInstance().saisieDouble("Charges : ");
 				Double cautionChambre = Context.getInstance().saisieDouble("Caution : ");
 				int dureeMiniChambre = Context.getInstance().saisieInt("Duree mini de location : ");
-				Chambre newChambre = new Chambre(newLogement,surfaceChambre,loyerChambre,cautionChambre);
+				Chambre newChambre = new Chambre(newLogement,surfaceChambre,loyerChambre,chargeChambre,cautionChambre,dureeMiniChambre,LocalDate.parse(dateDispoChambre));
 				newChambre = Context.getInstance().getDaoChambre().save(newChambre);
 			}
 		}
@@ -482,93 +482,6 @@ public class TestColoc {
 	public static void main(String[] args) {
 		
 		ajoutAppart();
-	
-//	
-//		menuPrincipal();
-//	}
-//	
-//	public static void menuPrincipal() {
-//		System.out.println("1 - Se connecter");
-//		System.out.println("2 - Creer un compte");
-//		System.out.println("3 - STOP");
-//	
-//		int choix = Context.getInstance().saisieInt("Choisir un menu :");
-//		switch(choix) 
-//		{
-//		case 1 : connexion();break;
-//		case 2 : creerCompte();break;
-//		case 3 : System.exit(0);
-//		}
-//		menuPrincipal();
-//	}
-//
-//	
-//	
-//	public static void connexion() {
-//		String login = Context.getInstance().saisieString("Saisir votre login");
-//		String password = Context.getInstance().saisieString("Saisir votre password");
-//		
-//		//A MODIFER
-//		Utilisateur connexion = Context.getInstance().getDaoUtilisateur().connect(login,password);
-//		//
-//		if(connexion instanceof Locataire) {menuLocataire(); Context.getInstance().setUtisateurConnecte(connexion);}
-//		else if(connexion instanceof Proprio) {menuProprietaire(); Context.getInstance().setUtisateurConnecte(connexion);}
-//		else {System.out.println("Identifiants invalides");connexion();}
-//	}
-//	
-//	
-//	public static void creerCompte() {
-//		
-//	}
-//	
-//	public static void menuLocataire() {
-//		System.out.println("1 - Voir/Modifier mon profil");
-//		System.out.println("2 - Voir les annonces");
-//		System.out.println("3 - Lire mes messages");
-//		System.out.println("4 - Envoyer un message");
-//		System.out.println("5 - Noter un appartement");
-//		System.out.println("6 - Se deconnecter");
-//		System.out.println("7 - STOP");
-//		
-//		int choix = Context.getInstance().saisieInt("Choisir un menu :");
-//		switch(choix)
-//		{
-//		case 1 : modifierProfil();break;
-//		case 2 : voirAnnonce();break;
-//		case 3 : afficherListeMessageRecus();break;
-//		case 4 : envoyerMessage();break;
-//		case 5 : noterAppart();break;
-//		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtisateurConnecte(null);connexion();break;
-//		case 7 : System.exit(0);
-//		}
-//	}
-//	
-//	public static void menuProprietaire() {
-//		System.out.println("1 - Voir/Modifier mon profil");
-//		System.out.println("2 - Ajouter un logement");
-//		System.out.println("3 - Voir/Modifier un logement");
-//		System.out.println("4 - Voir les dossiers de candidature");
-//		System.out.println("5 - Modifier les disponibilit�s d'un logement");
-//		System.out.println("6 - Lire mes messages");
-//		System.out.println("7 - Ecrire un message");
-//		System.out.println("8 - Se deconnecter");
-//		System.out.println("9 - Stop");
-//		
-//		int choix = Context.getInstance().saisieInt("Choisir un menu :");
-//		switch(choix)
-//		{
-//		case 1 : modifierProfil();break;
-//		case 2 : ajoutAppart();break;
-//		case 3 : modifAppart();break;
-//		case 4 : validerDossier();break;
-//		case 5 : rendreDispo();break;
-//		case 6 : envoyerMessage();break;
-//		case 7 : afficherListeMessageRecus();break;
-//		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtisateurConnecte(null);connexion();break;
-//		case 9 : System.exit(0);
-//		}
-//	}
-	
 	
 	
 	}	
