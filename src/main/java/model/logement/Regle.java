@@ -22,8 +22,7 @@ public class Regle {
 	@ManyToMany(mappedBy = "regles")
 	private List<Logement> logements;
 	
-	@ManyToMany(mappedBy = "regles")
-	private List<Chambre> chambres;
+
 	
 	public Regle() {
 		super();

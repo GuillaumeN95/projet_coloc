@@ -18,8 +18,8 @@ public class Locataire extends Utilisateur {
 	@OneToOne
 	private Dossier dossier;
 	
-	
-	private Logement logement;
+//	@OneToOne
+//	private Logement logement;
 	
 	@OneToOne
 	private Chambre chambre;

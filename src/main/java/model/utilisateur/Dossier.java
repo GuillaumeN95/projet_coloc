@@ -14,7 +14,7 @@ public class Dossier {
 	private int id;
 	private Double revenu;
 	private Double revenuGarant;
-	private Situation situation;
+	private Situation situationGarant;
 	
 	@OneToOne(mappedBy = "dossier" )
 	private Locataire locataire;
@@ -24,10 +24,10 @@ public class Dossier {
 		super();
 	}
 
-	public Dossier(Double revenu, Double revenuGarant, Situation situation) {
+	public Dossier(Double revenu, Double revenuGarant, Situation situationGarant) {
 		this.revenu = revenu;
 		this.revenuGarant = revenuGarant;
-		this.situation = situation;
+		this.situationGarant = situationGarant;
 	}
 	
 	
@@ -57,11 +57,11 @@ public class Dossier {
 	}
 
 	public Situation getSituation() {
-		return situation;
+		return situationGarant;
 	}
 
-	public void setSituation(Situation situation) {
-		this.situation = situation;
+	public void setSituation(Situation situationGarant) {
+		this.situationGarant = situationGarant;
 	}
 
 	
@@ -69,7 +69,7 @@ public class Dossier {
 	@Override
 	public String toString() {
 		return "Dossier [id=" + id + ", revenu=" + revenu + ", revenuGarant=" + revenuGarant + ", situation="
-				+ situation + "]";
+				+ situationGarant + "]";
 	}
 
 	
