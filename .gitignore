@@ -3,5 +3,4 @@ target/
 .classpath
 .project
 bin/
-src/main/resources/META-INF/persistence.xml
 .DS_Store
