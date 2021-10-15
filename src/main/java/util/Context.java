@@ -5,26 +5,8 @@ import java.util.Scanner;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import dao.IDAOChambre;
-import dao.IDAOCommodite;
-import dao.IDAODossier;
-import dao.IDAOLocalisation;
-import dao.IDAOLocataire;
-import dao.IDAOLogement;
-import dao.IDAOMessage;
-import dao.IDAOProprio;
-import dao.IDAORegle;
-import dao.IDAOUtilisateur;
-import dao.jpa.DAOChambre;
-import dao.jpa.DAOCommodite;
-import dao.jpa.DAODossier;
-import dao.jpa.DAOLocalisation;
-import dao.jpa.DAOLocataire;
-import dao.jpa.DAOLogement;
-import dao.jpa.DAOMessage;
-import dao.jpa.DAOProprio;
-import dao.jpa.DAORegle;
-import dao.jpa.DAOUtilisateur;
+import dao.*;
+import dao.jpa.*;
 import model.utilisateur.*;
 
 
@@ -40,8 +22,9 @@ public class Context {
 	private IDAOMessage daoMessage = new DAOMessage();
 	private IDAOProprio daoProprio = new DAOProprio();
 	private IDAORegle daoRegle = new DAORegle();
+	private IDAONotation daoNotation = new DAONotation();
 	private IDAOUtilisateur daoUtilisateur = new DAOUtilisateur();
-	private Utilisateur utisateurConnecte = null;
+	private Utilisateur utilisateurConnecte = null;
 	
 	//SINGLETON
 	private static Context _instance;
@@ -97,6 +80,11 @@ public class Context {
 		return daoRegle;
 	}
 
+	public IDAONotation getDaoNotation() {
+		return daoNotation;
+	}
+
+	
 	public IDAOUtilisateur getDaoUtilisateur() {
 		return daoUtilisateur;
 	}
@@ -127,12 +115,12 @@ public class Context {
 		return sc.nextDouble();
 	}
 
-	public Utilisateur getUtisateurConnecte() {
-		return utisateurConnecte;
+	public Utilisateur getUtilisateurConnecte() {
+		return utilisateurConnecte;
 	}
 
-	public void setUtisateurConnecte(Utilisateur utisateurConnecte) {
-		this.utisateurConnecte = utisateurConnecte;
+	public void setUtilisateurConnecte(Utilisateur utilisateurConnecte) {
+		this.utilisateurConnecte = utilisateurConnecte;
 	}
 	
 }
