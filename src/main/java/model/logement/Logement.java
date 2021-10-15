@@ -3,8 +3,23 @@ package model.logement;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
+
 public class Logement {
 	
+	@Id
+	@GeneratedValue(strategy =  GenerationType.IDENTITY )
 	private int id;
 	private String description;
 	private int surface;
@@ -15,10 +30,31 @@ public class Logement {
 	private int note;
 	private LocalDate dateDispo;
 	private int dureeMini;
+	
+	@OneToOne
 	private Localisation localisation;
+	
 	private TypeLogement typeLogement;
+	
+	@OneToMany(mappedBy = "logement")
 	private List<Chambre> chambres;
+	
+	@ManyToMany
+	@JoinTable
+	(
+		name="Commodites",
+		joinColumns = @JoinColumn(name="idLogement"),
+		inverseJoinColumns = @JoinColumn(name="idCommodites")
+	)
 	private List<Commodite> commodites;
+	
+	@ManyToMany
+	@JoinTable
+	(
+		name="Regles",
+		joinColumns = @JoinColumn(name="idLogement"),
+		inverseJoinColumns = @JoinColumn(name="idRegle")
+	)
 	private List<Regle> regles;
 
 	
