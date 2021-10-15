@@ -53,9 +53,12 @@ public class DAOUtilisateur implements IDAOUtilisateur {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		Query query = em.createQuery("from Utilisateur u where u.email = :email", Utilisateur.class);
 		query.setParameter("email", email);
-		Utilisateur utilisateur = (Utilisateur) query.getSingleResult();
+		List<Utilisateur> utilisateur = query.getResultList();
 		em.close();
-		return utilisateur;
+		if(utilisateur.size()==0) {
+			return null;
+		}
+		return utilisateur.get(0);
 	}
 
 	@Override

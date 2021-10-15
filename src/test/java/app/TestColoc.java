@@ -51,7 +51,7 @@ public class TestColoc {
 		case 3 : afficherListeMessageRecus();break;
 		case 4 : envoyerMessage();break;
 		case 5 : noterAppart();break;
-		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);connexion();break;
+		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);menuPrincipal();break;
 		case 7 : System.exit(0);
 		}
 	}
@@ -77,7 +77,7 @@ public class TestColoc {
 		case 5 : rendreDispo();break;
 		case 6 : envoyerMessage();break;
 		case 7 : afficherListeMessageRecus();break;
-		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);connexion();break;
+		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);menuPrincipal();break;
 		case 9 : System.exit(0);
 		}
 	}
@@ -121,10 +121,11 @@ public class TestColoc {
 		System.out.println("Creation de compte :");
 		String nom = Context.getInstance().saisieString("Entrez votre nom : ");
 		String prenom = Context.getInstance().saisieString("Entrez votre prenom : ");
-		System.out.println("Voici les civilités disponibles : " + Civilite.values());
+		System.out.println("Voici les civilités disponibles : ");
+		for(Civilite civ : Civilite.values()) {System.out.println(civ);}
 		Civilite civ = Civilite.valueOf(Context.getInstance().saisieString("Choisissez votre civilite : "));
 		String email = "";
-		while(nouveauMail) {
+		while(!nouveauMail) {
 			email = Context.getInstance().saisieString("Entrez votre email : ");
 			Utilisateur utilisateurExistant = Context.getInstance().getDaoUtilisateur().findByEmail(email);
 			if(utilisateurExistant != null) {
@@ -143,9 +144,10 @@ public class TestColoc {
 			String choixRecherche = Context.getInstance().saisieString("Etes vous en recherche de colocation (O/N) : ");
 			boolean recherche = false;
 			if(choixRecherche.toLowerCase().equals("o")) {recherche = true;}
-			System.out.println("Voici les situtations disponibles : " + Situation.values());
+			System.out.println("Voici les situtations disponibles : ");
+			for(Situation sit : Situation.values()) {System.out.println(sit);}
 			Situation situation = Situation.valueOf(Context.getInstance().saisieString("Choisissez votre situation : "));
-			String description = Context.getInstance().saisieString("Saisissez votre descriptiion : ");
+			String description = Context.getInstance().saisieString("Saisissez votre description : ");
 			Locataire locataireACreer = new Locataire(nom, prenom, civ, email, tel, password, recherche, description, situation, null, null);
 			Context.getInstance().getDaoLocataire().save(locataireACreer);
 		}
@@ -286,19 +288,21 @@ public class TestColoc {
 	
 	public static void main(String[] args) {
 
-//		menuPrincipal();
 
-	Logement logement1 = new Logement();
+		Logement logement1 = new Logement();
 	
-	Context.getInstance().getDaoLogement().save(logement1);
+		Context.getInstance().getDaoLogement().save(logement1);
 	
 
-	Proprio proprio1 = new Proprio();
-	Locataire loc1 = new Locataire();
-	Context.getInstance().getDaoProprio().save(proprio1);
-	Context.getInstance().getDaoLocataire().save(loc1);
+		Proprio proprio1 = new Proprio();
+		Locataire loc1 = new Locataire();
+		Context.getInstance().getDaoProprio().save(proprio1);
+		Context.getInstance().getDaoLocataire().save(loc1);
 	
-	Context.getInstance().closeEmf();
+		menuPrincipal();
+
+		
+		Context.getInstance().closeEmf();
 	
 	}	
 	

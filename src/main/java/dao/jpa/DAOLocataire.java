@@ -58,9 +58,12 @@ public class DAOLocataire implements IDAOLocataire {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		Query query = em.createQuery("from Locataire l where l.chambre = :chambre", Locataire.class);
 		query.setParameter("chambre", chambre);
-		Locataire locataire = (Locataire) query.getSingleResult();
+		List<Locataire> locataire = query.getResultList();
 		em.close();
-		return locataire;
+		if(locataire.size() == 0) {
+			return null;
+		}
+		return locataire.get(0);
 	}
 	
 }
