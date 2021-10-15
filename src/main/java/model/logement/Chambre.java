@@ -1,6 +1,7 @@
 package model.logement;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Chambre {
 	
@@ -12,7 +13,8 @@ public class Chambre {
 	private Double caution;
 	private int dureeMini;
 	private LocalDate dateDispo;
-	
+	private List<Commodite> commodites;
+	private List<Regle> regles;
 	
 	
 	
@@ -20,12 +22,9 @@ public class Chambre {
 	}
 
 
-	
-	
-	
+
 	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
-			LocalDate dateDispo) {
-		this.id = id;
+			LocalDate dateDispo, List<Commodite> commodites, List<Regle> regles) {
 		this.logement = logement;
 		this.surface = surface;
 		this.loyer = loyer;
@@ -33,9 +32,9 @@ public class Chambre {
 		this.caution = caution;
 		this.dureeMini = dureeMini;
 		this.dateDispo = dateDispo;
+		this.commodites = commodites;
+		this.regles = regles;
 	}
-
-
 
 
 
@@ -105,6 +104,29 @@ public class Chambre {
 	
 	public void setDateDispo(LocalDate dateDispo) {
 		this.dateDispo = dateDispo;
+	}
+
+
+	public List<Commodite> getCommodites() {
+		return commodites;
+	}
+
+
+
+	public void setCommodites(List<Commodite> commodites) {
+		this.commodites = commodites;
+	}
+
+
+
+	public List<Regle> getRegles() {
+		return regles;
+	}
+
+
+
+	public void setRegles(List<Regle> regles) {
+		this.regles = regles;
 	}
 
 	

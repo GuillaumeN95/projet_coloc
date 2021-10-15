@@ -1,6 +1,7 @@
 package model.logement;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Logement {
 	
@@ -16,6 +17,9 @@ public class Logement {
 	private int dureeMini;
 	private Localisation localisation;
 	private TypeLogement typeLogement;
+	private List<Chambre> chambres;
+	private List<Commodite> commodites;
+	private List<Regle> regles;
 
 	
 	
@@ -23,12 +27,28 @@ public class Logement {
 	public Logement() {
 		super();
 	}
+	
 
 
-
-	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer, int note,
-			LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement) {
+	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			Localisation localisation) {
 		super();
+		this.description = description;
+		this.surface = surface;
+		this.nChambree = nChambree;
+		this.nChambreOccup = nChambreOccup;
+		this.nSdb = nSdb;
+		this.loyer = loyer;
+		this.localisation = localisation;
+	}
+
+
+
+	public Logement(int id, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			int note, LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement,
+			List<Chambre> chambres, List<Commodite> commodites, List<Regle> regles) {
+		super();
+		this.id = id;
 		this.description = description;
 		this.surface = surface;
 		this.nChambree = nChambree;
@@ -40,7 +60,16 @@ public class Logement {
 		this.dureeMini = dureeMini;
 		this.localisation = localisation;
 		this.typeLogement = typeLogement;
+		this.chambres = chambres;
+		this.commodites = commodites;
+		this.regles = regles;
 	}
+
+
+
+
+
+
 
 
 
@@ -184,6 +213,48 @@ public class Logement {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	
+
+
+	public List<Chambre> getChambres() {
+		return chambres;
+	}
+
+
+
+
+
+	public void setChambres(List<Chambre> chambres) {
+		this.chambres = chambres;
+	}
+
+	
+
+
+
+
+	public List<Commodite> getCommodites() {
+		return commodites;
+	}
+
+
+
+	public void setCommodites(List<Commodite> commodites) {
+		this.commodites = commodites;
+	}
+
+
+
+	public List<Regle> getRegles() {
+		return regles;
+	}
+
+
+
+	public void setRegles(List<Regle> regles) {
+		this.regles = regles;
 	}
 
 

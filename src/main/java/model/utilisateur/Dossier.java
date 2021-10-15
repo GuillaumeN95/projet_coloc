@@ -51,6 +51,8 @@ public class Dossier {
 		this.situation = situation;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Dossier [id=" + id + ", revenu=" + revenu + ", revenuGarant=" + revenuGarant + ", situation="
