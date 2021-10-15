@@ -49,7 +49,7 @@ public class Logement {
 	@ManyToMany
 	@JoinTable
 	(
-		name="Commodites",
+		name="Commodite_Logement",
 		joinColumns = @JoinColumn(name="idLogement"),
 		inverseJoinColumns = @JoinColumn(name="idCommodites")
 	)
@@ -58,7 +58,7 @@ public class Logement {
 	@ManyToMany
 	@JoinTable
 	(
-		name="Regles",
+		name="Regle_Logement",
 		joinColumns = @JoinColumn(name="idLogement"),
 		inverseJoinColumns = @JoinColumn(name="idRegle")
 	)
@@ -89,7 +89,7 @@ public class Logement {
 
 	public Logement(int id, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
 			int note, LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement,
-			List<Chambre> chambres, List<Commodite> commodites, List<Regle> regles) {
+			List<Chambre> chambres, List<Commodite> commodites) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -105,7 +105,6 @@ public class Logement {
 		this.typeLogement = typeLogement;
 		this.chambres = chambres;
 		this.commodites = commodites;
-		this.regles = regles;
 	}
 
 
@@ -288,17 +287,6 @@ public class Logement {
 		this.commodites = commodites;
 	}
 
-
-
-	public List<Regle> getRegles() {
-		return regles;
-	}
-
-
-
-	public void setRegles(List<Regle> regles) {
-		this.regles = regles;
-	}
 
 
 

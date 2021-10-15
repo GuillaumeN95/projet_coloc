@@ -3,6 +3,7 @@ package app;
 import java.util.List;
 
 import model.*;
+import model.logement.*;
 import model.utilisateur.*;
 import util.Context;
 
@@ -88,97 +89,111 @@ public class TestColoc {
 		retourMenu();
 	}
 	
+	
+	
 	/*
 	 *  Main
 	 */
 	
 	public static void main(String[] args) {
+//	
+//		menuPrincipal();
+//	}
+//	
+//	public static void menuPrincipal() {
+//		System.out.println("1 - Se connecter");
+//		System.out.println("2 - Creer un compte");
+//		System.out.println("3 - STOP");
+//	
+//		int choix = Context.getInstance().saisieInt("Choisir un menu :");
+//		switch(choix) 
+//		{
+//		case 1 : connexion();break;
+//		case 2 : creerCompte();break;
+//		case 3 : System.exit(0);
+//		}
+//		menuPrincipal();
+//	}
+//
+//	
+//	
+//	public static void connexion() {
+//		String login = Context.getInstance().saisieString("Saisir votre login");
+//		String password = Context.getInstance().saisieString("Saisir votre password");
+//		
+//		//A MODIFER
+//		Utilisateur connexion = Context.getInstance().getDaoUtilisateur().connect(login,password);
+//		//
+//		if(connexion instanceof Locataire) {menuLocataire(); Context.getInstance().setUtisateurConnecte(connexion);}
+//		else if(connexion instanceof Proprio) {menuProprietaire(); Context.getInstance().setUtisateurConnecte(connexion);}
+//		else {System.out.println("Identifiants invalides");connexion();}
+//	}
+//	
+//	
+//	public static void creerCompte() {
+//		
+//	}
+//	
+//	public static void menuLocataire() {
+//		System.out.println("1 - Voir/Modifier mon profil");
+//		System.out.println("2 - Voir les annonces");
+//		System.out.println("3 - Lire mes messages");
+//		System.out.println("4 - Envoyer un message");
+//		System.out.println("5 - Noter un appartement");
+//		System.out.println("6 - Se deconnecter");
+//		System.out.println("7 - STOP");
+//		
+//		int choix = Context.getInstance().saisieInt("Choisir un menu :");
+//		switch(choix)
+//		{
+//		case 1 : modifierProfil();break;
+//		case 2 : voirAnnonce();break;
+//		case 3 : afficherListeMessageRecus();break;
+//		case 4 : envoyerMessage();break;
+//		case 5 : noterAppart();break;
+//		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtisateurConnecte(null);connexion();break;
+//		case 7 : System.exit(0);
+//		}
+//	}
+//	
+//	public static void menuProprietaire() {
+//		System.out.println("1 - Voir/Modifier mon profil");
+//		System.out.println("2 - Ajouter un logement");
+//		System.out.println("3 - Voir/Modifier un logement");
+//		System.out.println("4 - Voir les dossiers de candidature");
+//		System.out.println("5 - Modifier les disponibilit�s d'un logement");
+//		System.out.println("6 - Lire mes messages");
+//		System.out.println("7 - Ecrire un message");
+//		System.out.println("8 - Se deconnecter");
+//		System.out.println("9 - Stop");
+//		
+//		int choix = Context.getInstance().saisieInt("Choisir un menu :");
+//		switch(choix)
+//		{
+//		case 1 : modifierProfil();break;
+//		case 2 : ajoutAppart();break;
+//		case 3 : modifAppart();break;
+//		case 4 : validerDossier();break;
+//		case 5 : rendreDispo();break;
+//		case 6 : envoyerMessage();break;
+//		case 7 : afficherListeMessageRecus();break;
+//		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtisateurConnecte(null);connexion();break;
+//		case 9 : System.exit(0);
+//		}
+//	}
 	
-		menuPrincipal();
-	}
+	Logement logement1 = new Logement();
 	
-	public static void menuPrincipal() {
-		System.out.println("1 - Se connecter");
-		System.out.println("2 - Creer un compte");
-		System.out.println("3 - STOP");
+	Context.getInstance().getDaoLogement().save(logement1);
 	
-		int choix = Context.getInstance().saisieInt("Choisir un menu :");
-		switch(choix) 
-		{
-		case 1 : connexion();break;
-		case 2 : creerCompte();break;
-		case 3 : System.exit(0);
-		}
-		menuPrincipal();
-	}
 
+	Proprio proprio1 = new Proprio();
+	Locataire loc1 = new Locataire();
+	Context.getInstance().getDaoProprio().save(proprio1);
+	Context.getInstance().getDaoLocataire().save(loc1);
 	
+	Context.getInstance().closeEmf();
 	
-	public static void connexion() {
-		String login = Context.getInstance().saisieString("Saisir votre login");
-		String password = Context.getInstance().saisieString("Saisir votre password");
-		
-		//A MODIFER
-		Utilisateur connexion = Context.getInstance().getDaoUtilisateur().connect(login,password);
-		//
-		if(connexion instanceof Locataire) {menuLocataire(); Context.getInstance().setUtisateurConnecte(connexion);}
-		else if(connexion instanceof Proprio) {menuProprietaire(); Context.getInstance().setUtisateurConnecte(connexion);}
-		else {System.out.println("Identifiants invalides");connexion();}
-	}
-	
-	
-	public static void creerCompte() {
-		
-	}
-	
-	public static void menuLocataire() {
-		System.out.println("1 - Voir/Modifier mon profil");
-		System.out.println("2 - Voir les annonces");
-		System.out.println("3 - Lire mes messages");
-		System.out.println("4 - Envoyer un message");
-		System.out.println("5 - Noter un appartement");
-		System.out.println("6 - Se deconnecter");
-		System.out.println("7 - STOP");
-		
-		int choix = Context.getInstance().saisieInt("Choisir un menu :");
-		switch(choix)
-		{
-		case 1 : modifierProfil();break;
-		case 2 : voirAnnonce();break;
-		case 3 : afficherListeMessageRecus();break;
-		case 4 : envoyerMessage();break;
-		case 5 : noterAppart();break;
-		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtisateurConnecte(null);connexion();break;
-		case 7 : System.exit(0);
-		}
-	}
-	
-	public static void menuProprietaire() {
-		System.out.println("1 - Voir/Modifier mon profil");
-		System.out.println("2 - Ajouter un logement");
-		System.out.println("3 - Voir/Modifier un logement");
-		System.out.println("4 - Voir les dossiers de candidature");
-		System.out.println("5 - Modifier les disponibilit�s d'un logement");
-		System.out.println("6 - Lire mes messages");
-		System.out.println("7 - Ecrire un message");
-		System.out.println("8 - Se deconnecter");
-		System.out.println("9 - Stop");
-		
-		int choix = Context.getInstance().saisieInt("Choisir un menu :");
-		switch(choix)
-		{
-		case 1 : modifierProfil();break;
-		case 2 : ajoutAppart();break;
-		case 3 : modifAppart();break;
-		case 4 : validerDossier();break;
-		case 5 : rendreDispo();break;
-		case 6 : envoyerMessage();break;
-		case 7 : afficherListeMessageRecus();break;
-		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtisateurConnecte(null);connexion();break;
-		case 9 : System.exit(0);
-		}
-	}
-	
-	
+	}	
 	
 }
