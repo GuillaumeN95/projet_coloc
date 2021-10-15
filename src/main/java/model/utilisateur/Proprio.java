@@ -2,34 +2,29 @@ package model.utilisateur;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import model.logement.Logement;
 
+@Entity
+@DiscriminatorValue("proprio")
 public class Proprio extends Utilisateur {
-	
-	private List<Logement> logements;
+
 	
 	public Proprio() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Proprio(String nom, String prenom, Civilite civ, String email, String tel) {
+	
+	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, List<Logement> biens) {
 		super(nom, prenom, civ, email, tel);
-		// TODO Auto-generated constructor stub
+		this.biens = biens;
 	}
-
-	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, List<Logement> logements) {
-		super(nom, prenom, civ, email, tel);
-		this.logements = logements;
-	}
-
-	public List<Logement> getLogements() {
-		return logements;
-	}
-
-	public void setLogements(List<Logement> logements) {
-		this.logements = logements;
-	}
+	
+	
 	
 	
 
