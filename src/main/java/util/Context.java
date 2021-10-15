@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Scanner;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -23,11 +25,10 @@ import dao.jpa.DAOMessage;
 import dao.jpa.DAOProprio;
 import dao.jpa.DAORegle;
 import dao.jpa.DAOUtilisateur;
+import model.utilisateur.*;
 
 
 public class Context {
-
-
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("configJPA");
 	private IDAOChambre daoChambre= new DAOChambre();
@@ -40,16 +41,12 @@ public class Context {
 	private IDAOProprio daoProprio = new DAOProprio();
 	private IDAORegle daoRegle = new DAORegle();
 	private IDAOUtilisateur daoUtilisateur = new DAOUtilisateur();
+	private Utilisateur utisateurConnecte = null;
 	
-	
-
 	//SINGLETON
 	private static Context _instance;
 	
-	
 	private Context() {}
-	
-	
 	
 	public static Context getInstance() 
 	{
@@ -60,81 +57,83 @@ public class Context {
 	}
 	//FIN SINGLETON
 
-
-
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}
-
-	
 
 	public IDAOChambre getDaoChambre() {
 		return daoChambre;
 	}
 
-
-
 	public IDAOCommodite getDaoCommodite() {
 		return daoCommodite;
 	}
-
-
 
 	public IDAODossier getDaoDossier() {
 		return daoDossier;
 	}
 
-
-
 	public IDAOLocalisation getDaoLocalisation() {
 		return daoLocalisation;
 	}
-
-
 
 	public IDAOLocataire getDaoLocataire() {
 		return daoLocataire;
 	}
 
-
-
 	public IDAOLogement getDaoLogement() {
 		return daoLogement;
 	}
-
-
 
 	public IDAOMessage getDaoMessage() {
 		return daoMessage;
 	}
 
-
-
 	public IDAOProprio getDaoProprio() {
 		return daoProprio;
 	}
-
-
 
 	public IDAORegle getDaoRegle() {
 		return daoRegle;
 	}
 
-
-
 	public IDAOUtilisateur getDaoUtilisateur() {
 		return daoUtilisateur;
 	}
-
-
 
 	public void closeEmf() 
 	{
 		this.emf.close();
 	}
 
-	
-	
-	
+	public String saisieString(String msg) 
+	{
+		Scanner sc= new Scanner(System.in);		
+		System.out.println(msg);
+		return sc.nextLine();
+	}
+
+	public int saisieInt(String msg) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println(msg);
+		return sc.nextInt();
+	}
+
+	public double saisieDouble(String msg) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println(msg);
+		return sc.nextDouble();
+	}
+
+	public Utilisateur getUtisateurConnecte() {
+		return utisateurConnecte;
+	}
+
+	public void setUtisateurConnecte(Utilisateur utisateurConnecte) {
+		this.utisateurConnecte = utisateurConnecte;
+	}
 	
 }
+
