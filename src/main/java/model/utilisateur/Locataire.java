@@ -36,10 +36,6 @@ public class Locataire extends Utilisateur {
 		this.dossier = dossier;
 		this.chambre = chambre;
 	}
-	
-	
-
-
 
 	public Situation getSituation() {
 		return situation;
@@ -80,8 +76,14 @@ public class Locataire extends Utilisateur {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
+	public Chambre getChambre() {
+		return chambre;
+	}
+
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
+	}
 
 	@Override
 	public String toString() {

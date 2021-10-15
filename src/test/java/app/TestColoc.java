@@ -1,7 +1,10 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.persistence.Column;
 
 import model.*;
 import model.logement.Logement;
@@ -9,27 +12,6 @@ import model.utilisateur.*;
 import util.Context;
 
 public class TestColoc {
-	
-	public static String saisieString(String msg) 
-	{
-		Scanner sc= new Scanner(System.in);		
-		System.out.println(msg);
-		return sc.nextLine();
-	}
-
-	public static int saisieInt(String msg) 
-	{
-		Scanner sc = new Scanner(System.in);
-		System.out.println(msg);
-		return sc.nextInt();
-	}
-
-	public static double saisieDouble(String msg) 
-	{
-		Scanner sc = new Scanner(System.in);
-		System.out.println(msg);
-		return sc.nextDouble();
-	}
 	
 	//----------------------------------------------------------------------
 	
@@ -69,7 +51,7 @@ public class TestColoc {
 		case 3 : afficherListeMessageRecus();break;
 		case 4 : envoyerMessage();break;
 		case 5 : noterAppart();break;
-		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);connexion();break;
+		case 6 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);menuPrincipal();break;
 		case 7 : System.exit(0);
 		}
 	}
@@ -79,7 +61,7 @@ public class TestColoc {
 		System.out.println("2 - Ajouter un logement");
 		System.out.println("3 - Voir/Modifier un logement");
 		System.out.println("4 - Voir les dossiers de candidature");
-		System.out.println("5 - Modifier les disponibilit�s d'un logement");
+		System.out.println("5 - Modifier les disponibilites d'un logement");
 		System.out.println("6 - Lire mes messages");
 		System.out.println("7 - Ecrire un message");
 		System.out.println("8 - Se deconnecter");
@@ -95,7 +77,7 @@ public class TestColoc {
 		case 5 : rendreDispo();break;
 		case 6 : envoyerMessage();break;
 		case 7 : afficherListeMessageRecus();break;
-		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);connexion();break;
+		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);menuPrincipal();break;
 		case 9 : System.exit(0);
 		}
 	}
@@ -135,7 +117,74 @@ public class TestColoc {
 	 */
 	
 	public static void creerCompte() {
+		boolean nouveauMail = false;
+		System.out.println("Creation de compte :");
+		String nom = Context.getInstance().saisieString("Entrez votre nom : ");
+		String prenom = Context.getInstance().saisieString("Entrez votre prenom : ");
+		System.out.println("Voici les civilités disponibles : ");
+		for(Civilite civ : Civilite.values()) {System.out.println(civ);}
+		Civilite civ = Civilite.valueOf(Context.getInstance().saisieString("Choisissez votre civilite : "));
+		String email = "";
+		while(!nouveauMail) {
+			email = Context.getInstance().saisieString("Entrez votre email : ");
+			Utilisateur utilisateurExistant = Context.getInstance().getDaoUtilisateur().findByEmail(email);
+			if(utilisateurExistant != null) {
+				System.out.println("Un compte est deja existant pour cet email.");
+			} else {
+				nouveauMail = true;
+			}
+		}
+		String tel = Context.getInstance().saisieString("Entrez votre numero de telephone : ");
+		String password = Context.getInstance().saisieString("Entrez votre mot de passe : ");
+		int choixTypeCompte = Context.getInstance().saisieInt("Etes vous 1-Proprietaire ou 2-Locataire :");
+		if(choixTypeCompte == 1) {
+			Proprio proprioACreer = new Proprio(nom, prenom, civ, email, tel, password, null);
+			Context.getInstance().getDaoProprio().save(proprioACreer);
+		}else{
+			String choixRecherche = Context.getInstance().saisieString("Etes vous en recherche de colocation (O/N) : ");
+			boolean recherche = false;
+			if(choixRecherche.toLowerCase().equals("o")) {recherche = true;}
+			System.out.println("Voici les situtations disponibles : ");
+			for(Situation sit : Situation.values()) {System.out.println(sit);}
+			Situation situation = Situation.valueOf(Context.getInstance().saisieString("Choisissez votre situation : "));
+			String description = Context.getInstance().saisieString("Saisissez votre description : ");
+			Locataire locataireACreer = new Locataire(nom, prenom, civ, email, tel, password, recherche, description, situation, null, null);
+			Context.getInstance().getDaoLocataire().save(locataireACreer);
+		}
+		System.out.println("Profil cree");
+		menuPrincipal();
+	}
+	
+	public static void modifierProfil() {
 		
+		Utilisateur connected = Context.getInstance().getUtilisateurConnecte();
+		System.out.println("1 - Le nom");
+		System.out.println("2 - Le prenom");
+		System.out.println("3 - La civilite");
+		System.out.println("4 - L'adresse mail");
+		System.out.println("5 - Le numero de telephone");
+	
+		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
+		
+		String modif = null;
+		int modifInt=0;
+		
+	//	if(choix==6) { modifInt=saisieInt("saisir modif");}
+	//	else{
+			modif = Context.getInstance().saisieString("Saisir la modif");
+	//	}
+		
+		switch(choix) 
+		{
+		case 1 : connected.setNom(modif);break;
+		case 2 : connected.setPrenom(modif);break;
+		case 3 : connected.setCiv(Civilite.valueOf(modif));break;
+		case 4 : connected.setEmail(modif);break;
+		case 5 : connected.setTel(modif);break;
+		
+		}
+		
+		Context.getInstance().getDaoUtilisateur().save(connected);
 	}
 	
 	/*
@@ -198,41 +247,46 @@ public class TestColoc {
 		System.out.println("Message envoye");
 		retourMenu();
 	}
+
+	/*
+	 * Methodes appartement
+	 */
 	
-	public static void modifierProfil() {
-		
-		Utilisateur connected = Context.getInstance().getUtisateurConnecte();
-		System.out.println("1 - Le nom");
-		System.out.println("2 - Le prenom");
-		System.out.println("3 - La civilite");
-		System.out.println("4 - L'adresse mail");
-		System.out.println("5 - Le numero de telephone");
-	
-		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
-		
-		String modif = null;
-		int modifInt=0;
-		
-	//	if(choix==6) { modifInt=saisieInt("saisir modif");}
-	//	else{
-			modif = saisieString("Saisir la modif");
-	//	}
-		
-		switch(choix) 
-		{
-		case 1 : connected.setNom(modif);break;
-		case 2 : connected.setPrenom(modif);break;
-		case 3 : connected.setCiv(Civilite.valueOf(modif));break;
-		case 4 : connected.setEmail(modif);break;
-		case 5 : connected.setTel(modif);break;
-		
+	public static void rendreDispo() {
+		List<Logement> logementsDuProprio = Context.getInstance().getDaoLogement().findAllByIdProprio(Context.getInstance().getUtilisateurConnecte().getId());
+		System.out.println("Voici la liste de vos logements : ");
+		for(Logement l : logementsDuProprio) {
+			System.out.println("Logement numero " + l.getId() + " situé " + l.getLocalisation().getNum() + " " + l.getLocalisation().getVoie() + " " + l.getLocalisation().getVille());
 		}
-		
-		Context.getInstance().getDaoUtilisateur().save(connected);
-		
+		int choix = Context.getInstance().saisieInt("Dans quel logement souhaitez vous liberer une chambre : ");
+		Logement logementALiberer = Context.getInstance().getDaoLogement().findById(choix);
+		List<Chambre> chambresDuLogement = Context.getInstance().getDaoChambre().findAllByIdLogement(logementALiberer.getId());
+		System.out.println("Voici les chambres du logement : ");
+		List<Locataire> locatairesDesChambres = new ArrayList();
+		for(Chambre c : chambresDuLogement) {
+			Locataire loc = Context.getInstance().getDaoLocataire().findByIdChambre(c.getId());
+			locatairesDesChambres.add(loc);
+			if(loc == null) {
+				System.out.println("Chambre numero " + c.getId() + "inoccupee");
+			} else {
+				System.out.println("Chambre numero " + c.getId() + " occupee par " + loc.getNom() + " " + loc.getPrenom());
+			}
+		choix = Context.getInstance().saisieInt("Quelle chambre souhaitez vous liberer : ");
+		Chambre chambreALiberer = Context.getInstance().getDaoChambre().findById(choix);
+		Locataire locataireChambreALiberer = Context.getInstance().getDaoLocataire().findByIdChambre(choix);
+		locataireChambreALiberer.setChambre(null);
+		chambreALiberer.setLocataire(null);
+		Context.getInstance().getDaoChambre().save(chambreALiberer);
+		Context.getInstance().getDaoLocataire().save(locataireChambreALiberer);
+		retourMenu();
+		}
 	}
 	
 	
+	public static void voirAnnonce () {
+		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailability();
+		System.out.println(logements);		
+	}
 	
 	/*
 	 *  Main
@@ -240,19 +294,21 @@ public class TestColoc {
 	
 	public static void main(String[] args) {
 
-//		menuPrincipal();
 
-	Logement logement1 = new Logement();
+		Logement logement1 = new Logement();
 	
-	Context.getInstance().getDaoLogement().save(logement1);
+		Context.getInstance().getDaoLogement().save(logement1);
 	
 
-	Proprio proprio1 = new Proprio();
-	Locataire loc1 = new Locataire();
-	Context.getInstance().getDaoProprio().save(proprio1);
-	Context.getInstance().getDaoLocataire().save(loc1);
+		Proprio proprio1 = new Proprio();
+		Locataire loc1 = new Locataire();
+		Context.getInstance().getDaoProprio().save(proprio1);
+		Context.getInstance().getDaoLocataire().save(loc1);
 	
-	Context.getInstance().closeEmf();
+		menuPrincipal();
+
+		
+		Context.getInstance().closeEmf();
 	
 	}	
 	
