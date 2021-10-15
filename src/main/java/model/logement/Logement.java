@@ -3,7 +3,6 @@ package model.logement;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import model.utilisateur.Locataire;
+import model.Photo;
 import model.utilisateur.Proprio;
 
 @Entity
@@ -31,7 +30,13 @@ public class Logement {
 	private int nChambreOccup;
 	private int nSdb;
 	private Double loyer;
-	private int note;
+	
+	@OneToMany(mappedBy = "logement")
+	private List<Photo> photos;
+	
+	@OneToMany(mappedBy = "logement")
+	private List<Notation> notations;
+	
 	private LocalDate dateDispo;
 	private int dureeMini;
 	
@@ -84,32 +89,6 @@ public class Logement {
 		this.loyer = loyer;
 		this.localisation = localisation;
 	}
-
-
-
-	public Logement(int id, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
-			int note, LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement,
-			List<Chambre> chambres, List<Commodite> commodites) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.surface = surface;
-		this.nChambree = nChambree;
-		this.nChambreOccup = nChambreOccup;
-		this.nSdb = nSdb;
-		this.loyer = loyer;
-		this.note = note;
-		this.dateDispo = dateDispo;
-		this.dureeMini = dureeMini;
-		this.localisation = localisation;
-		this.typeLogement = typeLogement;
-		this.chambres = chambres;
-		this.commodites = commodites;
-	}
-
-
-
-
 
 
 
@@ -187,15 +166,6 @@ public class Logement {
 
 
 
-	public int getNote() {
-		return note;
-	}
-
-
-
-	public void setNote(int note) {
-		this.note = note;
-	}
 
 
 
@@ -290,13 +260,64 @@ public class Logement {
 
 
 
+
+
+	public void setRegles(List<Regle> regles) {
+		this.regles = regles;
+	}
+
+
+
+	public List<Notation> getNotations() {
+		return notations;
+	}
+
+
+
+	public void setNotations(List<Notation> notations) {
+		this.notations = notations;
+	}
+
+
+
+	public Proprio getProprietaire() {
+		return proprietaire;
+	}
+
+
+
+	public void setProprietaire(Proprio proprietaire) {
+		this.proprietaire = proprietaire;
+	}
+
+	
+
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+
+
+
+	public List<Regle> getRegles() {
+		return regles;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Logement [id=" + id + ", description=" + description + ", surface=" + surface + ", nChambree="
-				+ nChambree + ", nChambreOccup=" + nChambreOccup + ", nSdb=" + nSdb + ", loyer=" + loyer + ", note="
-				+ note + ", dateDispo=" + dateDispo + ", dureeMini=" + dureeMini + ", localisation=" + localisation
-				+ ", typeLogement=" + typeLogement + "]";
+		return "Logement [id=" + id + ", description=" + description + ", nChambree=" + nChambree + ", nChambreOccup="
+				+ nChambreOccup + ", loyer=" + loyer + ", proprietaire=" + proprietaire + ", typeLogement="
+				+ typeLogement + "]";
 	}
+
 
 
 

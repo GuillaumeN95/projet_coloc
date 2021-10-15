@@ -7,7 +7,7 @@ import java.util.Scanner;
 import javax.persistence.Column;
 
 import model.*;
-import model.logement.*;
+import model.logement.Logement;
 import model.utilisateur.*;
 import util.Context;
 

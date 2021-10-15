@@ -37,6 +37,30 @@ public class Locataire extends Utilisateur {
 		this.chambre = chambre;
 	}
 
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
+	}
+
+	public Dossier getDossier() {
+		return dossier;
+	}
+
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
+	}
+
+	public Chambre getChambre() {
+		return chambre;
+	}
+
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
+	}
+
 	public boolean isRecherche() {
 		return recherche;
 	}
