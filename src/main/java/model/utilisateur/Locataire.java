@@ -56,8 +56,14 @@ public class Locataire extends Utilisateur {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
+	public Chambre getChambre() {
+		return chambre;
+	}
+
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
+	}
 
 	@Override
 	public String toString() {

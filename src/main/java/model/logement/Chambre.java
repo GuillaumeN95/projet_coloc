@@ -47,12 +47,8 @@ public class Chambre {
 	private List<Commodite> commodites;
 	
 	
-	
-	
 	public Chambre() {
 	}
-
-
 
 	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
 			LocalDate dateDispo, List<Commodite> commodites) {
@@ -66,27 +62,21 @@ public class Chambre {
 		this.commodites = commodites;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public Logement getLogement() {
 		return logement;
 	}
 
-
 	public void setLogement(Logement logement) {
 		this.logement = logement;
 	}
-
 
 	public int getSurface() {
 		return surface;
@@ -136,21 +126,20 @@ public class Chambre {
 		this.dateDispo = dateDispo;
 	}
 
-
 	public List<Commodite> getCommodites() {
 		return commodites;
 	}
-
-
 
 	public void setCommodites(List<Commodite> commodites) {
 		this.commodites = commodites;
 	}
 
+	public Locataire getLocataire() {
+		return locataire;
+	}
 
-
-
-	
-	
+	public void setLocataire(Locataire locataire) {
+		this.locataire = locataire;
+	}
 
 }

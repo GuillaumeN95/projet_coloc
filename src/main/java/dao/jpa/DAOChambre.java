@@ -7,6 +7,9 @@ import javax.persistence.Query;
 
 import dao.IDAOChambre;
 import model.logement.Chambre;
+import model.logement.Logement;
+import model.utilisateur.Locataire;
+import model.utilisateur.Proprio;
 import util.Context;
 
 public class DAOChambre implements IDAOChambre {
@@ -47,6 +50,17 @@ public class DAOChambre implements IDAOChambre {
 		em.remove(o);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	@Override
+	public List<Chambre> findAllByIdLogement(int idLogement) {
+		Logement logement = Context.getInstance().getDaoLogement().findById(idLogement);
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query query = em.createQuery("from Chambre c where c.logement = :logement", Chambre.class);
+		query.setParameter("logement", logement);
+		List<Chambre> chambres = query.getResultList();
+		em.close();
+		return chambres;
 	}
 	
 }

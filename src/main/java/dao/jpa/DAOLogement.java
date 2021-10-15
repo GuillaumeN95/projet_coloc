@@ -8,6 +8,8 @@ import util.Context;
 
 import dao.IDAOLogement;
 import model.logement.Logement;
+import model.utilisateur.Proprio;
+import model.utilisateur.Utilisateur;
 
 public class DAOLogement implements IDAOLogement {
 
@@ -47,6 +49,17 @@ public class DAOLogement implements IDAOLogement {
 		em.remove(o);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	@Override
+	public List<Logement> findAllByIdProprio(int idProprio) {
+		Proprio proprio = Context.getInstance().getDaoProprio().findById(idProprio);
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query query = em.createQuery("from Logement l where l.proprietaire = :proprio", Logement.class);
+		query.setParameter("proprio", proprio);
+		List<Logement> logements = query.getResultList();
+		em.close();
+		return logements;
 	}
 	
 }
