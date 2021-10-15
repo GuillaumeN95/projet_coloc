@@ -8,6 +8,7 @@ import javax.persistence.Column;
 
 import model.*;
 import model.logement.Logement;
+import model.logement.Notation;
 import model.utilisateur.*;
 import util.Context;
 
@@ -282,6 +283,15 @@ public class TestColoc {
 		}
 	}
 	
+	public static void noterAppart() {
+		Locataire locataire = (Locataire) Context.getInstance().getUtilisateurConnecte();
+		Double note = Context.getInstance().saisieDouble("Saississez votre note : ");
+		String commentaire = Context.getInstance().saisieString("Saississez votre commentaire : ");
+		Notation newNotation = new Notation(locataire.getChambre().getLogement(),locataire, note, commentaire);
+		newNotation = Context.getInstance().getDaoNotation().save(newNotation);
+		System.out.println("Notation envoyee");
+		retourMenu();
+	}
 	
 	public static void voirAnnonce () {
 		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailability();
