@@ -14,7 +14,7 @@ public class TestColoc {
 	 * Méthode pour revenir au menu
 	 */
 	
-	public void retourMenu() {
+	public static void retourMenu() {
 		// Retour au menu correspondant à l'utilisateur connecté (Proprio / Locataire)
 		int retourMenu = Context.getInstance().saisieInt("Voulez vous : 1 - Afficher la liste des messages reçus | 2 - Revenir au menu : ");
 		if(retourMenu==1) {
@@ -31,9 +31,9 @@ public class TestColoc {
 	 * Méthodes messages
 	 */
 	
-	public void afficherListeMessageRecus() {
+	public static void afficherListeMessageRecus() {
 		// Affiche la liste des messages reçus
-		List<Message> messages = Context.getInstance().daoMessage().findAllByIdDestinataire(Context.getInstance().getUtisateurConnecte().getId());
+		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdDestinataire(Context.getInstance().getUtisateurConnecte().getId());
 		for(Message m : messages) {
 			System.out.println("Message n°" + m.getId() +" de " + m.getEmetteur().getNom() + " " + m.getEmetteur().getPrenom());
 		}
@@ -46,18 +46,18 @@ public class TestColoc {
 		}
 	}
 	
-	public void afficherListeMessageEnvoyes() {
+	public static void afficherListeMessageEnvoyes() {
 		// Affiche la liste des messages envoyes
-		List<Message> messages = Context.getInstance().daoMessage().findAllByIdEmetteur(Context.getInstance().getUtisateurConnecte().getId());
+		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdEmetteur(Context.getInstance().getUtisateurConnecte().getId());
 		for(Message m : messages) {
 			System.out.println("Message n°" + m.getId() +" à " + m.getDestinataire().getNom() + " " + m.getDestinataire().getPrenom());
 		}
 	}
 	
-	public void afficherMessage(int idMessage) {
+	public static void afficherMessage(int idMessage) {
 		// Affiche un message par son id dans la BDD
-		Message message = Context.getInstance().daoMessage().findByIdAndByIdDestinataire(idMessage, Context.getInstance().getUtisateurConnecte().getId());
-		System.out.println("Message n°" + m.getId() +" de " + m.getEmetteur().getNom() + " " + m.getEmetteur().getPrenom());
+		Message message = Context.getInstance().getDaoMessage().findByIdAndByIdDestinataire(idMessage, Context.getInstance().getUtisateurConnecte().getId());
+		System.out.println("Message n°" + message.getId() +" de " + message.getEmetteur().getNom() + " " + message.getEmetteur().getPrenom());
 		System.out.println(message.getContenu());
 		String choix = Context.getInstance().saisieString("Voulez vous supprimer ce message : (O/N)");
 		if(choix.toUpperCase().equals("O")) {
@@ -66,24 +66,24 @@ public class TestColoc {
 		retourMenu();
 	}
 	
-	public void supprimerMessage(int idMessage) {
+	public static void supprimerMessage(int idMessage) {
 		// Supprime un message par son id dans la BDD
-		Message message = Context.getInstance().daoMessage().findByIdAndByIdDestinataire(idMessage, Context.getInstance().getUtisateurConnecte().getId());
-		Context.getInstance().daoMessage().delete(message);
+		Message message = Context.getInstance().getDaoMessage().findByIdAndByIdDestinataire(idMessage, Context.getInstance().getUtisateurConnecte().getId());
+		Context.getInstance().getDaoMessage().delete(message);
 		System.out.println("Message supprimé");
 	}
 	
-	public void envoyerMessage() {
+	public static void envoyerMessage() {
 		// Envoie un nouveau message
 		String mailDestinataire = Context.getInstance().saisieString("Entrez l'email du destinataire : ");
-		Utilisateur destinataire = Context.getInstance().doaUtilisateur().findByEmail(mailDestinataire);
+		Utilisateur destinataire = Context.getInstance().getDaoUtilisateur().findByEmail(mailDestinataire);
 		if(destinataire == null) {
 			System.out.println("L'adresse mail saisie ne correspond à aucun utilisateur.");
 			envoyerMessage();
 		}
 		String contenu = Context.getInstance().saisieString("Saissisez votre message : ");
 		Message newMessage = new Message(Context.getInstance().getUtisateurConnecte(), destinataire, contenu);
-		newMessage = Context.getInstance().daoMessage().save(newMessage);
+		newMessage = Context.getInstance().getDaoMessage().save(newMessage);
 		System.out.println("Message envoyé");
 		retourMenu();
 	}
@@ -119,7 +119,7 @@ public class TestColoc {
 		String password = Context.getInstance().saisieString("Saisir votre password");
 		
 		//A MODIFER
-		Utilisateur connexion = Context.getInstance().daoUtilisateur.connect(login,password);
+		Utilisateur connexion = Context.getInstance().getDaoUtilisateur().connect(login,password);
 		//
 		if(connexion instanceof Locataire) {menuLocataire(); Context.getInstance().setUtisateurConnecte(connexion);}
 		else if(connexion instanceof Proprio) {menuProprietaire(); Context.getInstance().setUtisateurConnecte(connexion);}
