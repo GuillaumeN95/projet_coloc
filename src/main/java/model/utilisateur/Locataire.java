@@ -3,8 +3,10 @@ package model.utilisateur;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import model.logement.Chambre;
+import model.logement.Logement;
 
 @Entity
 @DiscriminatorValue("locataire")
@@ -12,11 +14,14 @@ public class Locataire extends Utilisateur {
 	private boolean recherche;
 	private String description;
 	private Situation situation;
-	private Dossier dossier;
-	private Logement logement;
-	private Chambre chambre;
 	
-	@ManyToOne
+	@OneToOne
+	private Dossier dossier;
+	
+	
+	private Logement logement;
+	
+	@OneToOne
 	private Chambre chambre;
 	
 	

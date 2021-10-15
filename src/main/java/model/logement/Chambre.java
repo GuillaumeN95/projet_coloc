@@ -26,7 +26,7 @@ public class Chambre {
 	@ManyToOne
 	private Logement logement;
 	
-	@OneToMany(mappedBy = "chambre" )
+	@OneToOne(mappedBy = "chambre" )
 	private Locataire locataire;
 	
 	

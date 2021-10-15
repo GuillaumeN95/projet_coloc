@@ -11,7 +11,9 @@ import model.logement.Logement;
 @Entity
 @DiscriminatorValue("proprio")
 public class Proprio extends Utilisateur {
-
+	
+	@OneToMany(mappedBy = "proprietaire" )
+	private List<Logement> logements;
 	
 	public Proprio() {
 		super();
@@ -19,9 +21,9 @@ public class Proprio extends Utilisateur {
 	}
 
 	
-	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, List<Logement> biens) {
+	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, List<Logement> logements) {
 		super(nom, prenom, civ, email, tel);
-		this.biens = biens;
+		this.logements = logements;
 	}
 	
 	
