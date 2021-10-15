@@ -23,7 +23,6 @@ public abstract class Utilisateur {
 	@Column(unique = true)
 	protected String email;
 	protected String tel;
-	@Column(unique = true)
 	protected String password;
 	
 	public Utilisateur() {

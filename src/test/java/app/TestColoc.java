@@ -4,33 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.Column;
+
 import model.*;
 import model.logement.*;
 import model.utilisateur.*;
 import util.Context;
 
 public class TestColoc {
-	
-	public static String saisieString(String msg) 
-	{
-		Scanner sc= new Scanner(System.in);		
-		System.out.println(msg);
-		return sc.nextLine();
-	}
-
-	public static int saisieInt(String msg) 
-	{
-		Scanner sc = new Scanner(System.in);
-		System.out.println(msg);
-		return sc.nextInt();
-	}
-
-	public static double saisieDouble(String msg) 
-	{
-		Scanner sc = new Scanner(System.in);
-		System.out.println(msg);
-		return sc.nextDouble();
-	}
 	
 	//----------------------------------------------------------------------
 	
@@ -136,7 +117,40 @@ public class TestColoc {
 	 */
 	
 	public static void creerCompte() {
-		
+		boolean nouveauMail = false;
+		System.out.println("Creation de compte :");
+		String nom = Context.getInstance().saisieString("Entrez votre nom : ");
+		String prenom = Context.getInstance().saisieString("Entrez votre prenom : ");
+		System.out.println("Voici les civilités disponibles : " + Civilite.values());
+		Civilite civ = Civilite.valueOf(Context.getInstance().saisieString("Choisissez votre civilite : "));
+		String email = "";
+		while(nouveauMail) {
+			email = Context.getInstance().saisieString("Entrez votre email : ");
+			Utilisateur utilisateurExistant = Context.getInstance().getDaoUtilisateur().findByEmail(email);
+			if(utilisateurExistant != null) {
+				System.out.println("Un compte est deja existant pour cet email.");
+			} else {
+				nouveauMail = true;
+			}
+		}
+		String tel = Context.getInstance().saisieString("Entrez votre numero de telephone : ");
+		String password = Context.getInstance().saisieString("Entrez votre mot de passe : ");
+		int choixTypeCompte = Context.getInstance().saisieInt("Etes vous 1-Proprietaire ou 2-Locataire :");
+		if(choixTypeCompte == 1) {
+			Proprio proprioACreer = new Proprio(nom, prenom, civ, email, tel, password, null);
+			Context.getInstance().getDaoProprio().save(proprioACreer);
+		}else{
+			String choixRecherche = Context.getInstance().saisieString("Etes vous en recherche de colocation (O/N) : ");
+			boolean recherche = false;
+			if(choixRecherche.toLowerCase().equals("o")) {recherche = true;}
+			System.out.println("Voici les situtations disponibles : " + Situation.values());
+			Situation situation = Situation.valueOf(Context.getInstance().saisieString("Choisissez votre situation : "));
+			String description = Context.getInstance().saisieString("Saisissez votre descriptiion : ");
+			Locataire locataireACreer = new Locataire(nom, prenom, civ, email, tel, password, recherche, description, situation, null, null);
+			Context.getInstance().getDaoLocataire().save(locataireACreer);
+		}
+		System.out.println("Profil cree");
+		menuPrincipal();
 	}
 	
 	public static void modifierProfil() {
@@ -155,7 +169,7 @@ public class TestColoc {
 		
 	//	if(choix==6) { modifInt=saisieInt("saisir modif");}
 	//	else{
-			modif = saisieString("Saisir la modif");
+			modif = Context.getInstance().saisieString("Saisir la modif");
 	//	}
 		
 		switch(choix) 
