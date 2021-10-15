@@ -2,6 +2,6 @@ package model.utilisateur;
 
 public enum Situation {
 	
-	Etudiant,Salarié,Retraité,Autre;
+	Etudiant,Salarie,Retraite,Autre;
 	
 }
