@@ -11,8 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import model.utilisateur.Locataire;
+import model.utilisateur.Proprio;
 
 @Entity
 
@@ -30,6 +34,9 @@ public class Logement {
 	private int note;
 	private LocalDate dateDispo;
 	private int dureeMini;
+	
+	@ManyToOne
+	private Proprio proprietaire;
 	
 	@OneToOne
 	private Localisation localisation;
