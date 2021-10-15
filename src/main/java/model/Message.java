@@ -16,7 +16,6 @@ public class Message {
 
 	public Message(Utilisateur emetteur, Utilisateur destinataire, String contenu) {
 		super();
-		this.id = id;
 		this.emetteur = emetteur;
 		this.destinataire = destinataire;
 		this.contenu = contenu;
