@@ -3,7 +3,6 @@ package app;
 import java.util.List;
 
 import model.*;
-import model.logement.*;
 import model.utilisateur.*;
 import util.Context;
 
@@ -88,8 +87,6 @@ public class TestColoc {
 		System.out.println("Message envoyé");
 		retourMenu();
 	}
-	
-	
 	
 	/*
 	 *  Main

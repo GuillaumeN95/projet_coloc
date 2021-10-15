@@ -31,7 +31,10 @@ public class Logement {
 	private int nChambreOccup;
 	private int nSdb;
 	private Double loyer;
-	private int note;
+	
+	@OneToMany(mappedBy = "logement")
+	private List<Notation> notations;
+	
 	private LocalDate dateDispo;
 	private int dureeMini;
 	
@@ -187,15 +190,6 @@ public class Logement {
 
 
 
-	public int getNote() {
-		return note;
-	}
-
-
-
-	public void setNote(int note) {
-		this.note = note;
-	}
 
 
 
@@ -290,13 +284,45 @@ public class Logement {
 
 
 
+
+
+	public void setRegles(List<Regle> regles) {
+		this.regles = regles;
+	}
+
+
+
+	public List<Notation> getNotations() {
+		return notations;
+	}
+
+
+
+	public void setNotations(List<Notation> notations) {
+		this.notations = notations;
+	}
+
+
+
+	public Proprio getProprietaire() {
+		return proprietaire;
+	}
+
+
+
+	public void setProprietaire(Proprio proprietaire) {
+		this.proprietaire = proprietaire;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Logement [id=" + id + ", description=" + description + ", surface=" + surface + ", nChambree="
-				+ nChambree + ", nChambreOccup=" + nChambreOccup + ", nSdb=" + nSdb + ", loyer=" + loyer + ", note="
-				+ note + ", dateDispo=" + dateDispo + ", dureeMini=" + dureeMini + ", localisation=" + localisation
-				+ ", typeLogement=" + typeLogement + "]";
+		return "Logement [id=" + id + ", description=" + description + ", nChambree=" + nChambree + ", nChambreOccup="
+				+ nChambreOccup + ", loyer=" + loyer + ", proprietaire=" + proprietaire + ", typeLogement="
+				+ typeLogement + "]";
 	}
+
 
 
 
