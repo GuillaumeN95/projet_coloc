@@ -1,5 +1,6 @@
 package dao.jpa;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -57,6 +58,15 @@ public class DAOLogement implements IDAOLogement {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		Query query = em.createQuery("from Logement l where l.proprietaire = :proprio", Logement.class);
 		query.setParameter("proprio", proprio);
+		List<Logement> logements = query.getResultList();
+		em.close();
+		return logements;
+	}
+	
+	public List<Logement> findAllByAvailability() {
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query query = em.createQuery("from Logement l where :date > l.dateDispo", Logement.class);
+		query.setParameter("date", LocalDate.now());
 		List<Logement> logements = query.getResultList();
 		em.close();
 		return logements;

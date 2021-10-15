@@ -280,6 +280,12 @@ public class TestColoc {
 		}
 	}
 	
+	
+	public static void voirAnnonce () {
+		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailability();
+		System.out.println(logements);		
+	}
+	
 	/*
 	 *  Main
 	 */
