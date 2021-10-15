@@ -1,10 +1,15 @@
 package model.utilisateur;
 
+import model.logement.Chambre;
+import model.logement.Logement;
+
 public class Locataire extends Utilisateur {
 	private boolean recherche;
 	private String description;
 	private Situation situation;
 	private Dossier dossier;
+	private Logement logement;
+	private Chambre chambre;
 	
 	
 	public Locataire() {
@@ -21,6 +26,21 @@ public class Locataire extends Utilisateur {
 		this.description = description;
 		this.situation = situation;
 		this.dossier = dossier;
+	}
+	
+	
+
+
+
+	public Locataire(String nom, String prenom, Civilite civ, String email, String tel, boolean recherche,
+			String description, Situation situation, Dossier dossier, Logement logement, Chambre chambre) {
+		super(nom, prenom, civ, email, tel);
+		this.recherche = recherche;
+		this.description = description;
+		this.situation = situation;
+		this.dossier = dossier;
+		this.logement = logement;
+		this.chambre = chambre;
 	}
 
 

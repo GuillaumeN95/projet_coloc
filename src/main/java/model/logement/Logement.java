@@ -1,6 +1,7 @@
 package model.logement;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Logement {
 	
@@ -16,6 +17,9 @@ public class Logement {
 	private int dureeMini;
 	private Localisation localisation;
 	private TypeLogement typeLogement;
+	private List<Chambre> chambres;
+	private List<Commodite> commodites;
+	private List<Regle> regles;
 
 	
 	
@@ -26,9 +30,12 @@ public class Logement {
 
 
 
-	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer, int note,
-			LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement) {
-		super();
+
+
+	public Logement(int id, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			int note, LocalDate dateDispo, int dureeMini, Localisation localisation, TypeLogement typeLogement,
+			List<Chambre> chambres) {
+		this.id = id;
 		this.description = description;
 		this.surface = surface;
 		this.nChambree = nChambree;
@@ -40,7 +47,10 @@ public class Logement {
 		this.dureeMini = dureeMini;
 		this.localisation = localisation;
 		this.typeLogement = typeLogement;
+		this.chambres = chambres;
 	}
+
+
 
 
 
@@ -185,6 +195,23 @@ public class Logement {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	
+
+
+	public List<Chambre> getChambres() {
+		return chambres;
+	}
+
+
+
+
+
+	public void setChambres(List<Chambre> chambres) {
+		this.chambres = chambres;
+	}
+
+
 
 
 
