@@ -14,6 +14,7 @@ import model.logement.Commodite;
 import model.logement.Localisation;
 import model.logement.Logement;
 import model.logement.Notation;
+import model.logement.Regle;
 import model.logement.TypeLogement;
 import model.utilisateur.*;
 import util.Context;
@@ -304,15 +305,23 @@ public class TestColoc {
 		System.out.println("Localisation de l'appartement : ");
 		
 		String villeNew = Context.getInstance().saisieString("Ajouter la ville : ");
-		String codePostalNew = Context.getInstance().saisieString("Ajouter le code postal (Entrer pour passer)");
+		String codePostalNew = Context.getInstance().saisieString("Ajouter le code postal ");
 		
 		String voieNew="";
 		String departementNew ="";
-		int numNew;
+		int numNew = 0;
 	
-		departementNew = Context.getInstance().saisieString("Ajouter le departement (Entrer pour passer)");
-		voieNew = Context.getInstance().saisieString("Ajouter le nom de la voie (Entrer pour passer)");
-		numNew = Context.getInstance().saisieInt("Ajouter le numero de la voie (Entrer pour passer)");
+		departementNew = Context.getInstance().saisieString("Ajouter le departement ");
+		voieNew = Context.getInstance().saisieString("Ajouter le nom de la voie ");
+		boolean fin = false;
+		do
+		{
+			try
+			{numNew = Context.getInstance().saisieInt("Ajouter le numero de la voie ");
+			fin = true;}
+			catch(Exception e) {System.out.println("***ERREUR*** : entrer un numero de voie");}
+		}
+		while(!fin);
 		
 		Localisation newLocalisation = new Localisation(departementNew,villeNew,codePostalNew,voieNew,numNew);
 		newLocalisation = Context.getInstance().getDaoLocalisation().save(newLocalisation);
@@ -344,8 +353,8 @@ public class TestColoc {
 					if(typeNew.equals(t.toString())) {choix="n";}
 				}
 			}
-			catch(Exception e) {System.out.println("Erreur : entrer un type d'appartement");}
-			if(choix.equals("o")){System.out.println("Erreur dans la saisie");}
+			catch(Exception e) {System.out.println("***ERREUR*** : entrer un type valide");}
+			if(choix.equals("o")){System.out.println("***ERREUR*** : entrer un type valide");}
 		}
 		
 		
@@ -357,23 +366,36 @@ public class TestColoc {
 		
 		System.out.println("Informations sur le logement : ");
 		
-		boolean fin=false;
+		
 		int surface=0;
 		Double loyer=0.0;
+		fin=false;
 		do {
 			try 
-			{
-				surface = Context.getInstance().saisieInt("Entrer la surface totale du logement (m�) : ");
-				loyer = Context.getInstance().saisieDouble("Entrer le loyer : ");
-				fin = true;
-			}
-			catch(Exception e) {System.out.println("Erreur : entrer uniquement nombres");}
-		}
-		while(!fin);
+			{surface = Context.getInstance().saisieInt("Entrer la surface totale du logement (m2) : ");
+			loyer = Context.getInstance().saisieDouble("Entrer le loyer : ");
+			fin = true;}
+			catch(Exception e) {System.out.println("***ERREUR*** : entrer uniquement des nombres");}
+		}while(!fin);
 		
-		int nbChambre = Context.getInstance().saisieInt("Entrer le nombre de chambre : ");
-		int nbChambreOccup = Context.getInstance().saisieInt("Entrer le nombre de chambre occupee : ");
-		int nbSdB = Context.getInstance().saisieInt("Entrer le nombre de salle de bain : ");
+		int nbChambre = 0;
+		int nbChambreOccup = 0;
+		fin=false;
+		do {
+			try 
+			{nbChambre = Context.getInstance().saisieInt("Entrer le nombre de chambre : ");
+			nbChambreOccup = Context.getInstance().saisieInt("Entrer le nombre de chambre occupee : ");
+			fin=true;}
+			catch(Exception e) {System.out.println("***ERREUR*** : entrer uniquement des nombres");}
+		}while(!fin);
+		
+		int nbSdB = 0;
+		fin = false;
+		do {
+			try {nbSdB = Context.getInstance().saisieInt("Entrer le nombre de salle de bain : ");fin=true;}
+			catch(Exception e) {System.out.println("***ERREUR*** : entrer uniquement des nombres");}
+		}while(!fin);
+		
 		
 		
 		
@@ -381,28 +403,31 @@ public class TestColoc {
 		
 		
 		
-//		String commodite = Context.getInstance().saisieString("Ajouter d'autres commoditees au logement (o/n)? (balcon, terrasse, WiFi, cave,...)");
-//		
-//		List<Commodite> listeCommodites = new ArrayList();
-//		
-//		if(commodite.equals("o")) {System.out.println("Ajouter les commodites une par une (STOP pour finir) :");}
-//		while(!(commodite.equals("STOP")))
-//		{
-//			commodite = Context.getInstance().saisieString("- " );
-//			if(!(commodite.equals("STOP"))) 
-//			{
-//				Commodite newCommodite = new Commodite(commodite);
-//				Context.getInstance().getDaoCommodite().save(newCommodite);
-//				listeCommodites.add(newCommodite);
-//			}
-//		}
+		String commodite = Context.getInstance().saisieString("Ajouter d'autres commoditees au logement (o/n)? (balcon, terrasse, WiFi, cave,...)");
+		
+		List<Commodite> listeCommodites = new ArrayList();
+		
+		if(commodite.equals("o")) 
+		{
+			System.out.println("Ajouter les commodites une par une (STOP pour finir) :");
+			while(!(commodite.equals("STOP")))
+			{
+				commodite = Context.getInstance().saisieString("- " );
+				if(!(commodite.equals("STOP"))) 
+				{
+					Commodite newCommodite = new Commodite(commodite);
+					newCommodite = Context.getInstance().getDaoCommodite().save(newCommodite);
+					listeCommodites.add(newCommodite);
+				}
+			}
+		}
 		
 		
 		
 		//Description
 		
 		
-		String description = Context.getInstance().saisieString("Ajouter un texte de description � l'appartement (o/n) ?");
+		String description = Context.getInstance().saisieString("Ajouter un texte de description a l'appartement (o/n) ?");
 		
 		if(description.equals("o"))
 		{
@@ -417,24 +442,26 @@ public class TestColoc {
 		
 		
 		
-//		String regle = Context.getInstance().saisieString("Ajouter des regles � l'appartement (o/n) ?");
-//		List<Regle> listeRegles = new ArrayList();
-//		
-//		if(regle.equals("o")) {System.out.println("Ajouter les regles une par une (STOP pour finir) :");}
-//		while(!(commodite.equals("STOP")))
-//		{
-//			regle = Context.getInstance().saisieString("- " );
-//			if(!(regle.equals("STOP"))) 
-//			{
-//				Regle newRegle = new Regle(regle);
-//				Context.getInstance().getDaoRegle().save(newRegle);
-//				listeRegles.add(newRegle);
-//			}
-//		}
+		String regle = Context.getInstance().saisieString("Ajouter des regles a l'appartement (o/n) ?");
+		List<Regle> listeRegles = new ArrayList();
+		
+		if(regle.equals("o")) 
+		{
+			System.out.println("Ajouter les regles une par une (STOP pour finir) :");
+			while(!(regle.equals("STOP")))
+			{
+				regle = Context.getInstance().saisieString("- " );
+				if(!(regle.equals("STOP"))) 
+				{
+					Regle newRegle = new Regle(regle);
+					newRegle = Context.getInstance().getDaoRegle().save(newRegle);
+					listeRegles.add(newRegle);
+				}
+			}
+		}
 		
 		
-		
-		Logement newLogement = new Logement(description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites);
+		Logement newLogement = new Logement(description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites,listeRegles);
 		newLogement = Context.getInstance().getDaoLogement().save(newLogement);
 		
 		
@@ -443,9 +470,9 @@ public class TestColoc {
 		
 		
 		
-		System.out.println("Caract�ristiques des chambres : ");
+		System.out.println("Caracteristiques des chambres : ");
 		
-		String chambre = Context.getInstance().saisieString("Renseigner les chambres (o/n) ? ");
+		String chambre = Context.getInstance().saisieString("Renseigner les chambres (o/n)  ? ");
 		
 		List<Chambre> listeChambres = new ArrayList();
 		
@@ -455,13 +482,29 @@ public class TestColoc {
 			for(int i=1;i<=nbChambre;i++)
 			{
 				System.out.println("Chambre n� " + i);
-				String dateDispoChambre = Context.getInstance().saisieString("Date de disponbilite (aaaa-mm-jj) (Entrer pour passer) :");
+				String dateDispoChambre = Context.getInstance().saisieString("Date de disponbilite (aaaa-mm-jj)  :");
 				int surfaceChambre = Context.getInstance().saisieInt("Surface : ");
 				Double loyerChambre = Context.getInstance().saisieDouble("Loyer : ");
 				Double chargeChambre = Context.getInstance().saisieDouble("Charges : ");
 				Double cautionChambre = Context.getInstance().saisieDouble("Caution : ");
-				int dureeMiniChambre = Context.getInstance().saisieInt("Duree mini de location : ");
-				Chambre newChambre = new Chambre(newLogement,surfaceChambre,loyerChambre,chargeChambre,cautionChambre,dureeMiniChambre,LocalDate.parse(dateDispoChambre));
+				int dureeMiniChambre = Context.getInstance().saisieInt("Duree mini de location (mois) : ");
+				
+				String commoditeChambre = Context.getInstance().saisieString("Ajouter des commodites a la chambre (o/n) ? ");
+				
+				List<Commodite> listeCommoditesChambre = new ArrayList();
+				
+				if(commoditeChambre.equals("o")) {System.out.println("Ajouter les commodites une par une (STOP pour finir) :");}
+				while(!(commoditeChambre.equals("STOP")))
+				{
+					commoditeChambre = Context.getInstance().saisieString("- " );
+					if(!(commoditeChambre.equals("STOP"))) 
+					{
+						Commodite newCommoditeChambre = new Commodite(commoditeChambre);
+						newCommoditeChambre = Context.getInstance().getDaoCommodite().save(newCommoditeChambre);
+						listeCommoditesChambre.add(newCommoditeChambre);
+					}
+				}
+				Chambre newChambre = new Chambre(newLogement,surfaceChambre,loyerChambre,chargeChambre,cautionChambre,dureeMiniChambre,LocalDate.parse(dateDispoChambre),listeCommoditesChambre);
 				newChambre = Context.getInstance().getDaoChambre().save(newChambre);
 			}
 		}
