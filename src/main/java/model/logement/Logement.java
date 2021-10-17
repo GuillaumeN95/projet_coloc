@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,13 +47,13 @@ public class Logement {
 	
 	@OneToOne
 	private Localisation localisation;
-	
+	@Enumerated(EnumType.STRING)
 	private TypeLogement typeLogement;
 	
 	@OneToMany(mappedBy = "logement")
 	private List<Chambre> chambres;
 	
-	@ManyToMany
+	@OneToMany
 	@JoinTable
 	(
 		name="Commodite_Logement",
@@ -91,7 +93,7 @@ public class Logement {
 	}
 	
 	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
-			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites) {
+			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
 		super();
 		this.description = description;
 		this.surface = surface;
@@ -102,9 +104,11 @@ public class Logement {
 		this.localisation = localisation;
 		this.typeLogement = typeLogement;
 		this.commodites = commodites;
+		this.regles = regles;
 	}
 
 
+	
 
 
 
