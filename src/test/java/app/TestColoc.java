@@ -520,6 +520,17 @@ public class TestColoc {
 	
 	
 	/*
+	 * Methode visualisation des appartements disponibles
+	 */
+	
+	public static void voirAnnonce () {
+		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailability();
+		System.out.println(logements);		
+	}
+
+	
+	
+	/*
 	 * Methode visualisation & validation des dossiers
 	 */
 	
@@ -807,6 +818,22 @@ public static void ajoutAppart() {
 		
 		
 	}
+	
+	/*
+	 * Methode noter l'appartement
+	 */
+	
+	public static void noterAppart() {
+		Locataire locataire = (Locataire) Context.getInstance().getUtilisateurConnecte();
+		Double note = Context.getInstance().saisieDouble("Saississez votre note : ");
+		String commentaire = Context.getInstance().saisieString("Saississez votre commentaire : ");
+		Notation newNotation = new Notation(locataire.getChambre().getLogement(),locataire, note, commentaire);
+		newNotation = Context.getInstance().getDaoNotation().save(newNotation);
+		System.out.println("Notation envoyee");
+		retourMenu();
+	}
+
+	
 	
 	
 	/*
