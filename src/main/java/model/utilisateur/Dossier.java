@@ -1,10 +1,15 @@
 package model.utilisateur;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import model.logement.Chambre;
 
 @Entity
 public class Dossier {
@@ -18,6 +23,9 @@ public class Dossier {
 	
 	@OneToOne(mappedBy = "dossier" )
 	private Locataire locataire;
+	
+	@OneToMany
+	private List<Chambre> chambre;
 	
 	
 	public Dossier() {

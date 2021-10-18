@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,20 +47,20 @@ public class Logement {
 	
 	@OneToOne
 	private Localisation localisation;
-	
+	@Enumerated(EnumType.STRING)
 	private TypeLogement typeLogement;
 	
 	@OneToMany(mappedBy = "logement")
 	private List<Chambre> chambres;
 	
-	@ManyToMany
+	@OneToMany
 	@JoinTable
 	(
 		name="Commodite_Logement",
 		joinColumns = @JoinColumn(name="idLogement"),
 		inverseJoinColumns = @JoinColumn(name="idCommodites")
 	)
-	private List<Commodite> commodites;
+	private  List<Commodite> commodites;
 	
 	@ManyToMany
 	@JoinTable
@@ -77,9 +79,8 @@ public class Logement {
 	}
 	
 
-
 	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
-			Localisation localisation) {
+			Localisation localisation,TypeLogement typeLogement) {
 		super();
 		this.description = description;
 		this.surface = surface;
@@ -88,8 +89,27 @@ public class Logement {
 		this.nSdb = nSdb;
 		this.loyer = loyer;
 		this.localisation = localisation;
+		this.typeLogement = typeLogement;
+	}
+	
+	public Logement(Proprio proprietaire, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
+		super();
+		this.proprietaire = proprietaire;
+		this.description = description;
+		this.surface = surface;
+		this.nChambree = nChambree;
+		this.nChambreOccup = nChambreOccup;
+		this.nSdb = nSdb;
+		this.loyer = loyer;
+		this.localisation = localisation;
+		this.typeLogement = typeLogement;
+		this.commodites = commodites;
+		this.regles = regles;
 	}
 
+
+	
 
 
 
