@@ -171,7 +171,6 @@ public class TestColoc {
 		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
 		
 		String modif = null;
-		int modifInt=0;
 		
 		if(choix==6) {}
 		else{
@@ -192,8 +191,7 @@ public class TestColoc {
 		Context.getInstance().getDaoUtilisateur().save(connected);
 		System.out.println(connected);
 		
-		if(connected instanceof Locataire) {menuLocataire();}
-		else if(connected instanceof Proprio) {menuProprietaire();}
+		retourMenu();
 	}
 	
 	/*
@@ -226,6 +224,7 @@ public class TestColoc {
 		for(Message m : messages) {
 			System.out.println("Message numero " + m.getId() + " a " + m.getDestinataire().getNom() + " " + m.getDestinataire().getPrenom());
 		}
+		retourMenu();
 	}
 	
 	public static void afficherMessage(int idMessage) {
@@ -245,6 +244,7 @@ public class TestColoc {
 		Message message = Context.getInstance().getDaoMessage().findById(idMessage);
 		Context.getInstance().getDaoMessage().delete(message);
 		System.out.println("Message supprime");
+		retourMenu();
 	}
 	
 	public static void envoyerMessage() {
@@ -520,6 +520,7 @@ public class TestColoc {
 		}
 		
 		System.out.println("Nouveau logement ajoute !");
+		retourMenu();
 		
 		
 	}
@@ -531,7 +532,8 @@ public class TestColoc {
 	
 	public static void voirAnnonce () {
 		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailability();
-		System.out.println(logements);		
+		System.out.println(logements);	
+		retourMenu();
 	}
 
 	
