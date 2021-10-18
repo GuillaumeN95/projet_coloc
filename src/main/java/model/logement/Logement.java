@@ -92,9 +92,10 @@ public class Logement {
 		this.typeLogement = typeLogement;
 	}
 	
-	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+	public Logement(Proprio proprietaire, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
 			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
 		super();
+		this.proprietaire = proprietaire;
 		this.description = description;
 		this.surface = surface;
 		this.nChambree = nChambree;

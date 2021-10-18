@@ -7,7 +7,9 @@ import javax.persistence.Query;
 import util.Context;
 
 import dao.IDAODossier;
+import model.logement.Logement;
 import model.utilisateur.Dossier;
+import model.utilisateur.Proprio;
 
 public class DAODossier implements IDAODossier {
 
@@ -48,5 +50,7 @@ public class DAODossier implements IDAODossier {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	
 	
 }

@@ -81,7 +81,7 @@ public class TestColoc {
 		case 1 : modifierProfil();break;
 		case 2 : ajoutAppart();break;
 		case 3 : modifAppart();break;
-		case 4 : validerDossier();break;
+		case 4 : voirDossier();break;
 		case 5 : rendreDispo();break;
 		case 6 : envoyerMessage();break;
 		case 7 : afficherListeMessageRecus();break;
@@ -461,7 +461,11 @@ public class TestColoc {
 		}
 		
 		
-		Logement newLogement = new Logement(description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites,listeRegles);
+		Utilisateur connected = Context.getInstance().getUtilisateurConnecte();
+		
+		
+		
+		Logement newLogement = new Logement((Proprio) connected, description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites,listeRegles);
 		newLogement = Context.getInstance().getDaoLogement().save(newLogement);
 		
 		
@@ -509,12 +513,44 @@ public class TestColoc {
 			}
 		}
 		
+		System.out.println("Nouveau logement ajoute !");
 		
 		
 	}
 	
 	
+	/*
+	 * Methode visualisation & validation des dossiers
+	 */
 	
+	public static void voirDossier() {
+		
+		System.out.println("Vos logements enregistrés : ");
+		
+		Utilisateur connected = Context.getInstance().getUtilisateurConnecte();
+		List<Logement> listeLogements = Context.getInstance().getDaoLogement().findAllByIdProprio(connected.getId());
+		
+		for(int i=0;i<listeLogements.size();i++)
+		{
+			Logement logement = listeLogements.get(i);
+			System.out.println((i+1)+ " : " +logement.getTypeLogement()+ " à " +logement.getLocalisation().getVille()+ "(" +logement.getLocalisation().getCodePostal()+ ") au " +logement.getLocalisation().getNum()+ " " +logement.getLocalisation().getVoie());
+			
+		}
+		
+		boolean fin=false;
+		do {
+			try {
+				int choixLogement = Context.getInstance().saisieInt("Quel logement souhaitez-vous choisir ?");
+				fin=true;
+			}
+			catch (Exception e) {System.out.println("***ERREUR*** : Entrer un numero de logement");}
+		}
+		while(!fin);
+		
+		
+		
+		
+	}
 	
 	
 	
@@ -524,7 +560,7 @@ public class TestColoc {
 	
 	public static void main(String[] args) {
 		
-		ajoutAppart();
+		menuPrincipal();
 	
 	
 	}	
