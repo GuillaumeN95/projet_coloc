@@ -77,14 +77,6 @@ public class Locataire extends Utilisateur {
 		this.description = description;
 	}
 
-	public Chambre getChambre() {
-		return chambre;
-	}
-
-	public void setChambre(Chambre chambre) {
-		this.chambre = chambre;
-	}
-
 	@Override
 	public String toString() {
 		return "Locataire [recherche=" + recherche + ", description=" + description + ", situation=" + situation
