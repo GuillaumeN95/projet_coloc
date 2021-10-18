@@ -65,8 +65,12 @@ public class DAOUtilisateur implements IDAOUtilisateur {
 	public Utilisateur connect(String email, String password) {
 		// TODO Auto-generated method stub
 		Utilisateur utilisateur = findByEmail(email);
-		if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)) {
-			return utilisateur;
+		if(utilisateur == null) {
+			return null;
+		} else {
+			if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)) {
+				return utilisateur;
+			}
 		}
 		return null;
 	}
