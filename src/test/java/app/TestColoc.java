@@ -166,16 +166,17 @@ public class TestColoc {
 		System.out.println("3 - La civilite");
 		System.out.println("4 - L'adresse mail");
 		System.out.println("5 - Le numero de telephone");
+		System.out.println("6 - Rien, seulement voir le profil");
 	
 		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
 		
 		String modif = null;
 		int modifInt=0;
 		
-	//	if(choix==6) { modifInt=saisieInt("saisir modif");}
-	//	else{
+		if(choix==6) {}
+		else{
 			modif = Context.getInstance().saisieString("Saisir la modif");
-	//	}
+		}
 		
 		switch(choix) 
 		{
@@ -184,10 +185,15 @@ public class TestColoc {
 		case 3 : connected.setCiv(Civilite.valueOf(modif));break;
 		case 4 : connected.setEmail(modif);break;
 		case 5 : connected.setTel(modif);break;
+		case 6 : break;
 		
 		}
 		
 		Context.getInstance().getDaoUtilisateur().save(connected);
+		System.out.println(connected);
+		
+		if(connected instanceof Locataire) {menuLocataire();}
+		else if(connected instanceof Proprio) {menuProprietaire();}
 	}
 	
 	/*
