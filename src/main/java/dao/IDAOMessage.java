@@ -6,6 +6,7 @@ import model.Message;
 
 public interface IDAOMessage extends IDAO<Message,Integer>{
 
-	public List<Message> findAllByIdDestinataire(int idDestinataire);
-	public List<Message> findAllByIdEmetteur(int idEmetteur);
+	public List<Message> findAllByIdDestinataireWithUtilisateur(int idDestinataire);
+	public List<Message> findAllByIdEmetteurWithUtilisateur(int idEmetteur);
+	public Message findByIdWithUtilisateur(int idMessage);
 }
