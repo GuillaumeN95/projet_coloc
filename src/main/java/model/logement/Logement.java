@@ -108,6 +108,22 @@ public class Logement {
 		this.regles = regles;
 	}
 
+	public Logement(Proprio proprietaire,String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites, List<Regle> regles) {
+		super();
+		this.proprietaire = proprietaire;
+		this.description = description;
+		this.surface = surface;
+		this.nChambree = nChambree;
+		this.nChambreOccup = nChambreOccup;
+		this.nSdb = nSdb;
+		this.loyer = loyer;
+		this.localisation = localisation;
+		this.typeLogement= typeLogement;
+		this.commodites = commodites;
+		this.regles = regles;
+	}
+
 
 	
 

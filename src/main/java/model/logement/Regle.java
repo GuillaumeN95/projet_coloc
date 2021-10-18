@@ -29,10 +29,9 @@ public class Regle {
 	}
 
 	public Regle(String libelle) {
-		
 		this.libelle = libelle;
 	}
-
+	
 	public Regle(int id, String libelle) {
 		this.id = id;
 		this.libelle = libelle;
