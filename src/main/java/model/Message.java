@@ -1,10 +1,21 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import model.utilisateur.Utilisateur;
 
+@Entity
 public class Message {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@OneToOne
 	private Utilisateur emetteur;
+	@OneToOne
 	private Utilisateur destinataire;
 	private String contenu;
 	
