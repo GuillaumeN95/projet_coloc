@@ -80,7 +80,7 @@ public class TestColoc {
 		{
 		case 1 : modifierProfil();break;
 		case 2 : ajoutAppart();break;
-		//case 3 : modifAppart();break;
+		case 3 : modifAppart();break;
 		case 4 : voirDossier();break;
 		case 5 : rendreDispo();break;
 		case 6 : afficherListeMessageRecus();break;
@@ -638,12 +638,12 @@ public class TestColoc {
 	private static Chambre choisirChambre(Logement logement){
 		
 		Chambre chambreChoisie=null;
-		List<Chambre> chambres = logement.getChambres();
+		List<Chambre> chambres = Context.getInstance().getDaoChambre().findAllByIdLogement(logement.getId());
 		
 		for(int j=0;j<chambres.size();j++)
 		{
-			Chambre chambre = chambres.get(i);
-			System.out.println((i+1)+ " : " +chambre.getSurface()+ "," +chambre.getLoyer() + "m², dispo le " +logement.getDateDispo());
+			Chambre chambre = chambres.get(j);
+			System.out.println((j+1)+ " : " +chambre.getSurface()+ "m² ," +chambre.getLoyer() + "€, dispo le " +logement.getDateDispo());
 
 		}
 
@@ -735,11 +735,12 @@ public class TestColoc {
 			String voie = Context.getInstance().saisieString("Saisir la voie");
 			int num = Context.getInstance().saisieInt("Saisir le numéro de voie");
 			Localisation newLocalisation = new Localisation(departement, ville, CP, voie, num);
+			newLocalisation = Context.getInstance().getDaoLocalisation().save(newLocalisation);
 			logement.setLocalisation(newLocalisation);
 		}
 		else if(choix==10) {
 			
-		//	System.out.println("1 - La description");
+		modifChambre(logement);
 
 		}
 		
@@ -755,8 +756,8 @@ public class TestColoc {
 		}
 
 		Context.getInstance().getDaoLogement().save(logement);
-		System.out.println("Modification(s) effectuée(s)");
-		modifAppart();
+		System.out.println("Modification(s) effectuée(s) \n Retour menu...");
+		retourMenu();
 	}
 
 
