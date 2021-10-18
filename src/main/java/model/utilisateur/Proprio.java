@@ -30,6 +30,11 @@ public class Proprio extends Utilisateur {
 	
 	
 
+	/*@Override
+	public String toString() {
+		return "Proprio [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", civ=" + civ
+				+ ", email=" + email + ", tel=" + tel + "]";
+	}*/
 
 	
 

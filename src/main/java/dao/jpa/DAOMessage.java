@@ -50,23 +50,39 @@ public class DAOMessage implements IDAOMessage {
 	}
 
 	@Override
-	public List<Message> findAllByIdDestinataire(int idDestinataire) {
+	public List<Message> findAllByIdDestinataireWithUtilisateur(int idDestinataire) {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
-		Query requete = em.createQuery("from Message m WHERE m.destinataire = :destinataire",Message.class);
+		Query requete = em.createQuery("from Message m LEFT JOIN fetch m.emetteur WHERE m.destinataire = :destinataire",Message.class);
 		requete.setParameter("destinataire", Context.getInstance().getDaoUtilisateur().findById(idDestinataire));
 		List<Message> messages = requete.getResultList();
+		requete = em.createQuery("from Message m LEFT JOIN fetch m.destinataire WHERE m.destinataire = :destinataire",Message.class);
+		requete.setParameter("destinataire", Context.getInstance().getDaoUtilisateur().findById(idDestinataire));
+		messages = requete.getResultList();
 		em.close();
 		return messages;
 	}
 
 	@Override
-	public List<Message> findAllByIdEmetteur(int idEmetteur) {
+	public List<Message> findAllByIdEmetteurWithUtilisateur(int idEmetteur) {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
-		Query requete = em.createQuery("from Message m WHERE m.emetteur = :emetteur",Message.class);
+		Query requete = em.createQuery("from Message m LEFT JOIN fetch m.emetteur WHERE m.emetteur = :emetteur",Message.class);
 		requete.setParameter("emetteur", Context.getInstance().getDaoUtilisateur().findById(idEmetteur));
 		List<Message> messages = requete.getResultList();
+		requete = em.createQuery("from Message m LEFT JOIN fetch m.destinataire WHERE m.emetteur = :emetteur",Message.class);
+		requete.setParameter("emetteur", Context.getInstance().getDaoUtilisateur().findById(idEmetteur));
+		messages = requete.getResultList();
 		em.close();
 		return messages;
+	}
+
+	@Override
+	public Message findByIdWithUtilisateur(int idMessage) {
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Query requete = em.createQuery("from Message m LEFT JOIN fetch m.emetteur WHERE m.id = :idMessage",Message.class);
+		requete.setParameter("idMessage", idMessage);
+		Message message = (Message) requete.getSingleResult();
+		em.close();
+		return message;
 	}
 	
 }
