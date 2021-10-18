@@ -28,7 +28,7 @@ public class Logement {
 	private int id;
 	private String description;
 	private int surface;
-	private int nChambree;
+	private int nChambre;
 	private int nChambreOccup;
 	private int nSdb;
 	private Double loyer;
@@ -79,12 +79,12 @@ public class Logement {
 	}
 	
 
-	public Logement(String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+	public Logement(String description, int surface, int nchambre, int nChambreOccup, int nSdb, Double loyer,
 			Localisation localisation,TypeLogement typeLogement) {
 		super();
 		this.description = description;
 		this.surface = surface;
-		this.nChambree = nChambree;
+		this.nChambre = nchambre;
 		this.nChambreOccup = nChambreOccup;
 		this.nSdb = nSdb;
 		this.loyer = loyer;
@@ -92,13 +92,13 @@ public class Logement {
 		this.typeLogement = typeLogement;
 	}
 	
-	public Logement(Proprio proprietaire, String description, int surface, int nChambree, int nChambreOccup, int nSdb, Double loyer,
+	public Logement(Proprio proprietaire, String description, int surface, int nchambre, int nChambreOccup, int nSdb, Double loyer,
 			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
 		super();
 		this.proprietaire = proprietaire;
 		this.description = description;
 		this.surface = surface;
-		this.nChambree = nChambree;
+		this.nChambre = nchambre;
 		this.nChambreOccup = nChambreOccup;
 		this.nSdb = nSdb;
 		this.loyer = loyer;
@@ -132,14 +132,14 @@ public class Logement {
 
 
 
-	public int getnChambree() {
-		return nChambree;
+	public int getnChambre() {
+		return nChambre;
 	}
 
 
 
-	public void setnChambree(int nChambree) {
-		this.nChambree = nChambree;
+	public void setnChambre(int nChambre) {
+		this.nChambre = nChambre;
 	}
 
 
@@ -327,8 +327,8 @@ public class Logement {
 
 	@Override
 	public String toString() {
-		return "Logement [id=" + id + ", description=" + description + ", nChambree=" + nChambree + ", nChambreOccup="
-				+ nChambreOccup + ", loyer=" + loyer + ", proprietaire=" + proprietaire + ", typeLogement="
+		return "Logement [id=" + id + ", description=" + description + ", nChambre=" + nChambre + ", nChambreOccup="
+				+ nChambreOccup + ", loyer=" + loyer + ", typeLogement="
 				+ typeLogement + "]";
 	}
 
