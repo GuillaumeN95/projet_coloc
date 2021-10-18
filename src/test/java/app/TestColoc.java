@@ -80,25 +80,20 @@ public class TestColoc {
 		{
 		case 1 : modifierProfil();break;
 		case 2 : ajoutAppart();break;
-		case 3 : modifAppart();break;
+		//case 3 : modifAppart();break;
 		case 4 : voirDossier();break;
 		case 5 : rendreDispo();break;
-		case 6 : envoyerMessage();break;
-		case 7 : afficherListeMessageRecus();break;
+		case 6 : afficherListeMessageRecus();break;
+		case 7 : envoyerMessage();break;
 		case 8 : System.out.println("Deconnexion...");Context.getInstance().setUtilisateurConnecte(null);menuPrincipal();break;
 		case 9 : System.exit(0);
 		}
 	}
 	
 	public static void retourMenu() {
-		// Retour au menu correspondant à l'utilisateur connecté (Proprio / Locataire)
-		int retourMenu = Context.getInstance().saisieInt("Voulez vous : 1 - Afficher la liste des messages reçus | 2 - Revenir au menu : ");
-		if(retourMenu==1) {
-			afficherListeMessageRecus();
+		if(Context.getInstance().getUtilisateurConnecte() instanceof Locataire) {
+			menuLocataire();
 		} else {
-			if(Context.getInstance().getUtilisateurConnecte() instanceof Locataire) {
-				menuLocataire();
-			}
 			menuProprietaire();
 		}
 	}
@@ -207,22 +202,27 @@ public class TestColoc {
 	
 	public static void afficherListeMessageRecus() {
 		// Affiche la liste des messages reçus
-		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdDestinataire(Context.getInstance().getUtilisateurConnecte().getId());
-		for(Message m : messages) {
-			System.out.println("Message numero " + m.getId() + " de " + m.getEmetteur().getNom() + " " + m.getEmetteur().getPrenom());
-		}
-		String choix = Context.getInstance().saisieString("Voulez vous lire un message : (O/N)");
-		if(choix.toUpperCase().equals("O")) {
-			int idMessage = Context.getInstance().saisieInt("Entrez le numero du message que vous souhaitez lire : ");
-			afficherMessage(idMessage);
+		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdDestinataireWithUtilisateur(Context.getInstance().getUtilisateurConnecte().getId());
+		if(messages.size() != 0) {
+			for(Message m : messages) {
+				System.out.println("Message numero " + m.getId() + " de " + m.getEmetteur().getNom() + " " + m.getEmetteur().getPrenom());
+			}
+			String choix = Context.getInstance().saisieString("Voulez vous lire un message : (O/N)");
+			if(choix.toUpperCase().equals("O")) {
+				int idMessage = Context.getInstance().saisieInt("Entrez le numero du message que vous souhaitez lire : ");
+				afficherMessage(idMessage);
+			} else {
+				retourMenu();
+			}
 		} else {
+			System.out.println("Pas de message reçu");
 			retourMenu();
 		}
 	}
 	
 	public static void afficherListeMessageEnvoyes() {
 		// Affiche la liste des messages envoyes
-		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdEmetteur(Context.getInstance().getUtilisateurConnecte().getId());
+		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdEmetteurWithUtilisateur(Context.getInstance().getUtilisateurConnecte().getId());
 		for(Message m : messages) {
 			System.out.println("Message numero " + m.getId() + " a " + m.getDestinataire().getNom() + " " + m.getDestinataire().getPrenom());
 		}
@@ -230,7 +230,7 @@ public class TestColoc {
 	
 	public static void afficherMessage(int idMessage) {
 		// Affiche un message par son id dans la BDD
-		Message message = Context.getInstance().getDaoMessage().findById(idMessage);
+		Message message = Context.getInstance().getDaoMessage().findByIdWithUtilisateur(idMessage);
 		System.out.println("Message n°" + message.getId() +" de " + message.getEmetteur().getNom() + " " + message.getEmetteur().getPrenom());
 		System.out.println(message.getContenu());
 		String choix = Context.getInstance().saisieString("Voulez vous supprimer ce message : (O/N)");
