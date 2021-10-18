@@ -63,9 +63,9 @@ public class DAOLogement implements IDAOLogement {
 		return logements;
 	}
 	
-	public List<Logement> findAllByAvailability() {
+	public List<Logement> findAllByAvailabilityWithProprio() {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
-		Query query = em.createQuery("from Logement l where :date > l.dateDispo", Logement.class);
+		Query query = em.createQuery("from Logement l LEFT JOIN fetch l.proprietaire where :date > l.dateDispo", Logement.class);
 		query.setParameter("date", LocalDate.now());
 		List<Logement> logements = query.getResultList();
 		em.close();

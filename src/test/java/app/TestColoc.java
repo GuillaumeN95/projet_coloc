@@ -89,8 +89,9 @@ public class TestColoc {
 		case 9 : System.exit(0);
 		}
 	}
-	
+
 	public static void retourMenu() {
+		// Test OK
 		if(Context.getInstance().getUtilisateurConnecte() instanceof Locataire) {
 			menuLocataire();
 		} else {
@@ -99,6 +100,7 @@ public class TestColoc {
 	}
 	
 	public static void connexion() {
+		// Test OK
 		// Permet de se connecter a un compte utilisateur et mettre l'utlisiteur dans le contexte
 		String email = Context.getInstance().saisieString("Saisir votre email : ");
 		String password = Context.getInstance().saisieString("Saisir votre password : ");
@@ -199,6 +201,7 @@ public class TestColoc {
 	 */
 	
 	public static void afficherListeMessageRecus() {
+		// Test OK
 		// Affiche la liste des messages reçus
 		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdDestinataireWithUtilisateur(Context.getInstance().getUtilisateurConnecte().getId());
 		if(messages.size() != 0) {
@@ -219,6 +222,7 @@ public class TestColoc {
 	}
 	
 	public static void afficherListeMessageEnvoyes() {
+		// Test OK
 		// Affiche la liste des messages envoyes
 		List<Message> messages = Context.getInstance().getDaoMessage().findAllByIdEmetteurWithUtilisateur(Context.getInstance().getUtilisateurConnecte().getId());
 		for(Message m : messages) {
@@ -228,6 +232,7 @@ public class TestColoc {
 	}
 	
 	public static void afficherMessage(int idMessage) {
+		// Test OK
 		// Affiche un message par son id dans la BDD
 		Message message = Context.getInstance().getDaoMessage().findByIdWithUtilisateur(idMessage);
 		System.out.println("Message n°" + message.getId() +" de " + message.getEmetteur().getNom() + " " + message.getEmetteur().getPrenom());
@@ -240,6 +245,7 @@ public class TestColoc {
 	}
 	
 	public static void supprimerMessage(int idMessage) {
+		// Test OK
 		// Supprime un message par son id dans la BDD
 		Message message = Context.getInstance().getDaoMessage().findById(idMessage);
 		Context.getInstance().getDaoMessage().delete(message);
@@ -248,6 +254,7 @@ public class TestColoc {
 	}
 	
 	public static void envoyerMessage() {
+		// Test OK
 		// Envoie un nouveau message
 		String mailDestinataire = Context.getInstance().saisieString("Entrez l'email du destinataire : ");
 		Utilisateur destinataire = Context.getInstance().getDaoUtilisateur().findByEmail(mailDestinataire);
@@ -267,6 +274,7 @@ public class TestColoc {
 	 */
 	
 	public static void rendreDispo() {
+		// Test OK
 		List<Logement> logementsDuProprio = Context.getInstance().getDaoLogement().findAllByIdProprio(Context.getInstance().getUtilisateurConnecte().getId());
 		System.out.println("Voici la liste de vos logements : ");
 		for(Logement l : logementsDuProprio) {
@@ -281,19 +289,24 @@ public class TestColoc {
 			Locataire loc = Context.getInstance().getDaoLocataire().findByIdChambre(c.getId());
 			locatairesDesChambres.add(loc);
 			if(loc == null) {
-				System.out.println("Chambre numero " + c.getId() + "inoccupee");
+				System.out.println("Chambre numero " + c.getId() + " inoccupee");
 			} else {
 				System.out.println("Chambre numero " + c.getId() + " occupee par " + loc.getNom() + " " + loc.getPrenom());
 			}
+		}
 		choix = Context.getInstance().saisieInt("Quelle chambre souhaitez vous liberer : ");
 		Chambre chambreALiberer = Context.getInstance().getDaoChambre().findById(choix);
-		Locataire locataireChambreALiberer = Context.getInstance().getDaoLocataire().findByIdChambre(choix);
-		locataireChambreALiberer.setChambre(null);
-		chambreALiberer.setLocataire(null);
-		Context.getInstance().getDaoChambre().save(chambreALiberer);
-		Context.getInstance().getDaoLocataire().save(locataireChambreALiberer);
-		retourMenu();
+		if(chambreALiberer.getLocataire() != null) {
+			Locataire locataireChambreALiberer = Context.getInstance().getDaoLocataire().findByIdChambre(choix);
+			locataireChambreALiberer.setChambre(null);
+			chambreALiberer.setLocataire(null);
+			Context.getInstance().getDaoChambre().save(chambreALiberer);
+			Context.getInstance().getDaoLocataire().save(locataireChambreALiberer);
+			System.out.println("Chambre liberee");
+		} else {
+			System.out.println(("Cette chambre est deja inoccupee"));
 		}
+		retourMenu();
 	}
 	
 	/*
@@ -521,8 +534,6 @@ public class TestColoc {
 		
 		System.out.println("Nouveau logement ajoute !");
 		retourMenu();
-		
-		
 	}
 	
 	
@@ -531,12 +542,14 @@ public class TestColoc {
 	 */
 	
 	public static void voirAnnonce () {
-		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailability();
-		System.out.println(logements);	
+		//Test OK
+		List<Logement> logements = Context.getInstance().getDaoLogement().findAllByAvailabilityWithProprio();
+		for(Logement l : logements) {
+			System.out.println(l);
+		}
 		retourMenu();
 	}
 
-	
 	
 	/*
 	 * Methode visualisation & validation des dossiers
@@ -544,7 +557,7 @@ public class TestColoc {
 	
 	public static void voirDossier() {
 		
-		System.out.println("Vos logements enregistr�s : ");
+		System.out.println("Vos logements enregistres : ");
 		
 		Utilisateur connected = Context.getInstance().getUtilisateurConnecte();
 		List<Logement> listeLogements = Context.getInstance().getDaoLogement().findAllByIdProprio(connected.getId());
@@ -552,7 +565,7 @@ public class TestColoc {
 		for(int i=0;i<listeLogements.size();i++)
 		{
 			Logement logement = listeLogements.get(i);
-			System.out.println((i+1)+ " : " +logement.getTypeLogement()+ " � " +logement.getLocalisation().getVille()+ "(" +logement.getLocalisation().getCodePostal()+ ") au " +logement.getLocalisation().getNum()+ " " +logement.getLocalisation().getVoie());
+			System.out.println((i+1)+ " : " +logement.getTypeLogement()+ " a " +logement.getLocalisation().getVille()+ "(" +logement.getLocalisation().getCodePostal()+ ") au " +logement.getLocalisation().getNum()+ " " +logement.getLocalisation().getVoie());
 			
 		}
 		
@@ -564,11 +577,7 @@ public class TestColoc {
 			}
 			catch (Exception e) {System.out.println("***ERREUR*** : Entrer un numero de logement");}
 		}
-		while(!fin);
-		
-		
-		
-		
+		while(!fin);		
 	}
 	
 	/*
@@ -576,12 +585,17 @@ public class TestColoc {
 	 */
 	
 	public static void noterAppart() {
+		// Test OK
 		Locataire locataire = (Locataire) Context.getInstance().getUtilisateurConnecte();
-		Double note = Context.getInstance().saisieDouble("Saississez votre note : ");
-		String commentaire = Context.getInstance().saisieString("Saississez votre commentaire : ");
-		Notation newNotation = new Notation(locataire.getChambre().getLogement(),locataire, note, commentaire);
-		newNotation = Context.getInstance().getDaoNotation().save(newNotation);
-		System.out.println("Notation envoyee");
+		if(locataire.getChambre() != null) {
+			Double note = Context.getInstance().saisieDouble("Saississez votre note (/10): ");
+			String commentaire = Context.getInstance().saisieString("Saississez votre commentaire : ");
+			Notation newNotation = new Notation(locataire.getChambre().getLogement(),locataire, note, commentaire);
+			newNotation = Context.getInstance().getDaoNotation().save(newNotation);
+			System.out.println("Notation envoyee");
+		} else {
+			System.out.println("Aucune chambre n'est associee a votre profil");
+		}
 		retourMenu();
 	}
 
