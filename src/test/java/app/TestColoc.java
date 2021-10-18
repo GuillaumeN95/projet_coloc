@@ -2,11 +2,8 @@ package app;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import javax.persistence.Column;
 
 import model.*;
 import model.logement.Chambre;
@@ -313,6 +310,194 @@ public class TestColoc {
 	 * Methodes logement
 	 */
 	
+private static Logement choisirLogement(){
+		
+		Logement logementChoisi=null;
+		Utilisateur connected = Context.getInstance().getUtilisateurConnecte();
+		List<Logement> listeLogements = Context.getInstance().getDaoLogement().findAllByIdProprio(connected.getId());
+		
+		for(int i=0;i<listeLogements.size();i++)
+		{
+			Logement logement = listeLogements.get(i);
+			System.out.println((i+1)+ " : " +logement.getTypeLogement()+ " à " +logement.getLocalisation().getVille()+ "(" +logement.getLocalisation().getCodePostal()+ ") au " +logement.getLocalisation().getNum()+ " " +logement.getLocalisation().getVoie());
+
+		}
+
+		boolean fin=false;
+		do {
+			try {
+				int choixLogement = Context.getInstance().saisieInt("Quel logement souhaitez-vous choisir ?");
+				logementChoisi = listeLogements.get(choixLogement-1);
+				fin=true;
+				
+			}
+			catch (Exception e) {System.out.println("***ERREUR*** : Entrer un numero de logement");}
+		}
+		while(!fin);
+		
+		return logementChoisi;
+	
+	}
+	
+	private static Chambre choisirChambre(Logement logement){
+		
+		Chambre chambreChoisie=null;
+		List<Chambre> chambres = Context.getInstance().getDaoChambre().findAllByIdLogement(logement.getId());
+		
+		for(int j=0;j<chambres.size();j++)
+		{
+			Chambre chambre = chambres.get(j);
+			System.out.println((j+1)+ " : " +chambre.getSurface()+ "m² ," +chambre.getLoyer() + "€, dispo le " +logement.getDateDispo());
+
+		}
+
+		boolean fin=false;
+		do {
+			try {
+				int choixChambre = Context.getInstance().saisieInt("Quel chambre souhaitez-vous choisir ?");
+				chambreChoisie = chambres.get(choixChambre-1);
+				fin=true;
+				
+			}
+			catch (Exception e) {System.out.println("***ERREUR*** : Entrer un numero de chambre");}
+		}
+		while(!fin);
+		
+		return chambreChoisie;
+	
+	}
+	
+	private static void modifAppart() {
+		// TODO Auto-generated method stub
+		Logement logement = choisirLogement();
+		
+		
+		System.out.println("1 - La description");
+		System.out.println("2 - Le loyer");
+		System.out.println("3 - La date de disponibilité");
+		System.out.println("4 - Le nombre de chambres");
+		System.out.println("5 - Le nombre de chambres occupées");
+		System.out.println("6 - Le nombre de salles de bain");
+		System.out.println("7 - Le type de logement");
+		System.out.println("8 - La durée minimum du bail");
+		System.out.println("9 - La localisation");
+		System.out.println("10 - Une chambre du logement");
+		System.out.println("11 - Fin des modifications");
+	
+		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
+
+		String modif = null;
+		int modifInt=0;
+		Double modifDouble=0.0;
+
+		if(choix==11) {logement=null;menuProprietaire();}
+
+		else if(choix==2) { 
+			modifDouble=Context.getInstance().saisieDouble("saisir modif");
+			logement.setLoyer(modifDouble);
+		}
+
+		else if(choix==4 || choix==5 || choix==6 || choix==8) { 
+			modifInt=Context.getInstance().saisieInt("saisir modif");
+			switch(choix) 
+			{
+			case 4 : logement.setnChambre(modifInt);break;
+			case 5 : logement.setnChambreOccup(modifInt);break;
+			case 6 : logement.setnSdb(modifInt);break;
+			case 8 : logement.setDureeMini(modifInt);break;
+
+			}
+		}
+		else if (choix==3) {
+			
+			modif=Context.getInstance().saisieString("saisir modif (aaa-mm-jj)");
+			logement.setDateDispo(LocalDate.parse(modif));
+		}
+		else if (choix==9) {
+			
+		/*	System.out.println("1 - Le departement");
+			System.out.println("2 - La ville");
+			System.out.println("3 - Le code postal");
+			System.out.println("4 - La voie");
+			System.out.println("5 - Le numéro de voie");
+			
+			int choixLoc = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
+			switch(choix) 
+			{
+			case 1 :String departement = Context.getInstance().saisieString("Saisir le departement");
+			case 2 :String ville = Context.getInstance().saisieString("Saisir la ville");
+			case 3 :String CP = Context.getInstance().saisieString("Saisir le code postal");
+			case 4 :String voie = Context.getInstance().saisieString("Saisir la voie");
+			case 5 :Int num = Context.getInstance().saisieInt("Saisir le numero de voie");
+			}*/
+			
+			String departement = Context.getInstance().saisieString("Saisir le departement");
+			String ville = Context.getInstance().saisieString("Saisir la ville");
+			String CP = Context.getInstance().saisieString("Saisir le code postal");
+			String voie = Context.getInstance().saisieString("Saisir la voie");
+			int num = Context.getInstance().saisieInt("Saisir le numéro de voie");
+			Localisation newLocalisation = new Localisation(departement, ville, CP, voie, num);
+			newLocalisation = Context.getInstance().getDaoLocalisation().save(newLocalisation);
+			logement.setLocalisation(newLocalisation);
+		}
+		else if(choix==10) {
+			
+		modifChambre(logement);
+
+		}
+		
+		else {
+			modif = Context.getInstance().saisieString("Saisir la modif");
+			switch(choix) 
+			{
+			case 1 : logement.setDescription(modif);break;
+			case 3 : logement.setDateDispo(LocalDate.parse(modif));break;
+			case 7 : logement.setTypeLogement(TypeLogement.valueOf(modif));break;
+		
+			}
+		}
+
+		Context.getInstance().getDaoLogement().save(logement);
+		System.out.println("Modification(s) effectuée(s) \n Retour menu...");
+		retourMenu();
+	}
+
+	
+	public static void modifChambre(Logement logement) {
+		Chambre chambre = choisirChambre(logement);
+		
+		System.out.println("1 - Le loyer");
+		System.out.println("2 - Date de disponibilité");
+		System.out.println("3 - La surface");
+		System.out.println("4 - Charges");
+		System.out.println("5 - Caution");
+		System.out.println("6 - Durée minimum");
+		
+		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
+
+		String modif = null;
+		int modifInt=0;
+		Double modifDouble=0.0;
+
+		
+		if(choix==1|| choix == 4 || choix == 5) { 
+			modifDouble=Context.getInstance().saisieDouble("saisir modif");
+			chambre.setLoyer(modifDouble);
+		}
+		else if (choix==2 ) {
+			
+			modif=Context.getInstance().saisieString("saisir modif (aaa-mm-jj)");
+			chambre.setDateDispo(LocalDate.parse(modif));
+		}
+		else if (choix==3 || choix==6) {
+			modifInt=Context.getInstance().saisieInt("saisir la modif");
+		}
+		else {
+			modif=Context.getInstance().saisieString("saisir modif");
+		}
+		
+		Context.getInstance().getDaoChambre().save(chambre);
+	}
 	
 	public static void ajoutAppart() {
 		
@@ -597,212 +782,16 @@ public class TestColoc {
 			System.out.println("Aucune chambre n'est associee a votre profil");
 		}
 		retourMenu();
-	}
-
-	
-	
+	}	
 	
 	/*
 	 *  Main
 	 */
 	
-	private static Logement choisirLogement(){
-		
-		Logement logementChoisi=null;
-		Utilisateur connected = Context.getInstance().getUtilisateurConnecte();
-		List<Logement> listeLogements = Context.getInstance().getDaoLogement().findAllByIdProprio(connected.getId());
-		
-		for(int i=0;i<listeLogements.size();i++)
-		{
-			Logement logement = listeLogements.get(i);
-			System.out.println((i+1)+ " : " +logement.getTypeLogement()+ " à " +logement.getLocalisation().getVille()+ "(" +logement.getLocalisation().getCodePostal()+ ") au " +logement.getLocalisation().getNum()+ " " +logement.getLocalisation().getVoie());
-
-		}
-
-		boolean fin=false;
-		do {
-			try {
-				int choixLogement = Context.getInstance().saisieInt("Quel logement souhaitez-vous choisir ?");
-				logementChoisi = listeLogements.get(choixLogement-1);
-				fin=true;
-				
-			}
-			catch (Exception e) {System.out.println("***ERREUR*** : Entrer un numero de logement");}
-		}
-		while(!fin);
-		
-		return logementChoisi;
-	
-	}
-	
-	private static Chambre choisirChambre(Logement logement){
-		
-		Chambre chambreChoisie=null;
-		List<Chambre> chambres = Context.getInstance().getDaoChambre().findAllByIdLogement(logement.getId());
-		
-		for(int j=0;j<chambres.size();j++)
-		{
-			Chambre chambre = chambres.get(j);
-			System.out.println((j+1)+ " : " +chambre.getSurface()+ "m² ," +chambre.getLoyer() + "€, dispo le " +logement.getDateDispo());
-
-		}
-
-		boolean fin=false;
-		do {
-			try {
-				int choixChambre = Context.getInstance().saisieInt("Quel chambre souhaitez-vous choisir ?");
-				chambreChoisie = chambres.get(choixChambre-1);
-				fin=true;
-				
-			}
-			catch (Exception e) {System.out.println("***ERREUR*** : Entrer un numero de chambre");}
-		}
-		while(!fin);
-		
-		return chambreChoisie;
-	
-	}
-		
-		
-	
-	private static void modifAppart() {
-		// TODO Auto-generated method stub
-		Logement logement = choisirLogement();
-		
-		
-		System.out.println("1 - La description");
-		System.out.println("2 - Le loyer");
-		System.out.println("3 - La date de disponibilité");
-		System.out.println("4 - Le nombre de chambres");
-		System.out.println("5 - Le nombre de chambres occupées");
-		System.out.println("6 - Le nombre de salles de bain");
-		System.out.println("7 - Le type de logement");
-		System.out.println("8 - La durée minimum du bail");
-		System.out.println("9 - La localisation");
-		System.out.println("10 - Une chambre du logement");
-		System.out.println("11 - Fin des modifications");
-	
-		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
-
-		String modif = null;
-		int modifInt=0;
-		Double modifDouble=0.0;
-
-		if(choix==11) {logement=null;menuProprietaire();}
-
-		else if(choix==2) { 
-			modifDouble=Context.getInstance().saisieDouble("saisir modif");
-			logement.setLoyer(modifDouble);
-		}
-
-		else if(choix==4 || choix==5 || choix==6 || choix==8) { 
-			modifInt=Context.getInstance().saisieInt("saisir modif");
-			switch(choix) 
-			{
-			case 4 : logement.setnChambre(modifInt);break;
-			case 5 : logement.setnChambreOccup(modifInt);break;
-			case 6 : logement.setnSdb(modifInt);break;
-			case 8 : logement.setDureeMini(modifInt);break;
-
-			}
-		}
-		else if (choix==3) {
-			
-			modif=Context.getInstance().saisieString("saisir modif (aaa-mm-jj)");
-			logement.setDateDispo(LocalDate.parse(modif));
-		}
-		else if (choix==9) {
-			
-		/*	System.out.println("1 - Le departement");
-			System.out.println("2 - La ville");
-			System.out.println("3 - Le code postal");
-			System.out.println("4 - La voie");
-			System.out.println("5 - Le numéro de voie");
-			
-			int choixLoc = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
-			switch(choix) 
-			{
-			case 1 :String departement = Context.getInstance().saisieString("Saisir le departement");
-			case 2 :String ville = Context.getInstance().saisieString("Saisir la ville");
-			case 3 :String CP = Context.getInstance().saisieString("Saisir le code postal");
-			case 4 :String voie = Context.getInstance().saisieString("Saisir la voie");
-			case 5 :Int num = Context.getInstance().saisieInt("Saisir le numero de voie");
-			}*/
-			
-			String departement = Context.getInstance().saisieString("Saisir le departement");
-			String ville = Context.getInstance().saisieString("Saisir la ville");
-			String CP = Context.getInstance().saisieString("Saisir le code postal");
-			String voie = Context.getInstance().saisieString("Saisir la voie");
-			int num = Context.getInstance().saisieInt("Saisir le numéro de voie");
-			Localisation newLocalisation = new Localisation(departement, ville, CP, voie, num);
-			newLocalisation = Context.getInstance().getDaoLocalisation().save(newLocalisation);
-			logement.setLocalisation(newLocalisation);
-		}
-		else if(choix==10) {
-			
-		modifChambre(logement);
-
-		}
-		
-		else {
-			modif = Context.getInstance().saisieString("Saisir la modif");
-			switch(choix) 
-			{
-			case 1 : logement.setDescription(modif);break;
-			case 3 : logement.setDateDispo(LocalDate.parse(modif));break;
-			case 7 : logement.setTypeLogement(TypeLogement.valueOf(modif));break;
-		
-			}
-		}
-
-		Context.getInstance().getDaoLogement().save(logement);
-		System.out.println("Modification(s) effectuée(s) \n Retour menu...");
-		retourMenu();
-	}
-
-
-	public static void modifChambre(Logement logement) {
-		Chambre chambre = choisirChambre(logement);
-		
-		System.out.println("1 - Le loyer");
-		System.out.println("2 - Date de disponibilité");
-		System.out.println("3 - La surface");
-		System.out.println("4 - Charges");
-		System.out.println("5 - Caution");
-		System.out.println("6 - Durée minimum");
-		
-		int choix = Context.getInstance().saisieInt("Que souhaitez-vous modifier ?");
-
-		String modif = null;
-		int modifInt=0;
-		Double modifDouble=0.0;
-
-		
-		if(choix==1|| choix == 4 || choix == 5) { 
-			modifDouble=Context.getInstance().saisieDouble("saisir modif");
-			chambre.setLoyer(modifDouble);
-		}
-		else if (choix==2 ) {
-			
-			modif=Context.getInstance().saisieString("saisir modif (aaa-mm-jj)");
-			chambre.setDateDispo(LocalDate.parse(modif));
-		}
-		else if (choix==3 || choix==6) {
-			modifInt=Context.getInstance().saisieInt("saisir la modif");
-		}
-		else {
-			modif=Context.getInstance().saisieString("saisir modif");
-		}
-		
-		Context.getInstance().getDaoChambre().save(chambre);
-	}
-	
-	
 	public static void main(String[] args) {
 		
 		menuPrincipal();
 
-	
 	}	
 	
 }
