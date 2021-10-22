@@ -9,6 +9,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="colocInscription.css">
         <title>Coloc</title>
+
+        <script>
+            function montrerChampsLocataire(){
+                document.getElementById("info-locataire").classList.remove("invisible").add("visible");
+            }
+            function masquerChampsLocataire(){
+                document.getElementById("info-locataire").classList.add("invisible").remove("visible");
+            }
+         </script>
     </head>
 
     <body class="container-fluid">
@@ -62,7 +71,7 @@
                               <input type="password" class="form-control" id="exampleInputPassword1">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Confimez le mot de passe</label>
+                                <label for="exampleInputPassword1" class="form-label">Confirmez le mot de passe</label>
                                 <input type="password" class="form-control" id="exampleInputPassword1">
                             </div>
                             <div class="mb-3">
@@ -89,15 +98,15 @@
                             <div class="mb-3">
                                 <label for="choix-loc-proprio" class="form-label">Etes-vous </label><br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="choix-loc-proprio" id="choix-proprietaire" value="proprietaire">
-                                    <label class="form-check-label" for="choix-proprietaire">Proprietaire</label>
+                                    <input class="form-check-input" type="radio" name="profil" id="choix-proprio" value="proprietaire" onchange="masquerChampsLocataire()">
+                                    <label class="form-check-label" for="choix-proprio">Proprietaire</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="choix-loc-proprio" id="choix-locataire" value="locataire">
+                                    <input class="form-check-input" type="radio" name="profil" id="choix-locataire" value="locataire" onchange="montrerChampsLocataire()">
                                     <label class="form-check-label" for="choix-locataire">Locataire</label>
                                   </div>
                             </div>
-                            <div id="info-locataire">
+                            <div id="info-locataire" class="invisible">
                                 <div class="mb-3">
                                     <label for="form-check form-check-inline" class="form-label">En recherche de colocation</label>
                                     <div class="form-check form-check-inline">
@@ -133,7 +142,6 @@
             </div>
             <div class="row espace-vide">
             </div>
-        
         </main>
 
         <footer>
