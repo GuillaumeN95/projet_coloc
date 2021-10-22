@@ -1,7 +1,5 @@
 package util;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import javax.persistence.EntityManagerFactory;
@@ -116,8 +114,6 @@ public class Context {
 		System.out.println(msg);
 		return sc.nextDouble();
 	}
-	
-
 	 
 	public Utilisateur getUtilisateurConnecte() {
 		return utilisateurConnecte;

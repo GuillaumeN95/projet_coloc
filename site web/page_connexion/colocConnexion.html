@@ -11,6 +11,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="colocConnexion.css">
         <title>Coloc</title>
+        <script>
+            function motDePasseOublie(){
+                var emailUtilisateur = prompt("Saisissez votre email :");
+                //Envoyer lien par mail pour modifier le mot de passe + redirection vers la page d'accueil
+            }
+        </script>
     </head>
 
     <body class="container-fluid">
@@ -69,7 +75,7 @@
                               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
                               <input type="password" class="form-control" id="exampleInputPassword1">
                             </div>
-                            <a id="mot-de-passe-oublie" href="">Mot de passe oublié</a>
+                            <a id="mot-de-passe-oublie" href="" onclick="motDePasseOublie()">Mot de passe oublié</a>
                             <button type="submit" class="btn btn-primary rounded-pill">Se connecter</button>
                           </form>
                         <div class="col-2"></div>
