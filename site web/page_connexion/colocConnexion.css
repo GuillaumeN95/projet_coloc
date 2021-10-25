@@ -18,6 +18,11 @@ body, h2, header, .row{
     padding: 1%;
 }
 
+.hidden
+{
+    visibility: hidden;
+}
+
 .btn-inscription-esp
 {
     height: 33%;
@@ -31,6 +36,7 @@ body, h2, header, .row{
     padding-top: 30px;
     padding-bottom: 30px;
     font-size: large;
+    margin-top: 75px;
 }
 
 .boutonHeader
