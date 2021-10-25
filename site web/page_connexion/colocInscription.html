@@ -7,41 +7,30 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" type="text/css" href="style-header.css">
         <link rel="stylesheet" href="colocInscription.css">
         <title>Coloc</title>
     </head>
 
     <body class="container-fluid">
-        <header class='header'>
-            <div class="row" id="row-top">
-            </div>
-            <div class="row">
-                <div class="col-1">
+        <header>
+            <div class="header-wrap" style="background: linear-gradient(0.25turn, #f69d3c, #ebf8e1, #3f87a6);">
+              <div class="header-main-container">
+                <div class="header-left-container">
+                  <div class="header-logo-main-container">
+                  </div>
+                 
                 </div>
-                <div class="logo col-1">
-                    <img id="logo-img" src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc" onclick="location.href='../page_accueil/colocFP.html'">
-                    <p id="logo-txt">LaColoc</p>
+                <div class="header-account-main-container">
+                  <button type=button class="header-button-account button1" style="padding-left:15px;padding-right:15px">
+                    Se connecter
+                  </button>
+                  <button type=button class="header-button-account button1 last-button">
+                    <i class="bi-globe"></i>
+                  </button>
                 </div>
-                <div class="col-7">
-                </div>
-                <div class="col-1">
-                    <div class="row btn-inscription-esp"></div>
-                    <div class="row btn-inscription-esp">
-                        <button id="btn-inscription" href="" class="col btn btn-light btn-sm rounded-pill border-secondary boutonHeader" type="button" onclick="location.href='../page_connexion/colocConnexion.html'">S'inscrire</button>
-                    </div>
-                    <div class="row btn-inscription-esp"></div>
-                </div>
-                <div class="col-1">
-                    <div class="row btn-connexion-esp">
-                    </div>
-                    <div class="row btn-connexion-esp">
-                        <button id="btn-connexion" href="" class="col btn btn-light btn-sm rounded-pill border-dark boutonHeader">Se connecter</button>
-                    </div>
-                    <div class="row btn-connexion-esp">
-                    </div>
-                </div>
-                <div class="col-1">
-                </div>
+              </div>
             </div>
         </header>
 
