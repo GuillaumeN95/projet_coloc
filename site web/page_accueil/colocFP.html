@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,26 +17,27 @@
     <title>Coloc</title>
 </head>
 
-    
+
 
 <body>
 
-    
-    
+
+
         <div class="container-fluid">
 
             <div class="top">
                 <div class="nav">
                     <div class="logo">
-                        <img id="logo-img" src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc">
+                        <img id="logo-img" src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc " onclick="location.href='../page_accueil/colocFP.html'">
                         <p id="logo-txt">LaColoc</p>
                     </div>
 
 
                     <div class="connexion">
-                        <button class="connexion-obj" id="inscrire">S'inscrire</button>
-                        <button class="connexion-obj" id="connecter">Se connecter</button>
+                        <button type="button" class="connexion-obj" id="inscrire" onclick="location.href='../page_connexion/colocInscription.html'">S'inscrire</button>
+                        <button type="button" class="connexion-obj" id="connecter" onclick="location.href='../page_connexion/colocConnexion.html'" >Se connecter</button>
                     </div>
+
                 </div>
 
 
@@ -44,7 +45,7 @@
                     <div class="recherche">
                         <div class="grp-recherche">
                                 <input type="text"  placeholder="Dans quelle ville cherchez-vous une colocation ?"  id="barre-recherche">
-                                <button id="btn-recherche" type="submit"></button>
+                                <button id="btn-recherche" type="button" onclick="location.href='../recherche_logements/rechercheLogements.html'"></button> <!-- type="submit" -->
                         </div>
                     </div>
                 </form>
@@ -68,11 +69,11 @@
                 <div class="logement-autour">
                     <p id="logement-autour-titre">Les colocations autour de vous</p>
 
-                    
+
 
                     <div id="carousel" class="grp-carousel">
-        
-                        
+
+
                             <div id="myCarousel2" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Carousel indicators -->
                                 <ol class="carousel-indicators">
@@ -80,9 +81,9 @@
                                     <li data-bs-target="#myCarousel2" data-bs-slide-to="1"></li>
                                     <li data-bs-target="#myCarousel2" data-bs-slide-to="2"></li>
                                 </ol>
-                
+
                                 <!-- Wrapper for carousel items -->
-                                
+
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img src="../img/exempleLogement/logement2/logement2_1.png" class="img-carousel" alt="Slide 1">
@@ -91,7 +92,7 @@
                                         <img src="../img/exempleLogement/logement2/logement2_2.png" class="img-carousel" alt="Slide 2">
                                     </div>
                                 </div>
-                        
+
                                 <!-- Carousel controls -->
                                 <a class="carousel-control-prev" href="#myCarousel2" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></a>
                                 <a class="carousel-control-next" href="#myCarousel2" data-bs-slide="next"> <span class="carousel-control-next-icon"></span> </a>
@@ -104,9 +105,9 @@
                                     <li data-bs-target="#myCarousel2" data-bs-slide-to="1"></li>
                                     <li data-bs-target="#myCarousel2" data-bs-slide-to="2"></li>
                                 </ol>
-                
+
                                 <!-- Wrapper for carousel items -->
-                                
+
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img src="../img/exempleLogement/logement1/logement1_1.png" class="img-carousel" alt="Slide 1">
@@ -115,7 +116,7 @@
                                         <img src="../img/exempleLogement/logement1/logement1_2.png" class="img-carousel" alt="Slide 2">
                                     </div>
                                 </div>
-                        
+
                                 <!-- Carousel controls -->
                                 <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></a>
                                 <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next"> <span class="carousel-control-next-icon"></span> </a>
@@ -128,9 +129,9 @@
                                     <li data-bs-target="#myCarousel3" data-bs-slide-to="1"></li>
                                     <li data-bs-target="#myCarousel3" data-bs-slide-to="2"></li>
                                 </ol>
-                
+
                                 <!-- Wrapper for carousel items -->
-                                
+
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img src="../img/exempleLogement/logement3/logement3_1.png" class="img-carousel" alt="Slide 1">
@@ -139,12 +140,12 @@
                                         <img src="../img/exempleLogement/logement3/logement3_2.png" class="img-carousel" alt="Slide 2">
                                     </div>
                                 </div>
-                        
+
                                 <!-- Carousel controls -->
                                 <a class="carousel-control-prev" href="#myCarousel3" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></a>
                                 <a class="carousel-control-next" href="#myCarousel3" data-bs-slide="next"> <span class="carousel-control-next-icon"></span> </a>
                             </div>
-                        
+
                     </div>
 
                     <!-- <div class="info-carousel">
@@ -165,14 +166,14 @@
 
                     </div>     -->
 
-                    
+
                 </div>
 
 
 
-                
 
-            </div> 
+
+            </div>
 
 
 
@@ -195,7 +196,7 @@
 
         </div>
 
-    
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
