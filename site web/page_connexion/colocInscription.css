@@ -9,6 +9,22 @@ body, h2, header, .row{
     margin-right: -12px;
 }
 
+.header
+{
+    margin-left: -12;
+    margin-right: -12;
+}
+
+#row-top
+{
+    padding: 1%;
+}
+
+.btn-connexion-esp, .btn-inscription-esp
+{
+    height: 33%;
+}
+
 .invisible
 {
     display: none;
@@ -51,9 +67,9 @@ body, h2, header, .row{
     padding-bottom: 10px;
 }
 
-.espace-vide
+#btn-submit
 {
-    height: 100px;
+    margin-bottom: 100px;
 }
 
 #btn-inscription
@@ -137,8 +153,38 @@ header
     background-position: center;
 }
 
+footer{
+    background-color: rgb(247, 247, 247);
+}
 
+.fLeft{
+    display:inline-block;
+}
 
+.fLeft p{
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.fLeft>img{
+    width:30px;
+    height:30px;
+}
+.fRight{
+    display: inline-block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.fRight>a>img{
+    width:20px;
+    height:20px;
+}
+
+.fRight>a:nth-of-type(2n){
+    margin:0 10px;
+}
 
 
 
