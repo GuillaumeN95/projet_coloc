@@ -11,17 +11,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="colocConnexion.css">
         <title>Coloc</title>
-        <script>
-            function motDePasseOublie(){
-                var emailUtilisateur = prompt("Saisissez votre email :");
-                //Envoyer lien par mail pour modifier le mot de passe + redirection vers la page d'accueil
-            }
-        </script>
     </head>
 
     <body class="container-fluid">
-        <header class='header' style="margin-left: -12; margin-right: -12;">
-            <div class="row" style="padding: 1%">
+        <header class='header'>
+            <div class="row" id="row-top"">
             </div>
             <div class="row">
                 <div class="col-1">
@@ -36,27 +30,17 @@
                     <!-- Emplacement bouton supplementaire -->
                 </div>
                 <div class="col-1">
-                    <div class="row" style="height: 33%;">
+                    <div class="row btn-inscription-esp">
                     </div>
-                    <div class="row" style="height: 33%;">
+                    <div class="row btn-inscription-esp">
                         <button id="btn-inscription" href="" class="col btn btn-light btn-sm rounded-pill border-dark boutonHeader">S'inscrire</button>
                     </div>
-                    <div class="row" style="height: 33%">
+                    <div class="row btn-inscription-esp">
                     </div>
                 </div>
                 <div class="col-1">
                 </div>
             </div>
-            <!--<div class="row">
-                <form action="">
-                    <div class="recherche">
-                        <div class="grp-recherche">
-                            <input type="text"  placeholder="Dans quelle ville cherchez-vous une colocation ?"  id="barre-recherche">
-                            <button id="btn-recherche" type="submit"></button>
-                        </div>
-                    </div>
-                </form>
-            </div>-->
         </header>
 
         <main>
@@ -75,7 +59,7 @@
                               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
                               <input type="password" class="form-control" id="exampleInputPassword1">
                             </div>
-                            <a id="mot-de-passe-oublie" href="" onclick="motDePasseOublie()">Mot de passe oublié</a>
+                            <a id="mot-de-passe-oublie" href="">Mot de passe oublié</a>
                             <button type="submit" class="btn btn-primary rounded-pill">Se connecter</button>
                           </form>
                         <div class="col-2"></div>
@@ -83,10 +67,28 @@
                 </div>
                 <div class="col-2"></div>
             </div>
-        
         </main>
 
-        <footer>
+        <footer class="row fixed-bottom">
+            <div class="col-1"></div>
+            <div class="col-2 fLeft">
+                <img src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc">
+                <p>&copy; 2021, LaColoc</p>
+            </div>
+            <div class="col-7"></div>
+            <div class="col-1 fRight">
+                <a target="_blank" href="https://facebook.com/"><img src="../img/reseauxSociaux/facebookBlack.svg" alt="" ></a>
+                <a target="_blank" href="https://twitter.com/"> <img src="../img/reseauxSociaux/twitterBlack.svg" alt=""></a>
+                <a target="_blank" href="https://www.instagram.com/"><img src="../img/reseauxSociaux/instagramBlack.svg" alt=""></a>
+            </div>
+            <div class="col-1"></div>
         </footer>
     </body>
+    <script>
+        function motDePasseOublie(){
+            var emailUtilisateur = prompt("Saisissez votre email :");
+            //Envoyer lien par mail pour modifier le mot de passe + redirection vers la page d'accueil
+        }
+        document.getElementById("mot-de-passe-oublie").onclick = motDePasseOublie;
+    </script>
 </html>
