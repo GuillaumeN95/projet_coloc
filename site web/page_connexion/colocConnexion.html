@@ -12,6 +12,7 @@
         <!-- Bootstrap Font Icon CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link rel="stylesheet" type="text/css" href="style-header.css">
+        <link rel="stylesheet" type="text/css" href="style-footer.css">
         <link rel="stylesheet" href="colocConnexion.css">
         <title>Coloc</title>
     </head>
@@ -21,13 +22,12 @@
             <div class="header-wrap" style="background: linear-gradient(0.25turn, #f69d3c, #ebf8e1, #3f87a6);">
               <div class="header-main-container">
                 <div class="header-left-container">
-                  <div class="header-logo-main-container">
+                  <div class="header-logo-main-container" onclick="location.href='../page_accueil/colocFP.html'">
                   </div>
-                 
                 </div>
                 <div class="header-account-main-container">
                   <button type=button class="header-button-account button1" style="padding-left:15px;padding-right:15px">
-                    S'enregistrer
+                    S'inscrire
                   </button>
                   <button type=button class="header-button-account button1 last-button">
                     <i class="bi-globe"></i>
@@ -63,21 +63,23 @@
             </div>
         </main>
 
-        <footer class="row fixed-bottom">
-            <div class="col-1"></div>
-            <div class="col-2 fLeft">
-                <img src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc">
-                <p>&copy; 2021, LaColoc</p>
+        <footer class="fixed-bottom">
+          <div class="fContent">
+            <div class="fLeft">
+              <img src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc">
+              <span>&copy; 2021, LaColoc</span>
             </div>
-            <div class="col-7"></div>
-            <div class="col-1 fRight">
-                <a target="_blank" href="https://facebook.com/"><img src="../img/reseauxSociaux/facebookBlack.svg" alt="" ></a>
-                <a target="_blank" href="https://twitter.com/"> <img src="../img/reseauxSociaux/twitterBlack.svg" alt=""></a>
-                <a target="_blank" href="https://www.instagram.com/"><img src="../img/reseauxSociaux/instagramBlack.svg" alt=""></a>
+    
+            <div class="fRight">
+              <a target="_blank" href="https://facebook.com/"><img src="../img/reseauxSociaux/facebookBlack.svg" alt="" ></a>
+              <a target="_blank" href="https://twitter.com/"> <img src="../img/reseauxSociaux/twitterBlack.svg" alt=""></a>
+              <a target="_blank" href="https://www.instagram.com/"><img src="../img/reseauxSociaux/instagramBlack.svg" alt=""></a>
             </div>
-            <div class="col-1"></div>
+          </div>
         </footer>
+
     </body>
+
     <script>
         function motDePasseOublie(){
             var emailUtilisateur = prompt("Saisissez votre email :");
