@@ -20,49 +20,24 @@
             <div class="col-1">
             </div>
             <div class="logo col-1">
-                <img id="logo-img" src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc">
-                <p id="logo-txt">LaColoc</p>
+                <a target="_blank" href="../recherche_locataires/rechercheLocataires.html">
+                  <img id="logo-img" src="../img/logo/logoRoofBlack.svg" alt="logo LaColoc">
+                  <p id="logo-txt">LaColoc</p></a>
             </div>
-            <div class="col-6">
+            <div class="col-7">
             </div>
             <div class="col-1">
-                  <button id="btn-ajoutlgmt" class="col btn btn-light btn-sm rounded-pill border-dark boutonHeader">Ajouter un logement</button>
+                  <a target="_blank" href="../ajout_logement/nouveauLogement.html"><button id="btn-ajoutlgmt" class="col btn btn-light btn-sm rounded-pill border-dark boutonHeader">Ajouter un logement</button></a>
             </div>
             <div class="col-1">
                   <button id="btn-messages" class="col btn btn-light btn-sm rounded-pill border-dark boutonHeader">Messages</button>
             </div>
-            <div class="col-1">
-                  <button id="btncompte" class="col btn btn-light btn-sm rounded-pill border-dark boutonHeader" >Mon compte</button>
-            </div>
         </div>
     </header>
-<!--
 
-
-        <div class="lgmt1">
-          <div class="row">Logement n°1</div>
-          <div class="row">
-            <div class="col-7">
-              <div class="chambre" id="ch1">disponibilité</div>
-              <div class="chambre" id="ch2">disponibilité</div>
-              <div class="chambre" id="ch3">disponibilité</div>
-              <div class="chambre" id="ch4">disponibilit</div>
-            </div>
-            <div class="col-3">
-              Autres caractéristiques
-            </div>
-            <div class="row"> Informations personnelles </div>
-          </div>
-          <div class="row">Carousel</div>
-        </div>
-
-
-        <div class="lgmt2">
-
-        </div>
--->
   <content >
 
+  <!-- 1E Logement !-->
     <p class="titre-info">Mon profil Propriétaire</p>
     <div class="container logement">
       <div class="row nomLogement">
@@ -73,11 +48,11 @@
         <div class="row">
             <div class="col-8">
                 <div class="detailChambres">
-                    <div class="chambre"><input type="radio" readonly checked>disponible <span class="detailChambre+" onClick="showDetail(1,1)">+</span></div>
+                    <div class="chambre"><input type="radio" readonly checked>disponible <input class="detailChambre+" onClick="ShowDetail(1,1)" type="button" value="V"><input class="detailChambre+" onClick="HideDetails(1,1)" type="button" value="^"></div>
                       <div class="detailChambre" id="detailChambre1-1">Detail de la chambre 1</div>
-                    <div class="chambre"><input type="radio" readonly checked>disponible <span class="detailChambre+" onClick="showDetail(2,1)">+</span></div>
+                    <div class="chambre"><input type="radio" readonly checked>disponible <span class="detailChambre+" onClick="ShowDetail(2,1)">+</span></div>
                        <div class="detailChambre" id="detailChambre2-1">Detail de la chambre 2</div>
-                    <div class="chambre"><input type="radio" readonly checked>disponible <span class="detailChambre+" onClick="showDetail(3,1)">+</span></div>
+                    <div class="chambre"><input type="radio" readonly checked>disponible <span class="detailChambre+" onClick="ShowDetail(3,1)">+</span></div>
                       <div class="detailChambre" id="detailChambre3-1">Detail de la chambre 3</div>
                 </div>
                   <div id="btnAddPhoto">
@@ -89,14 +64,22 @@
         </div>
 
       <div class="carrousel row">
-        <div class="col-12">Carousel</div>
+        <div class="col-12">
+          <div class="carousel-example">
+            <div><div class="box">1</div></div>
+  <div>
+    <div class="box">2</div>
+  </div>
+  <div>
+    <div class="box">3</div>
+  </div>
+</div></div>
       </div>
     </div>
   </div>
 
+
   <!-- 2E Logement !-->
-
-
 
   <div class="container logement">
     <div class="row nomLogement">
@@ -107,11 +90,11 @@
       <div class="row">
           <div class="col-8">
               <div class="detailChambres">
-                  <div class="chambre"><input type="radio" disabled checked> disponible <span class="detailChambre+" onClick="showDetail(1,2)">+</span></div>
+                  <div class="chambre"><input type="radio" disabled checked> disponible <span class="detailChambre+" onClick="ShowDetail(1,2)">+</span></div>
                     <div class="detailChambre" id="detailChambre1-2"> Detail de la chambre 1</div>
-                  <div class="chambre"><input type="radio" disabled> indisponible <span class="detailChambre+" onClick="showDetail(2,2)">+</span></div>
+                  <div class="chambre"><input type="radio" disabled> indisponible <span class="detailChambre+" onClick="ShowDetail(2,2)">+</span></div>
                      <div class="detailChambre" id="detailChambre2-2"> Detail de la chambre 2</div>
-                  <div class="chambre"><input type="radio" disabled> indisponible <span class="detailChambre+" onClick="showDetail(3,2)">+</span></div>
+                  <div class="chambre"><input type="radio" disabled> indisponible <span class="detailChambre+" onClick="ShowDetail(3,2)">+</span></div>
                     <div class="detailChambre" id="detailChambre3-2"> Detail de la chambre 3</div>
               </div>
                 <div id="btnAddPhoto">
@@ -126,6 +109,20 @@
       <div class="col-12">Carousel</div>
     </div>
   </div>
+</div>
+
+  <!-- Infos perso !-->
+<p class="titre-info">Informations personnelles</p>
+<div class="container logement">
+  <div class="row nomLogement">
+    <div class=" col-10">Nom et prénom</div>
+    <div class="showHideLogement col-2"><input class="showLogement" id="nomprenom"  onClick="AfficheLogement(nomprenom)" type="button" value="V"><input class="hideLogement" id="hideLogement2" onClick="HideLogement(2)" type="button" value="^"></div>
+  </div>
+  <div class="afficheLogement" id="nomprenom">
+    <div class="row">
+        <div class="caracteristiques col-4">Autres caractéristiques</div>
+    </div>
+</div>
 </div>
 
     </content>
@@ -169,9 +166,14 @@ function HideLogement(idLogement)
   document.getElementById("hideLogement"+idLogement).style.display="none";
 }
 
-function showDetail(idChambre,idLogement)
+function ShowDetail(idChambre,idLogement)
 {
     document.getElementById("detailChambre"+idChambre+"-"+idLogement).style.display="block";
+}
+
+function HideDetail(idChambre,idLogement)
+{
+    document.getElementById("detailChambre"+idChambre+"-"+idLogement).style.display="none";
 }
 
 </script>
