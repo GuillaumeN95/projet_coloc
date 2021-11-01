@@ -129,7 +129,8 @@ footer{
 {
   border:solid black 1px;
 }
-.afficheLogement,.hideLogement,.detailChambre
+
+.afficheLogement,.hideLogement,.detailChambre, .cache
 {
   display:none;
 }
