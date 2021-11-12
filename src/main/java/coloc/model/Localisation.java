@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 
@@ -11,19 +12,19 @@ public class Localisation {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY )
-	private int id; 
+	private Long id; 
+	@Version
+	private Integer version;
 	private String departement;
 	private String ville;
 	private String codePostal;
 	private String voie;
-	private int num;
-	
-
+	private Integer num;
 	
 	public Localisation() {
 	}
 
-	public Localisation(String departement, String ville, String codePostal, String voie, int num) {
+	public Localisation(String departement, String ville, String codePostal, String voie, Integer num) {
 		super();
 		this.departement = departement;
 		this.ville = ville;
@@ -32,11 +33,11 @@ public class Localisation {
 		this.num = num;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -72,11 +73,11 @@ public class Localisation {
 		this.voie = voie;
 	}
 
-	public int getNum() {
+	public Integer getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(Integer num) {
 		this.num = num;
 	}
 
@@ -85,9 +86,4 @@ public class Localisation {
 		return "Localisation [id=" + id + ", departement=" + departement + ", ville=" + ville + ", codePostal="
 				+ codePostal + ", voie=" + voie + ", num=" + num + "]";
 	}
-	
-	
-	
-	
-
 }

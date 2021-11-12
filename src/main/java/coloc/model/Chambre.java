@@ -12,26 +12,29 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 @Entity
 public class Chambre {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY )
-	private int id;
+	private Long id;
 	
+	@Version
+	private Integer version;
+
 	@ManyToOne
 	private Logement logement;
 	
 	@OneToOne(mappedBy = "chambre" )
 	private Locataire locataire;
 	
-	
-	private int surface;
+	private Integer surface;
 	private Double loyer;
 	private Double charges;
 	private Double caution;
-	private int dureeMini;
+	private Integer dureeMini;
 	private LocalDate dateDispo;
 	
 	@ManyToMany
@@ -43,10 +46,8 @@ public class Chambre {
 	)
 	private List<Commodite> commodites;
 	
-	
 	public Chambre() {
 	}
-
 
 	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
 			LocalDate dateDispo) {
@@ -71,11 +72,11 @@ public class Chambre {
 		this.commodites = commodites;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

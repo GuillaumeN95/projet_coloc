@@ -8,13 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 @Entity
 public class Dossier {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
+	@Version
+	private Integer version;
 	private Double revenu;
 	private Double revenuGarant;
 	private Situation situationGarant;
@@ -25,7 +28,6 @@ public class Dossier {
 	@OneToMany
 	private List<Chambre> chambre;
 	
-	
 	public Dossier() {
 		super();
 	}
@@ -35,14 +37,12 @@ public class Dossier {
 		this.revenuGarant = revenuGarant;
 		this.situationGarant = situationGarant;
 	}
-	
-	
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -69,15 +69,10 @@ public class Dossier {
 	public void setSituation(Situation situationGarant) {
 		this.situationGarant = situationGarant;
 	}
-
-	
 	
 	@Override
 	public String toString() {
 		return "Dossier [id=" + id + ", revenu=" + revenu + ", revenuGarant=" + revenuGarant + ", situation="
 				+ situationGarant + "]";
 	}
-
-	
-	
 }

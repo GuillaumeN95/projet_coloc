@@ -3,7 +3,6 @@ package app;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import coloc.repository.*;
-import coloc.model.*;
 import config.ApplicationConfig;
 
 public class TestSpring {
@@ -25,5 +24,4 @@ public class TestSpring {
 
 		spring.close();
 	}
-
 }

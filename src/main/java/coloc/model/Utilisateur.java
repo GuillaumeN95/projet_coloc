@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Version;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,7 +19,9 @@ public abstract class Utilisateur {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected int id;
+	protected Long id;
+	@Version
+	private Integer version;
 	protected String nom;
 	protected String prenom;
 	@Enumerated(EnumType.STRING)
@@ -41,11 +44,11 @@ public abstract class Utilisateur {
 		this.password = password;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

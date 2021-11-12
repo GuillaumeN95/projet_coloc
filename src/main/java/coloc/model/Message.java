@@ -10,18 +10,16 @@ import javax.persistence.OneToOne;
 public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@OneToOne
 	private Utilisateur emetteur;
 	@OneToOne
 	private Utilisateur destinataire;
 	private String contenu;
 	
-	
 	public Message() {
 		super();
 	}
-
 
 	public Message(Utilisateur emetteur, Utilisateur destinataire, String contenu) {
 		super();
@@ -30,54 +28,41 @@ public class Message {
 		this.contenu = contenu;
 	}
 
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Utilisateur getEmetteur() {
 		return emetteur;
 	}
 
-
 	public void setEmetteur(Utilisateur emetteur) {
 		this.emetteur = emetteur;
 	}
-
 
 	public Utilisateur getDestinataire() {
 		return destinataire;
 	}
 
-
 	public void setDestinataire(Utilisateur destinataire) {
 		this.destinataire = destinataire;
 	}
-
 
 	public String getContenu() {
 		return contenu;
 	}
 
-
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", emetteur=" + emetteur + ", destinataire=" + destinataire + ", contenu="
 				+ contenu + "]";
 	}
-	
-	
-	
-
 }

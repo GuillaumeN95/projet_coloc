@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 @Entity
 
@@ -22,12 +23,14 @@ public class Logement {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY )
-	private int id;
+	private Long id;
+	@Version
+	private Integer version;
 	private String description;
-	private int surface;
-	private int nChambre;
-	private int nChambreOccup;
-	private int nSdb;
+	private Integer surface;
+	private Integer nChambre;
+	private Integer nChambreOccup;
+	private Integer nSdb;
 	private Double loyer;
 	
 	@OneToMany(mappedBy = "logement")
@@ -67,16 +70,12 @@ public class Logement {
 		inverseJoinColumns = @JoinColumn(name="idRegle")
 	)
 	private List<Regle> regles;
-
-	
-	
 	
 	public Logement() {
 		super();
 	}
-	
 
-	public Logement(String description, int surface, int nchambre, int nChambreOccup, int nSdb, Double loyer,
+	public Logement(String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer,
 			Localisation localisation,TypeLogement typeLogement) {
 		super();
 		this.description = description;
@@ -89,7 +88,7 @@ public class Logement {
 		this.typeLogement = typeLogement;
 	}
 	
-	public Logement(Proprio proprietaire, String description, int surface, int nchambre, int nChambreOccup, int nSdb, Double loyer,
+	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer,
 			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
 		super();
 		this.proprietaire = proprietaire;
@@ -105,222 +104,141 @@ public class Logement {
 		this.regles = regles;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-
-
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
-	public int getSurface() {
+	public Integer getSurface() {
 		return surface;
 	}
 
-
-
-	public void setSurface(int surface) {
+	public void setSurface(Integer surface) {
 		this.surface = surface;
 	}
 
-
-
-	public int getnChambre() {
+	public Integer getnChambre() {
 		return nChambre;
 	}
 
-
-
-	public void setnChambre(int nChambre) {
+	public void setnChambre(Integer nChambre) {
 		this.nChambre = nChambre;
 	}
 
-
-
-	public int getnChambreOccup() {
+	public Integer getnChambreOccup() {
 		return nChambreOccup;
 	}
 
-
-
-	public void setnChambreOccup(int nChambreOccup) {
+	public void setnChambreOccup(Integer nChambreOccup) {
 		this.nChambreOccup = nChambreOccup;
 	}
 
-
-
-	public int getnSdb() {
+	public Integer getnSdb() {
 		return nSdb;
 	}
 
-
-
-	public void setnSdb(int nSdb) {
+	public void setnSdb(Integer nSdb) {
 		this.nSdb = nSdb;
 	}
-
-
 
 	public Double getLoyer() {
 		return loyer;
 	}
 
-
-
 	public void setLoyer(Double loyer) {
 		this.loyer = loyer;
 	}
-
-
-
-
-
 
 	public LocalDate getDateDispo() {
 		return dateDispo;
 	}
 
-
-
 	public void setDateDispo(LocalDate dateDispo) {
 		this.dateDispo = dateDispo;
 	}
 
-
-
-	public int getDureeMini() {
+	public Integer getDureeMini() {
 		return dureeMini;
 	}
 
-
-
-	public void setDureeMini(int dureeMini) {
+	public void setDureeMini(Integer dureeMini) {
 		this.dureeMini = dureeMini;
 	}
-
-
 
 	public Localisation getLocalisation() {
 		return localisation;
 	}
 
-
-
 	public void setLocalisation(Localisation localisation) {
 		this.localisation = localisation;
 	}
-
-
 
 	public TypeLogement getTypeLogement() {
 		return typeLogement;
 	}
 
-
-
 	public void setTypeLogement(TypeLogement typeLogement) {
 		this.typeLogement = typeLogement;
 	}
-
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	
-
 
 	public List<Chambre> getChambres() {
 		return chambres;
 	}
 
-
-
-
-
 	public void setChambres(List<Chambre> chambres) {
 		this.chambres = chambres;
 	}
-
-	
-
-
-
 
 	public List<Commodite> getCommodites() {
 		return commodites;
 	}
 
-
-
 	public void setCommodites(List<Commodite> commodites) {
 		this.commodites = commodites;
 	}
-
-
-
-
-
 
 	public void setRegles(List<Regle> regles) {
 		this.regles = regles;
 	}
 
-
-
 	public List<Notation> getNotations() {
 		return notations;
 	}
-
-
 
 	public void setNotations(List<Notation> notations) {
 		this.notations = notations;
 	}
 
-
-
 	public Proprio getProprietaire() {
 		return proprietaire;
 	}
-
-
 
 	public void setProprietaire(Proprio proprietaire) {
 		this.proprietaire = proprietaire;
 	}
 
-	
-
-
 	public List<Photo> getPhotos() {
 		return photos;
 	}
-
-
 
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
 	}
 
-
-
 	public List<Regle> getRegles() {
 		return regles;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -328,13 +246,4 @@ public class Logement {
 				+ nChambreOccup + ", loyer=" + loyer + ", typeLogement="
 				+ typeLogement + "]";
 	}
-
-
-
-
-	
-
-	
-	
-	
 }

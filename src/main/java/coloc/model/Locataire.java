@@ -17,7 +17,6 @@ public class Locataire extends Utilisateur {
 	@OneToOne
 	private Chambre chambre;
 	
-	
 	public Locataire() {}
 
 	public Locataire(String nom, String prenom, Civilite civ, String email, String tel, String password, boolean recherche,
@@ -75,9 +74,4 @@ public class Locataire extends Utilisateur {
 		return "Locataire [recherche=" + recherche + ", description=" + description + ", situation=" + situation
 				+ ", dossier=" + dossier + ", chambre=" + chambre + "]";
 	}
-
-	
-	
-	
-
 }

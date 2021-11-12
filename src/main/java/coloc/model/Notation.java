@@ -14,7 +14,7 @@ public class Notation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@ManyToOne
 	private Logement logement;
@@ -27,12 +27,8 @@ public class Notation {
 	@Column(columnDefinition = "VARCHAR(75)")
 	private String commentaire;
 	
-	
-	
 	public Notation() {
 	}
-
-
 
 	public Notation(Logement logement, Locataire locataire, Double note, String commentaire) {
 		this.logement = logement;
@@ -41,53 +37,37 @@ public class Notation {
 		this.commentaire = commentaire;
 	}
 
-
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public Logement getLogement() {
 		return logement;
 	}
 
-
-
 	public void setLogement(Logement logement) {
 		this.logement = logement;
 	}
-
-
 
 	public Locataire getLocataire() {
 		return locataire;
 	}
 
-
-
 	public void setLocataire(Locataire locataire) {
 		this.locataire = locataire;
 	}
-
-
 
 	public Double getNote() {
 		return note;
 	}
 
-
-
 	public void setNote(Double note) {
 		this.note = note;
 	}
-
-
 
 	public String getCommentaire() {
 		return commentaire;
@@ -101,8 +81,4 @@ public class Notation {
 	public String toString() {
 		return "Notation [id=" + id + ", note=" + note + ", commentaire=" + commentaire + "]";
 	}
-	
-	
-	
-
 }

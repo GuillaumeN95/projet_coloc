@@ -16,13 +16,11 @@ public class Regle {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY )
-	private int id;
+	private Long id;
 	private String libelle;
 	
 	@ManyToMany(mappedBy = "regles")
 	private List<Logement> logements;
-	
-
 	
 	public Regle() {
 		super();
@@ -32,37 +30,29 @@ public class Regle {
 		this.libelle = libelle;
 	}
 	
-	public Regle(int id, String libelle) {
+	public Regle(Long id, String libelle) {
 		this.id = id;
 		this.libelle = libelle;
 	}
 
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getLibelle() {
 		return libelle;
 	}
 
-
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Regle [id=" + id + ", libelle=" + libelle + "]";
 	}
-	
-	
-
 }

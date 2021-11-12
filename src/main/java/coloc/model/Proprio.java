@@ -15,29 +15,16 @@ public class Proprio extends Utilisateur {
 	
 	public Proprio() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, String password, List<Logement> logements) {
 		super(nom, prenom, civ, email, tel, password);
 		this.logements = logements;
 	}
 	
-	
-	
-	
-
 	/*@Override
 	public String toString() {
 		return "Proprio [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", civ=" + civ
 				+ ", email=" + email + ", tel=" + tel + "]";
 	}*/
-
-	
-
-
-	
-	
-
 }
