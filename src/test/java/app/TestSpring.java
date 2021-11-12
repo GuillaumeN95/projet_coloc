@@ -2,17 +2,8 @@ package app;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import coloc.repository.IDAOChambre;
-import coloc.repository.IDAOCommodite;
-import coloc.repository.IDAODossier;
-import coloc.repository.IDAOLocalisation;
-import coloc.repository.IDAOLocataire;
-import coloc.repository.IDAOLogement;
-import coloc.repository.IDAOMessage;
-import coloc.repository.IDAONotation;
-import coloc.repository.IDAOProprio;
-import coloc.repository.IDAORegle;
-import coloc.repository.IDAOUtilisateur;
+import coloc.repository.*;
+import coloc.model.*;
 import config.ApplicationConfig;
 
 public class TestSpring {
@@ -20,17 +11,17 @@ public class TestSpring {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
-		IDAOChambre chambreRepository = spring.getBean(IDAOChambre.class);
-		IDAOCommodite commoditeRepository = spring.getBean(IDAOCommodite.class);
-		IDAODossier dossierRepository = spring.getBean(IDAODossier.class);
-		IDAOLocalisation localisationRepository = spring.getBean(IDAOLocalisation.class);
-		IDAOLocataire locataireRepository = spring.getBean(IDAOLocataire.class);
-		IDAOLogement logementRepository = spring.getBean(IDAOLogement.class);
-		IDAOMessage messageRepository = spring.getBean(IDAOMessage.class);
-		IDAONotation notationRepository = spring.getBean(IDAONotation.class);
-		IDAOProprio proprioRepository = spring.getBean(IDAOProprio.class);
-		IDAORegle regleRepository = spring.getBean(IDAORegle.class);
-		IDAOUtilisateur utilisateurRepository = spring.getBean(IDAOUtilisateur.class);
+		IChambreRepository chambreRepository = spring.getBean(IChambreRepository.class);
+		ICommoditeRepository commoditeRepository = spring.getBean(ICommoditeRepository.class);
+		IDossierRepository dossierRepository = spring.getBean(IDossierRepository.class);
+		ILocalisationRepository localisationRepository = spring.getBean(ILocalisationRepository.class);
+		ILocataireRepository locataireRepository = spring.getBean(ILocataireRepository.class);
+		ILogementRepository logementRepository = spring.getBean(ILogementRepository.class);
+		IMessageRepository messageRepository = spring.getBean(IMessageRepository.class);
+		INotationRepository notationRepository = spring.getBean(INotationRepository.class);
+		IProprioRepository proprioRepository = spring.getBean(IProprioRepository.class);
+		IRegleRepository regleRepository = spring.getBean(IRegleRepository.class);
+		IUtilisateurRepository utilisateurRepository = spring.getBean(IUtilisateurRepository.class);
 
 		spring.close();
 	}

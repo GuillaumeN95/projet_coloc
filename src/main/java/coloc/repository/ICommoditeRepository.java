@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import coloc.model.*;
 
-public interface IDAORegle extends JpaRepository<Regle,Integer>{
+public interface ICommoditeRepository extends JpaRepository<Commodite,Integer>{
 
 }
