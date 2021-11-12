@@ -5,9 +5,9 @@ import java.util.Scanner;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import dao.*;
+import coloc.model.utilisateur.*;
+import coloc.repository.*;
 import dao.jpa.*;
-import model.utilisateur.*;
 
 
 public class Context {

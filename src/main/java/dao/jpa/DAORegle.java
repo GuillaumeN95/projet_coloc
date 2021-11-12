@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAORegle;
-import model.logement.Regle;
+import coloc.model.logement.Regle;
+import coloc.repository.IDAORegle;
+import util.Context;
 
 public class DAORegle implements IDAORegle {
 

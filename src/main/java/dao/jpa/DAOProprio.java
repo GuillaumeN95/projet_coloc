@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOProprio;
-import model.utilisateur.Proprio;
+import coloc.model.utilisateur.Proprio;
+import coloc.repository.IDAOProprio;
+import util.Context;
 
 
 public class DAOProprio implements IDAOProprio {

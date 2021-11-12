@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOLocalisation;
-import model.logement.Localisation;
+import coloc.model.logement.Localisation;
+import coloc.repository.IDAOLocalisation;
+import util.Context;
 
 public class DAOLocalisation implements IDAOLocalisation {
 

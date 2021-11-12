@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOCommodite;
-import model.logement.Commodite;
+import coloc.model.logement.Commodite;
+import coloc.repository.IDAOCommodite;
+import util.Context;
 
 public class DAOCommodite implements IDAOCommodite {
 

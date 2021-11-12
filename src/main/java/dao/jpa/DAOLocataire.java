@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOLocataire;
-import model.logement.Chambre;
-import model.logement.Logement;
-import model.utilisateur.Locataire;
-import model.utilisateur.Proprio;
+import coloc.model.logement.Chambre;
+import coloc.model.logement.Logement;
+import coloc.model.utilisateur.Locataire;
+import coloc.model.utilisateur.Proprio;
+import coloc.repository.IDAOLocataire;
+import util.Context;
 
 public class DAOLocataire implements IDAOLocataire {
 

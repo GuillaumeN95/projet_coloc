@@ -5,11 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import dao.IDAOChambre;
-import model.logement.Chambre;
-import model.logement.Logement;
-import model.utilisateur.Locataire;
-import model.utilisateur.Proprio;
+import coloc.model.*;
+import coloc.repository.IDAOChambre;
 import util.Context;
 
 public class DAOChambre implements IDAOChambre {

@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAODossier;
-import model.logement.Logement;
-import model.utilisateur.Dossier;
-import model.utilisateur.Proprio;
+import coloc.model.logement.Logement;
+import coloc.model.utilisateur.Dossier;
+import coloc.model.utilisateur.Proprio;
+import coloc.repository.IDAODossier;
+import util.Context;
 
 public class DAODossier implements IDAODossier {
 

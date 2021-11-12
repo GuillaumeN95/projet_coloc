@@ -5,8 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import dao.IDAONotation;
-import model.logement.Notation;
+import coloc.model.logement.Notation;
+import coloc.repository.IDAONotation;
 import util.Context;
 
 public class DAONotation implements IDAONotation {

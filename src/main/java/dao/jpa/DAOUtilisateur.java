@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOUtilisateur;
-import model.utilisateur.Utilisateur;
+import coloc.model.utilisateur.Utilisateur;
+import coloc.repository.IDAOUtilisateur;
+import util.Context;
 
 public class DAOUtilisateur implements IDAOUtilisateur {
 

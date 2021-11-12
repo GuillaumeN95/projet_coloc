@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOMessage;
-import model.Message;
+import coloc.model.Message;
+import coloc.repository.IDAOMessage;
+import util.Context;
 
 public class DAOMessage implements IDAOMessage {
 

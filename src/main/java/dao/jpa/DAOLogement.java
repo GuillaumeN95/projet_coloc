@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import util.Context;
 
-import dao.IDAOLogement;
-import model.logement.Logement;
-import model.utilisateur.Proprio;
-import model.utilisateur.Utilisateur;
+import coloc.model.logement.Logement;
+import coloc.model.utilisateur.Proprio;
+import coloc.model.utilisateur.Utilisateur;
+import coloc.repository.IDAOLogement;
+import util.Context;
 
 public class DAOLogement implements IDAOLogement {
 

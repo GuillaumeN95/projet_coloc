@@ -4,16 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import model.*;
-import model.logement.Chambre;
-import model.logement.Commodite;
-import model.logement.Localisation;
-import model.logement.Logement;
-import model.logement.Notation;
-import model.logement.Regle;
-import model.logement.TypeLogement;
-import model.utilisateur.*;
+import coloc.model.*;
 import util.Context;
 
 public class TestColoc {
