@@ -1,7 +1,9 @@
 package coloc.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import coloc.model.*;
 
-public interface IDAOProprio extends IDAO<Proprio,Integer>{
+public interface IDAOProprio extends JpaRepository<Proprio,Integer>{
 
 }
