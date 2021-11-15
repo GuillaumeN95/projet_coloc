@@ -1,5 +1,7 @@
 package coloc.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,7 @@ public class Message {
 	@OneToOne
 	private Utilisateur destinataire;
 	private String contenu;
+	private LocalDateTime date;
 	
 	public Message() {
 		super();
@@ -26,6 +29,15 @@ public class Message {
 		this.emetteur = emetteur;
 		this.destinataire = destinataire;
 		this.contenu = contenu;
+		this.date = LocalDateTime.now();
+	}
+
+	public Message(Utilisateur emetteur, Utilisateur destinataire, String contenu, LocalDateTime date) {
+		super();
+		this.emetteur = emetteur;
+		this.destinataire = destinataire;
+		this.contenu = contenu;
+		this.date = date;
 	}
 
 	public Long getId() {
@@ -58,6 +70,14 @@ public class Message {
 
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 
 	@Override

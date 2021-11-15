@@ -31,11 +31,6 @@ public class Chambre {
 	private Locataire locataire;
 	
 	private Integer surface;
-	private Double loyer;
-	private Double charges;
-	private Double caution;
-	private Integer dureeMini;
-	private LocalDate dateDispo;
 	
 	@ManyToMany
 	@JoinTable
@@ -49,26 +44,14 @@ public class Chambre {
 	public Chambre() {
 	}
 
-	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
-			LocalDate dateDispo) {
+	public Chambre(Logement logement, int surface) {
 		this.logement = logement;
 		this.surface = surface;
-		this.loyer = loyer;
-		this.charges = charges;
-		this.caution = caution;
-		this.dureeMini = dureeMini;
-		this.dateDispo = dateDispo;
 	}
 	
-	public Chambre(Logement logement, int surface, Double loyer, Double charges, Double caution, int dureeMini,
-			LocalDate dateDispo, List<Commodite> commodites) {
+	public Chambre(Logement logement, int surface, List<Commodite> commodites) {
 		this.logement = logement;
 		this.surface = surface;
-		this.loyer = loyer;
-		this.charges = charges;
-		this.caution = caution;
-		this.dureeMini = dureeMini;
-		this.dateDispo = dateDispo;
 		this.commodites = commodites;
 	}
 
@@ -94,46 +77,6 @@ public class Chambre {
 	
 	public void setSurface(int surface) {
 		this.surface = surface;
-	}
-	
-	public Double getLoyer() {
-		return loyer;
-	}
-	
-	public void setLoyer(Double loyer) {
-		this.loyer = loyer;
-	}
-	
-	public Double getCharges() {
-		return charges;
-	}
-	
-	public void setCharges(Double charges) {
-		this.charges = charges;
-	}
-	
-	public Double getCaution() {
-		return caution;
-	}
-	
-	public void setCaution(Double caution) {
-		this.caution = caution;
-	}
-	
-	public int getDureeMini() {
-		return dureeMini;
-	}
-	
-	public void setDureeMini(int dureeMini) {
-		this.dureeMini = dureeMini;
-	}
-	
-	public LocalDate getDateDispo() {
-		return dateDispo;
-	}
-	
-	public void setDateDispo(LocalDate dateDispo) {
-		this.dateDispo = dateDispo;
 	}
 
 	public List<Commodite> getCommodites() {

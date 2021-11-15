@@ -1,20 +1,10 @@
 package coloc.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.Embeddable;
 
-@Entity
-
+@Embeddable
 public class Localisation {
 	
-	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY )
-	private Long id; 
-	@Version
-	private Integer version;
 	private String departement;
 	private String ville;
 	private String codePostal;
@@ -31,14 +21,6 @@ public class Localisation {
 		this.codePostal = codePostal;
 		this.voie = voie;
 		this.num = num;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getDepartement() {
@@ -83,7 +65,7 @@ public class Localisation {
 
 	@Override
 	public String toString() {
-		return "Localisation [id=" + id + ", departement=" + departement + ", ville=" + ville + ", codePostal="
+		return "Localisation [departement=" + departement + ", ville=" + ville + ", codePostal="
 				+ codePostal + ", voie=" + voie + ", num=" + num + "]";
 	}
 }

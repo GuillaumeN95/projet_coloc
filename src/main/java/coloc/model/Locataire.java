@@ -1,7 +1,10 @@
 package coloc.model;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -9,9 +12,10 @@ import javax.persistence.OneToOne;
 public class Locataire extends Utilisateur {
 	private boolean recherche;
 	private String description;
+	@Enumerated(EnumType.STRING)
 	private Situation situation;
 	
-	@OneToOne
+	@Embedded
 	private Dossier dossier;
 	
 	@OneToOne
@@ -27,6 +31,14 @@ public class Locataire extends Utilisateur {
 		this.situation = situation;
 		this.dossier = dossier;
 		this.chambre = chambre;
+	}
+
+	public Locataire(String nom, String prenom, Civilite civ, String email, String tel, String password, boolean recherche,
+			String description, Situation situation) {
+		super(nom, prenom, civ, email, tel, password);
+		this.recherche = recherche;
+		this.description = description;
+		this.situation = situation;
 	}
 
 	public Situation getSituation() {

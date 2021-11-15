@@ -1,32 +1,13 @@
 package coloc.model;
 
-import java.util.List;
+import javax.persistence.Embeddable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
-
-@Entity
+@Embeddable
 public class Dossier {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Version
-	private Integer version;
 	private Double revenu;
 	private Double revenuGarant;
 	private Situation situationGarant;
-	
-	@OneToOne(mappedBy = "dossier" )
-	private Locataire locataire;
-	
-	@OneToMany
-	private List<Chambre> chambre;
 	
 	public Dossier() {
 		super();
@@ -36,14 +17,6 @@ public class Dossier {
 		this.revenu = revenu;
 		this.revenuGarant = revenuGarant;
 		this.situationGarant = situationGarant;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Double getRevenu() {
@@ -72,7 +45,7 @@ public class Dossier {
 	
 	@Override
 	public String toString() {
-		return "Dossier [id=" + id + ", revenu=" + revenu + ", revenuGarant=" + revenuGarant + ", situation="
+		return "Dossier [revenu=" + revenu + ", revenuGarant=" + revenuGarant + ", situation="
 				+ situationGarant + "]";
 	}
 }

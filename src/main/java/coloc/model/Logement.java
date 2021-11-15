@@ -1,8 +1,10 @@
 package coloc.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
@@ -32,6 +33,8 @@ public class Logement {
 	private Integer nChambreOccup;
 	private Integer nSdb;
 	private Double loyer;
+	private Double charges;
+	private Double caution;
 	
 	@OneToMany(mappedBy = "logement")
 	private List<Photo> photos;
@@ -40,19 +43,18 @@ public class Logement {
 	private List<Notation> notations;
 	
 	private LocalDate dateDispo;
-	private int dureeMini;
 	
 	@ManyToOne
 	private Proprio proprietaire;
 	
-	@OneToOne
+	@Embedded
 	private Localisation localisation;
 	@Enumerated(EnumType.STRING)
 	private TypeLogement typeLogement;
 	
 	@OneToMany(mappedBy = "logement")
-	private List<Chambre> chambres;
-	
+	private List<Chambre> chambres = new ArrayList<Chambre>();
+
 	@OneToMany
 	@JoinTable
 	(
@@ -60,7 +62,7 @@ public class Logement {
 		joinColumns = @JoinColumn(name="idLogement"),
 		inverseJoinColumns = @JoinColumn(name="idCommodites")
 	)
-	private  List<Commodite> commodites;
+	private  List<Commodite> commodites = new ArrayList<Commodite>();
 	
 	@ManyToMany
 	@JoinTable
@@ -69,26 +71,46 @@ public class Logement {
 		joinColumns = @JoinColumn(name="idLogement"),
 		inverseJoinColumns = @JoinColumn(name="idRegle")
 	)
-	private List<Regle> regles;
+	private List<Regle> regles = new ArrayList<Regle>();
 	
 	public Logement() {
 		super();
 	}
 
-	public Logement(String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer,
-			Localisation localisation,TypeLogement typeLogement) {
+	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
+			Localisation localisation, TypeLogement typeLogement) {
 		super();
+		this.proprietaire = proprietaire;
 		this.description = description;
 		this.surface = surface;
 		this.nChambre = nchambre;
 		this.nChambreOccup = nChambreOccup;
 		this.nSdb = nSdb;
 		this.loyer = loyer;
+		this.charges = charges;
+		this.caution = caution;
 		this.localisation = localisation;
 		this.typeLogement = typeLogement;
 	}
+
+	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
+			Localisation localisation, TypeLogement typeLogement, LocalDate dateDispo) {
+		super();
+		this.proprietaire = proprietaire;
+		this.description = description;
+		this.surface = surface;
+		this.nChambre = nchambre;
+		this.nChambreOccup = nChambreOccup;
+		this.nSdb = nSdb;
+		this.loyer = loyer;
+		this.charges = charges;
+		this.caution = caution;
+		this.localisation = localisation;
+		this.typeLogement = typeLogement;
+		this.dateDispo = dateDispo;
+	}
 	
-	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer,
+	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
 			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
 		super();
 		this.proprietaire = proprietaire;
@@ -98,6 +120,8 @@ public class Logement {
 		this.nChambreOccup = nChambreOccup;
 		this.nSdb = nSdb;
 		this.loyer = loyer;
+		this.charges = charges;
+		this.caution = caution;
 		this.localisation = localisation;
 		this.typeLogement = typeLogement;
 		this.commodites = commodites;
@@ -152,20 +176,28 @@ public class Logement {
 		this.loyer = loyer;
 	}
 
+	public Double getCharges() {
+		return charges;
+	}
+
+	public void setCharges(Double charges) {
+		this.charges = charges;
+	}
+
+	public Double getCaution() {
+		return caution;
+	}
+
+	public void setCaution(Double caution) {
+		this.caution = caution;
+	}
+
 	public LocalDate getDateDispo() {
 		return dateDispo;
 	}
 
 	public void setDateDispo(LocalDate dateDispo) {
 		this.dateDispo = dateDispo;
-	}
-
-	public Integer getDureeMini() {
-		return dureeMini;
-	}
-
-	public void setDureeMini(Integer dureeMini) {
-		this.dureeMini = dureeMini;
 	}
 
 	public Localisation getLocalisation() {
@@ -206,6 +238,10 @@ public class Logement {
 
 	public void setCommodites(List<Commodite> commodites) {
 		this.commodites = commodites;
+	}
+
+	public void addCommodite(Commodite commodite) {
+		this.commodites.add(commodite);
 	}
 
 	public void setRegles(List<Regle> regles) {

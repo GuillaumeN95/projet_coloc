@@ -21,6 +21,10 @@ public class Proprio extends Utilisateur {
 		super(nom, prenom, civ, email, tel, password);
 		this.logements = logements;
 	}
+
+	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, String password) {
+		super(nom, prenom, civ, email, tel, password);
+	}
 	
 	/*@Override
 	public String toString() {
