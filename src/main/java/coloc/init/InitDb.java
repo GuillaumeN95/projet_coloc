@@ -14,25 +14,26 @@ public class InitDb {
 
         AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
-		IChambreRepository chambreRepository = spring.getBean(IChambreRepository.class);
-		ICommoditeRepository commoditeRepository = spring.getBean(ICommoditeRepository.class);
+        IUtilisateurRepository utilisateurRepository = spring.getBean(IUtilisateurRepository.class);
+        IProprietaireRepository proprietaireRepository = spring.getBean(IProprietaireRepository.class);
 		ILocataireRepository locataireRepository = spring.getBean(ILocataireRepository.class);
 		ILogementRepository logementRepository = spring.getBean(ILogementRepository.class);
+        IChambreRepository chambreRepository = spring.getBean(IChambreRepository.class);
 		IMessageRepository messageRepository = spring.getBean(IMessageRepository.class);
 		INotationRepository notationRepository = spring.getBean(INotationRepository.class);
-		IProprioRepository proprioRepository = spring.getBean(IProprioRepository.class);
 		IRegleRepository regleRepository = spring.getBean(IRegleRepository.class);
-		IUtilisateurRepository utilisateurRepository = spring.getBean(IUtilisateurRepository.class);
+        ICommoditeRepository commoditeRepository = spring.getBean(ICommoditeRepository.class);
+        IPhotoRepository photoRepository = spring.getBean(IPhotoRepository.class);
 
         // Creation des Proprio
-        Proprio proprio1 = new Proprio("NomProprio1", "PrenomProprio1", Civilite.Mr, "proprio1@mail.com", "0000000001", "proprio1");
-        proprio1 = proprioRepository.save(proprio1);
-        Proprio proprio2 = new Proprio("NomProprio2", "PrenomProprio2", Civilite.Mme, "proprio2@mail.com", "0000000002", "proprio2");
-        proprio2 = proprioRepository.save(proprio2);
-        Proprio proprio3 = new Proprio("NomProprio3", "PrenomProprio3", Civilite.Mr, "proprio3@mail.com", "0000000003", "proprio3");
-        proprio3 = proprioRepository.save(proprio3);
-        Proprio proprio4 = new Proprio("NomProprio4", "PrenomProprio4", Civilite.Mme, "proprio4@mail.com", "0000000004", "proprio4");
-        proprio4 = proprioRepository.save(proprio4);
+        Proprietaire proprio1 = new Proprietaire("NomProprio1", "PrenomProprio1", Civilite.Mr, "proprio1@mail.com", "0000000001", "proprio1");
+        proprio1 = proprietaireRepository.save(proprio1);
+        Proprietaire proprio2 = new Proprietaire("NomProprio2", "PrenomProprio2", Civilite.Mme, "proprio2@mail.com", "0000000002", "proprio2");
+        proprio2 = proprietaireRepository.save(proprio2);
+        Proprietaire proprio3 = new Proprietaire("NomProprio3", "PrenomProprio3", Civilite.Mr, "proprio3@mail.com", "0000000003", "proprio3");
+        proprio3 = proprietaireRepository.save(proprio3);
+        Proprietaire proprio4 = new Proprietaire("NomProprio4", "PrenomProprio4", Civilite.Mme, "proprio4@mail.com", "0000000004", "proprio4");
+        proprio4 = proprietaireRepository.save(proprio4);
 
         // Creation des Locataire
         Locataire locataire1 = new Locataire("NomLocataire1", "PrenomLocataire1", Civilite.Mr, "locataire1@mail.com", "0011000001", "locataire1", true, "Description locataire 1", Situation.Etudiant);
@@ -71,6 +72,8 @@ public class InitDb {
         // Creation des Commodite
         Commodite balcon = new Commodite("balcon");
         balcon = commoditeRepository.save(balcon);
+        System.out.println(balcon.getId());
+        System.out.println("//////////////////");
         Commodite jardin = new Commodite("jardin");
         jardin = commoditeRepository.save(jardin);
         Commodite terrasse = new Commodite("terrasse");
@@ -120,6 +123,7 @@ public class InitDb {
         Notation noteLoc8Lg4 = new Notation(log4, locataire8, 8.0, "commentaire note loc5 pour log4");
         noteLoc8Lg4 = notationRepository.save(noteLoc8Lg4);
 
+        // Creation des Chambre
         Chambre ch1Log1 = new Chambre(log1, 12);
         ch1Log1 = chambreRepository.save(ch1Log1);
         Chambre ch2Log1 = new Chambre(log1, 13);
@@ -157,18 +161,108 @@ public class InitDb {
         Dossier dossierLoc1 = new Dossier(1500.0, 2200.0, Situation.Salarie);
         locataire1.setDossier(dossierLoc1);
         locataire1 = locataireRepository.save(locataire1);
+        Dossier dossierLoc2 = new Dossier(1500.0, 2200.0, Situation.Retraite);
+        locataire2.setDossier(dossierLoc2);
+        locataire2 = locataireRepository.save(locataire2);
         Dossier dossierLoc4 = new Dossier(0.0, 2500.0, Situation.Salarie);
         locataire4.setDossier(dossierLoc4);
         locataire4 = locataireRepository.save(locataire4);
         Dossier dossierLoc5 = new Dossier(800.0, 1600.0, Situation.Salarie);
         locataire5.setDossier(dossierLoc5);
         locataire5 = locataireRepository.save(locataire5);
+        Dossier dossierLoc6 = new Dossier(1200.0, 1600.0, Situation.Salarie);
+        locataire6.setDossier(dossierLoc6);
+        locataire6 = locataireRepository.save(locataire6);
+        Dossier dossierLoc7 = new Dossier(1000.0, 1800.0, Situation.Salarie);
+        locataire7.setDossier(dossierLoc7);
+        locataire7 = locataireRepository.save(locataire7);
         
-        // Ajout de Commodite a Logement
-        log1.addCommodite(jardin);
+      // Ajout de Commodite a Logement
+        log1.addCommodite(balcon);
+        log1.addCommodite(parking);
+        log1.addCommodite(fibre);
         log1 = logementRepository.save(log1);
+        log2.addCommodite(handicape);
+        log2.addCommodite(parking);
+        log2 = logementRepository.save(log2);
+        log3.addCommodite(jardin);
+        log3.addCommodite(parking);
+        log3.addCommodite(fibre);
+        log3 = logementRepository.save(log3);
+        log4.addCommodite(fibre);
+        log4.addCommodite(balcon);
+        log4.addCommodite(salleDeSport);
+        log4.addCommodite(handicape);
+        log4 = logementRepository.save(log4);
 
-        // Fonctionne jusque là 
+        // Ajout de Regle a Logement
+        log1.addRegle(fumeurAutorise);
+        log1 = logementRepository.save(log1);
+        log2.addRegle(animauxAutorises);
+        log2 = logementRepository.save(log2);
+        log3.addRegle(animauxAutorises);
+        log3.addRegle(passSanitaire);
+        log3 = logementRepository.save(log3);
+        log4.addRegle(femmeUniquement);
+        log4 = logementRepository.save(log4);
+
+        // Ajout de Commodite a Chambre
+        ch1Log1.addCommodites(balcon);
+        ch1Log1.addCommodites(television);
+        ch1Log1 = chambreRepository.save(ch1Log1);
+        ch1Log4.addCommodites(television);
+        ch1Log4 = chambreRepository.save(ch1Log4);
+
+        // Ajout de Locataire a Chambre
+        locataire1.setChambre(ch1Log1);
+        locataire1 = locataireRepository.save(locataire1);
+        locataire2.setChambre(ch2Log1);
+        locataire2 = locataireRepository.save(locataire2);
+        locataire5.setChambre(ch1Log3);
+        locataire5 = locataireRepository.save(locataire5);
+        locataire6.setChambre(ch2Log3);
+        locataire6 = locataireRepository.save(locataire6);
+        locataire7.setChambre(ch3Log3);
+        locataire7 = locataireRepository.save(locataire7);
+        log1.setnChambreOccup(2);
+        log1.setDateDispo(null);
+        log1 = logementRepository.save(log1);
+        log3.setnChambreOccup(3);
+        log3 = logementRepository.save(log3);
+
+        // Ajout de Photo a Logement
+        Photo photo1Log1 = new Photo("Photo1Log1", "URLPhoto1Log1", 1, log1);
+        photo1Log1 = photoRepository.save(photo1Log1);
+        Photo photo2Log1 = new Photo("Photo2Log1", "URLPhoto2Log1", 2, log1);
+        photo2Log1 = photoRepository.save(photo2Log1);
+        Photo photo3Log1 = new Photo("Photo3Log1", "URLPhoto3Log1", 3, log1);
+        photo3Log1 = photoRepository.save(photo3Log1);
+        Photo photo4Log1 = new Photo("Photo4Log1", "URLPhoto4Log1", 4, log1);
+        photo4Log1 = photoRepository.save(photo4Log1);
+        Photo photo1Log2 = new Photo("Photo1Log2", "URLPhoto1Log2", 1, log2);
+        photo1Log2 = photoRepository.save(photo1Log2);
+        Photo photo2Log2 = new Photo("Photo2Log2", "URLPhoto2Log2", 2, log2);
+        photo2Log2 = photoRepository.save(photo2Log2);
+        Photo photo3Log2 = new Photo("Photo3Log2", "URLPhoto3Log2", 3, log2);
+        photo3Log2 = photoRepository.save(photo3Log2);
+        Photo photo4Log2 = new Photo("Photo4Log2", "URLPhoto4Log2", 4, log2);
+        photo4Log2 = photoRepository.save(photo4Log2);
+        Photo photo1Log3 = new Photo("Photo1Log3", "URLPhoto1Log3", 1, log3);
+        photo1Log3 = photoRepository.save(photo1Log3);
+        Photo photo2Log3 = new Photo("Photo2Log3", "URLPhoto2Log3", 2, log3);
+        photo2Log3 = photoRepository.save(photo2Log3);
+        Photo photo3Log3 = new Photo("Photo3Log3", "URLPhoto3Log3", 3, log3);
+        photo3Log3 = photoRepository.save(photo3Log3);
+        Photo photo4Log3 = new Photo("Photo4Log3", "URLPhoto4Log3", 4, log3);
+        photo4Log3 = photoRepository.save(photo4Log3);
+        Photo photo1Log4 = new Photo("Photo1Log4", "URLPhoto1Log4", 1, log4);
+        photo1Log4 = photoRepository.save(photo1Log4);
+        Photo photo2Log4 = new Photo("Photo2Log4", "URLPhoto2Log4", 2, log4);
+        photo2Log4 = photoRepository.save(photo2Log4);
+        Photo photo3Log4 = new Photo("Photo3Log4", "URLPhoto3Log4", 3, log4);
+        photo3Log4 = photoRepository.save(photo3Log4);
+        Photo photo4Log4 = new Photo("Photo4Log4", "URLPhoto4Log4", 4, log4);
+        photo4Log4 = photoRepository.save(photo4Log4);
 
         spring.close();
     }

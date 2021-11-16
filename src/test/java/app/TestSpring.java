@@ -9,19 +9,22 @@ import config.ApplicationConfig;
 public class TestSpring {
 
 	public static void main(String[] args) {
+		// Creation de la base de donnees
+		InitDb.run();
+
 /*		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
-		IChambreRepository chambreRepository = spring.getBean(IChambreRepository.class);
-		ICommoditeRepository commoditeRepository = spring.getBean(ICommoditeRepository.class);
-		IDossierRepository dossierRepository = spring.getBean(IDossierRepository.class);
+        IUtilisateurRepository utilisateurRepository = spring.getBean(IUtilisateurRepository.class);
+        IProprietaireRepository proprietaireRepository = spring.getBean(IProprietaireRepository.class);
 		ILocataireRepository locataireRepository = spring.getBean(ILocataireRepository.class);
 		ILogementRepository logementRepository = spring.getBean(ILogementRepository.class);
+        IChambreRepository chambreRepository = spring.getBean(IChambreRepository.class);
 		IMessageRepository messageRepository = spring.getBean(IMessageRepository.class);
 		INotationRepository notationRepository = spring.getBean(INotationRepository.class);
-		IProprioRepository proprioRepository = spring.getBean(IProprioRepository.class);
 		IRegleRepository regleRepository = spring.getBean(IRegleRepository.class);
-		IUtilisateurRepository utilisateurRepository = spring.getBean(IUtilisateurRepository.class);
-*/
-		InitDb.run();
-	}
+        ICommoditeRepository commoditeRepository = spring.getBean(ICommoditeRepository.class);
+        IPhotoRepository photoRepository = spring.getBean(IPhotoRepository.class);
+
+		spring.close();
+	*/	}
 }

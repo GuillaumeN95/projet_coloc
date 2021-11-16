@@ -101,7 +101,7 @@ public class TestColoc {
 		Context.getInstance().setUtilisateurConnecte(connexion);
 		//
 		if(connexion instanceof Locataire) {menuLocataire();}
-		else if(connexion instanceof Proprio) {menuProprietaire();}
+		else if(connexion instanceof Proprietaire) {menuProprietaire();}
 		else {System.out.println("Identifiants invalides");connexion();}
 	}
 	
@@ -131,7 +131,7 @@ public class TestColoc {
 		String password = Context.getInstance().saisieString("Entrez votre mot de passe : ");
 		int choixTypeCompte = Context.getInstance().saisieInt("Etes vous 1-Proprietaire ou 2-Locataire :");
 		if(choixTypeCompte == 1) {
-			Proprio proprioACreer = new Proprio(nom, prenom, civ, email, tel, password, null);
+			Proprietaire proprioACreer = new Proprietaire(nom, prenom, civ, email, tel, password, null);
 			Context.getInstance().getDaoProprio().save(proprioACreer);
 		}else{
 			String choixRecherche = Context.getInstance().saisieString("Etes vous en recherche de colocation (O/N) : ");
@@ -660,7 +660,7 @@ private static Logement choisirLogement(){
 		
 		
 		
-		Logement newLogement = new Logement((Proprio) connected, description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites,listeRegles);
+		Logement newLogement = new Logement((Proprietaire) connected, description,surface,nbChambre,nbChambreOccup,nbSdB,loyer,newLocalisation,TypeLogement.valueOf(typeNew),listeCommodites,listeRegles);
 		newLogement = Context.getInstance().getDaoLogement().save(newLogement);
 		
 		

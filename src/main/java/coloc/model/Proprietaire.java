@@ -8,21 +8,21 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("proprio")
-public class Proprio extends Utilisateur {
+public class Proprietaire extends Utilisateur {
 	
 	@OneToMany(mappedBy = "proprietaire" )
 	private List<Logement> logements;
 	
-	public Proprio() {
+	public Proprietaire() {
 		super();
 	}
 
-	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, String password, List<Logement> logements) {
+	public Proprietaire(String nom, String prenom, Civilite civ, String email, String tel, String password, List<Logement> logements) {
 		super(nom, prenom, civ, email, tel, password);
 		this.logements = logements;
 	}
 
-	public Proprio(String nom, String prenom, Civilite civ, String email, String tel, String password) {
+	public Proprietaire(String nom, String prenom, Civilite civ, String email, String tel, String password) {
 		super(nom, prenom, civ, email, tel, password);
 	}
 	

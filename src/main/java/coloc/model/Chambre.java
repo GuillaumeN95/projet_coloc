@@ -1,13 +1,12 @@
 package coloc.model;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -35,11 +34,9 @@ public class Chambre {
 	@ManyToMany
 	@JoinTable
 	(
-		name="Commodites_Chambre",
-		joinColumns = @JoinColumn(name="idLogement"),
-		inverseJoinColumns = @JoinColumn(name="idCommodite")
+		name="commodite_chambre"
 	)
-	private List<Commodite> commodites;
+	private List<Commodite> commodites = new ArrayList<Commodite>();
 	
 	public Chambre() {
 	}
@@ -85,6 +82,10 @@ public class Chambre {
 
 	public void setCommodites(List<Commodite> commodites) {
 		this.commodites = commodites;
+	}
+
+	public void addCommodites(Commodite commodite) {
+		this.commodites.add(commodite);
 	}
 
 	public Locataire getLocataire() {

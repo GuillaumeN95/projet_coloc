@@ -1,9 +1,13 @@
 package coloc.model;
 
+
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 
@@ -13,6 +17,10 @@ public class Commodite {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY )
 	private Long id;
 	private String libelle;
+	@ManyToMany(mappedBy = "commodites")
+	private List<Logement> logements;
+	@ManyToMany(mappedBy = "commodites")
+	private List<Chambre> chambres;
 	
 	public Commodite() {
 		super();
@@ -37,6 +45,22 @@ public class Commodite {
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+	public List<Logement> getLogements() {
+		return logements;
+	}
+
+	public void setLogements(List<Logement> logements) {
+		this.logements = logements;
+	}
+
+	public List<Chambre> getChambres() {
+		return chambres;
+	}
+
+	public void setChambres(List<Chambre> chambres) {
+		this.chambres = chambres;
 	}
 
 	@Override

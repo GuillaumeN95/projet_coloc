@@ -29,6 +29,13 @@ public class Photo {
 		this.ordre = ordre;
 	}
 
+	public Photo(String libelle, String chemin, Integer ordre, Logement logement) {
+		this.libelle = libelle;
+		this.chemin = chemin;
+		this.ordre = ordre;
+		this.logement = logement;
+	}
+
 	public Long getId() {
 		return id;
 	}

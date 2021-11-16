@@ -11,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -45,7 +44,7 @@ public class Logement {
 	private LocalDate dateDispo;
 	
 	@ManyToOne
-	private Proprio proprietaire;
+	private Proprietaire proprietaire;
 	
 	@Embedded
 	private Localisation localisation;
@@ -55,21 +54,17 @@ public class Logement {
 	@OneToMany(mappedBy = "logement")
 	private List<Chambre> chambres = new ArrayList<Chambre>();
 
-	@OneToMany
+	@ManyToMany
 	@JoinTable
 	(
-		name="Commodite_Logement",
-		joinColumns = @JoinColumn(name="idLogement"),
-		inverseJoinColumns = @JoinColumn(name="idCommodites")
+		name="commodite_logement"
 	)
 	private  List<Commodite> commodites = new ArrayList<Commodite>();
 	
 	@ManyToMany
 	@JoinTable
 	(
-		name="Regle_Logement",
-		joinColumns = @JoinColumn(name="idLogement"),
-		inverseJoinColumns = @JoinColumn(name="idRegle")
+		name="regle_logement"
 	)
 	private List<Regle> regles = new ArrayList<Regle>();
 	
@@ -77,7 +72,7 @@ public class Logement {
 		super();
 	}
 
-	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
+	public Logement(Proprietaire proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
 			Localisation localisation, TypeLogement typeLogement) {
 		super();
 		this.proprietaire = proprietaire;
@@ -93,7 +88,7 @@ public class Logement {
 		this.typeLogement = typeLogement;
 	}
 
-	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
+	public Logement(Proprietaire proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
 			Localisation localisation, TypeLogement typeLogement, LocalDate dateDispo) {
 		super();
 		this.proprietaire = proprietaire;
@@ -110,7 +105,7 @@ public class Logement {
 		this.dateDispo = dateDispo;
 	}
 	
-	public Logement(Proprio proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
+	public Logement(Proprietaire proprietaire, String description, Integer surface, Integer nchambre, Integer nChambreOccup, Integer nSdb, Double loyer, Double charges, Double caution,
 			Localisation localisation,TypeLogement typeLogement, List<Commodite> commodites,List<Regle> regles) {
 		super();
 		this.proprietaire = proprietaire;
@@ -248,6 +243,14 @@ public class Logement {
 		this.regles = regles;
 	}
 
+	public void addRegle(Regle regle) {
+		this.regles.add(regle);
+	}
+
+	public List<Regle> getRegles() {
+		return regles;
+	}
+
 	public List<Notation> getNotations() {
 		return notations;
 	}
@@ -256,11 +259,11 @@ public class Logement {
 		this.notations = notations;
 	}
 
-	public Proprio getProprietaire() {
+	public Proprietaire getProprietaire() {
 		return proprietaire;
 	}
 
-	public void setProprietaire(Proprio proprietaire) {
+	public void setProprietaire(Proprietaire proprietaire) {
 		this.proprietaire = proprietaire;
 	}
 
@@ -270,10 +273,6 @@ public class Logement {
 
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
-	}
-
-	public List<Regle> getRegles() {
-		return regles;
 	}
 
 	@Override
