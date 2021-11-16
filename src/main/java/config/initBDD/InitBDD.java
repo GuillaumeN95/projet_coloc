@@ -1,4 +1,4 @@
-package coloc.init;
+package config.initBDD;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ import coloc.model.*;
 import coloc.repository.*;
 import config.ApplicationConfig;
 
-public class InitDb {
+public class InitBDD {
     
     public static void run(){
 
@@ -26,14 +26,14 @@ public class InitDb {
         IPhotoRepository photoRepository = spring.getBean(IPhotoRepository.class);
 
         // Creation des Proprio
-        Proprietaire proprio1 = new Proprietaire("NomProprio1", "PrenomProprio1", Civilite.Mr, "proprio1@mail.com", "0000000001", "proprio1");
-        proprio1 = proprietaireRepository.save(proprio1);
-        Proprietaire proprio2 = new Proprietaire("NomProprio2", "PrenomProprio2", Civilite.Mme, "proprio2@mail.com", "0000000002", "proprio2");
-        proprio2 = proprietaireRepository.save(proprio2);
-        Proprietaire proprio3 = new Proprietaire("NomProprio3", "PrenomProprio3", Civilite.Mr, "proprio3@mail.com", "0000000003", "proprio3");
-        proprio3 = proprietaireRepository.save(proprio3);
-        Proprietaire proprio4 = new Proprietaire("NomProprio4", "PrenomProprio4", Civilite.Mme, "proprio4@mail.com", "0000000004", "proprio4");
-        proprio4 = proprietaireRepository.save(proprio4);
+        Proprietaire proprietaire1 = new Proprietaire("NomProprietaire1", "PrenomProprietaire1", Civilite.Mr, "proprietaire1@mail.com", "0000000001", "proprietaire1");
+        proprietaire1 = proprietaireRepository.save(proprietaire1);
+        Proprietaire proprietaire2 = new Proprietaire("NomProprietaire2", "PrenomProprietaire2", Civilite.Mme, "proprietaire2@mail.com", "0000000002", "proprietaire2");
+        proprietaire2 = proprietaireRepository.save(proprietaire2);
+        Proprietaire proprietaire3 = new Proprietaire("NomProprietaire3", "PrenomProprietaire3", Civilite.Mr, "proprietaire3@mail.com", "0000000003", "proprietaire3");
+        proprietaire3 = proprietaireRepository.save(proprietaire3);
+        Proprietaire proprietaire4 = new Proprietaire("NomProprietaire4", "PrenomProprietaire4", Civilite.Mme, "proprietaire4@mail.com", "0000000004", "proprietaire4");
+        proprietaire4 = proprietaireRepository.save(proprietaire4);
 
         // Creation des Locataire
         Locataire locataire1 = new Locataire("NomLocataire1", "PrenomLocataire1", Civilite.Mr, "locataire1@mail.com", "0011000001", "locataire1", true, "Description locataire 1", Situation.Etudiant);
@@ -60,20 +60,18 @@ public class InitDb {
         Localisation locLog4 = new Localisation("departementLog4", "villeLog4", "cpLog4", "voieLog4", 4);
 
         // Creation des Logement
-        Logement log1 = new Logement(proprio1, "Description log1", 70, 2, 0, 1, 300.0, 50.0, 300.0, locLog1, TypeLogement.Appartement, LocalDate.now());
+        Logement log1 = new Logement(proprietaire1, "Description log1", 70, 2, 0, 1, 300.0, 50.0, 300.0, locLog1, TypeLogement.Appartement, LocalDate.now());
         log1 = logementRepository.save(log1);
-        Logement log2 = new Logement(proprio2, "Description log2", 40, 1, 0, 1, 350.0, 50.0, 350.0, locLog2, TypeLogement.Studio, LocalDate.now());
+        Logement log2 = new Logement(proprietaire2, "Description log2", 40, 1, 0, 1, 350.0, 50.0, 350.0, locLog2, TypeLogement.Studio, LocalDate.now());
         log2 = logementRepository.save(log2);
-        Logement log3 = new Logement(proprio3, "Description log3", 110, 4, 0, 1, 275.0, 50.0, 275.0, locLog3, TypeLogement.Maison, LocalDate.now());
+        Logement log3 = new Logement(proprietaire3, "Description log3", 110, 4, 0, 1, 275.0, 50.0, 275.0, locLog3, TypeLogement.Maison, LocalDate.now());
         log3 = logementRepository.save(log3);
-        Logement log4 = new Logement(proprio4, "Description log4", 35, 2, 0, 1, 325.0, 50.0, 325.0, locLog4, TypeLogement.Studio, LocalDate.now());
+        Logement log4 = new Logement(proprietaire4, "Description log4", 35, 2, 0, 1, 325.0, 50.0, 325.0, locLog4, TypeLogement.Studio, LocalDate.now());
         log4 = logementRepository.save(log4);
 
         // Creation des Commodite
         Commodite balcon = new Commodite("balcon");
         balcon = commoditeRepository.save(balcon);
-        System.out.println(balcon.getId());
-        System.out.println("//////////////////");
         Commodite jardin = new Commodite("jardin");
         jardin = commoditeRepository.save(jardin);
         Commodite terrasse = new Commodite("terrasse");
@@ -144,18 +142,18 @@ public class InitDb {
         ch2Log4 = chambreRepository.save(ch2Log4);
 
         //Creation des Message
-        Message message1Loc1Proprio1 = new Message(locataire1, proprio1, "Premier message loc1 vers proprio1");
-        message1Loc1Proprio1 = messageRepository.save(message1Loc1Proprio1);
-        Message message1Proprio1Loc1 = new Message(proprio1, locataire1, "Premier message proprio1 vers loc1");
-        message1Proprio1Loc1 = messageRepository.save(message1Proprio1Loc1);
-        Message message2Loc1Proprio1 = new Message(locataire1, proprio1, "Premier message loc1 vers proprio1");
-        message2Loc1Proprio1 = messageRepository.save(message2Loc1Proprio1);
-        Message message1Loc3Proprio2 = new Message(locataire3, proprio2, "Premier message loc3 vers proprio2");
-        message1Loc3Proprio2 = messageRepository.save(message1Loc3Proprio2);
-        Message message1Proprio2Loc3 = new Message(proprio2, locataire3, "Premier message proprio2 vers loc3");
-        message1Proprio2Loc3 = messageRepository.save(message1Proprio2Loc3);
-        Message message1Loc7Proprio4 = new Message(locataire7, proprio4, "Premier message loc7 vers proprio4");
-        message1Loc7Proprio4 = messageRepository.save(message1Loc7Proprio4);
+        Message message1Loc1proprietaire1 = new Message(locataire1, proprietaire1, "Premier message loc1 vers proprietaire1");
+        message1Loc1proprietaire1 = messageRepository.save(message1Loc1proprietaire1);
+        Message message1proprietaire1Loc1 = new Message(proprietaire1, locataire1, "Premier message proprietaire1 vers loc1");
+        message1proprietaire1Loc1 = messageRepository.save(message1proprietaire1Loc1);
+        Message message2Loc1proprietaire1 = new Message(locataire1, proprietaire1, "Premier message loc1 vers proprietaire1");
+        message2Loc1proprietaire1 = messageRepository.save(message2Loc1proprietaire1);
+        Message message1Loc3proprietaire2 = new Message(locataire3, proprietaire2, "Premier message loc3 vers proprietaire2");
+        message1Loc3proprietaire2 = messageRepository.save(message1Loc3proprietaire2);
+        Message message1proprietaire2Loc3 = new Message(proprietaire2, locataire3, "Premier message proprietaire2 vers loc3");
+        message1proprietaire2Loc3 = messageRepository.save(message1proprietaire2Loc3);
+        Message message1Loc7proprietaire4 = new Message(locataire7, proprietaire4, "Premier message loc7 vers proprietaire4");
+        message1Loc7proprietaire4 = messageRepository.save(message1Loc7proprietaire4);
 
         // Creation des Dossier
         Dossier dossierLoc1 = new Dossier(1500.0, 2200.0, Situation.Salarie);

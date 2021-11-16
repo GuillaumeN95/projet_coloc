@@ -2,15 +2,15 @@ package app;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import coloc.init.InitDb;
 import coloc.repository.*;
 import config.ApplicationConfig;
+import config.initBDD.InitBDD;
 
 public class TestSpring {
 
 	public static void main(String[] args) {
 		// Creation de la base de donnees
-		InitDb.run();
+		InitBDD.run();
 
 /*		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
